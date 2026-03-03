@@ -1,4 +1,5 @@
-    
+                                                /*--------------- Login Page ---------------*/
+
 /* ===== NAVBAR ===== */
 .job-login-navbar {
     display:flex;
@@ -55,18 +56,13 @@
 }
 
 /*--- NAV LINKS ---*/
-.job-login-nav-links a {
+/* .job-login-nav-links a {
     margin:0 20px;
     text-decoration:none;
     color:#0558b8;
     font-size:20px;
-
-    
-  color: rgba(8, 20, 133, 0.986);
-  
- 
-  
-}
+    color: rgba(8, 20, 133, 0.986);
+} */
 
 .job-login-nav-links a:hover {
     background: #068d53;
@@ -94,6 +90,195 @@
     color:white;
 }
 
+/* ===== MAIN SECTION ===== */
+.job-lg-container {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top:60px;
+    padding:20px;
+}
+
+/*--- LEFT BOX ---*/
+.job-lg-left-box {
+    background:white;
+    padding:40px;
+    width:450px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.job-lg-left-box h2 {
+    margin-bottom:20px;
+    color:#098a43;
+    font-size: 26px;
+}
+
+.job-lg-left-box ul {
+    margin-bottom:30px;
+}
+
+.job-lg-left-box ul li {
+    margin:15px 0;
+    list-style:none;
+    color:#555;
+}
+
+.job-lg-left-box ul li i {
+    color: #0aa06e;   
+    font-size: 18px;
+    min-width: 22px;
+}
+
+.job-lg-register-free {
+    padding:10px 20px;
+    border:1px solid #2a55e5;
+    background:white;
+    color:#2a55e5;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+.job-lg-register-free:hover {
+    background:#037c3a;
+    color:white;
+}
+
+/*--- RIGHT BOX ---*/
+.job-lg-right-box {
+    background:white;
+    padding:40px;
+    width:380px;
+    border-radius:8px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.job-lg-right-box h2 {
+    margin-bottom:25px;
+    text-align:center;
+    color:#098a43;
+    font-size: 28px;
+}
+
+.job-lg-input-group {
+    margin-bottom:20px;
+}
+
+.job-lg-input-group label {
+    font-size:15px;
+    margin-bottom:10px;
+    display:block;
+}
+
+.job-lg-input-group input {
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:4px;
+}
+
+.job-lg-input-group input:focus {
+    border: 1px solid #0aa06e;   /* medical green */
+    outline: none;               /* remove default blue outline */
+    box-shadow: 0 0 0 3px rgba(10, 160, 110, 0.15);
+}
+
+.job-lg-forgot {
+    text-align:right;
+    font-size:14px;
+    margin-bottom:15px;
+}
+
+.job-lg-forgot a {
+    text-decoration:none;
+    color:#2a55e5;
+}
+
+.job-lg-login-main {
+    width:100%;
+    padding:12px;
+    background: #098a43;
+    color:white;
+    border:none;
+    border-radius:4px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.job-lg-login-main:hover {
+    background:#1f43c5;
+}
+
+.job-lg-divider {
+    text-align:center;
+    margin:20px 0;
+    color:#615b5b;
+    font-size:15px;
+}
+
+.job-lg-google-btn {
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    background:white;
+    border-radius:50px;
+    cursor:pointer;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; 
+    font-size: 15px;
+}
+
+.job-lg-google-btn:hover {
+    background:#f5f5f5;
+}
+
+.job-lg-google-btn img {
+    width: 18px;     
+    height: 18px;
+    object-fit: contain;
+}
+
+
+
+
+
+
+        
+/*--- Dropdown container ---*/
+.job-login-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/*--- Main nav link ---*/
+.job-login-dropdown a {
+    padding: 5px 15px;
+    margin:0 10px;
+    text-decoration:none;
+    color:#0558b8;
+    font-size:20px;
+}
+
+
+
+
+
+/*--- Dropdown menu hidden by default ---*/
+.job-login-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background:rgb(245, 241, 241);
+    min-width: 200px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    border-radius: 6px;
+    padding: 10px 0;
+    z-index: 100;
+    margin-top: 10px;
+}
 
 
 
@@ -103,149 +288,16 @@
 
 
 
+/*--- Dropdown links ---*/
+.job-login-dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
 
-
-        /* ===== MAIN SECTION ===== */
-        .container{
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            margin-top:60px;
-            gap:40px;
-            padding:20px;
-        }
-
-        /* LEFT BOX */
-        .left-box{
-            background:white;
-            padding:40px;
-            width:450px;
-            border-radius:8px;
-            box-shadow:0 5px 20px rgba(0,0,0,0.08);
-        }
-
-        .left-box h2{
-            margin-bottom:20px;
-            color:#333;
-        }
-
-        .left-box ul{
-            margin-bottom:30px;
-        }
-
-        .left-box ul li{
-            margin:12px 0;
-            list-style:none;
-            color:#555;
-        }
-
-        .register-free{
-            padding:10px 20px;
-            border:1px solid #2a55e5;
-            background:white;
-            color:#2a55e5;
-            cursor:pointer;
-            border-radius:5px;
-        }
-
-        .register-free:hover{
-            background:#2a55e5;
-            color:white;
-        }
-
-        /* RIGHT BOX */
-        .right-box{
-            background:white;
-            padding:40px;
-            width:380px;
-            border-radius:8px;
-            box-shadow:0 5px 20px rgba(0,0,0,0.08);
-        }
-
-        .right-box h2{
-            margin-bottom:25px;
-            text-align:center;
-            color:#333;
-        }
-
-        .input-group{
-            margin-bottom:20px;
-        }
-
-        .input-group label{
-            font-size:14px;
-            margin-bottom:5px;
-            display:block;
-        }
-
-        .input-group input{
-            width:100%;
-            padding:10px;
-            border:1px solid #ccc;
-            border-radius:4px;
-        }
-
-        .forgot{
-            text-align:right;
-            font-size:13px;
-            margin-bottom:15px;
-        }
-
-        .forgot a{
-            text-decoration:none;
-            color:#2a55e5;
-        }
-
-        .login-main{
-            width:100%;
-            padding:12px;
-            background:#2a55e5;
-            color:white;
-            border:none;
-            border-radius:4px;
-            cursor:pointer;
-            font-size:15px;
-        }
-
-        .login-main:hover{
-            background:#1f43c5;
-        }
-
-        .divider{
-            text-align:center;
-            margin:20px 0;
-            color:#999;
-            font-size:13px;
-        }
-
-        .google-btn{
-            width:100%;
-            padding:10px;
-            border:1px solid #ccc;
-            background:white;
-            border-radius:4px;
-            cursor:pointer;
-        }
-
-        .google-btn:hover{
-            background:#f5f5f5;
-        }
-
-        /* RESPONSIVE */
-        @media(max-width:1000px){
-
-            .navbar{
-                flex-wrap:wrap;
-                padding:15px 20px;
-            }
-
-            .search-bar{
-                width:100%;
-            }
-
-            .container{
-                flex-direction:column;
-            }
-        }
-
-    
+/*--- Show dropdown on hover ---*/
+.job-login-dropdown:hover .job-login-dropdown-menu {
+    display: block;
+}

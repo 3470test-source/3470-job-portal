@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3470 Healthcare & Training Institutes - Login</title>
+    <title>3470 Healthcare & Training Institutes Job portal - Login</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="picture/Logo3470-health3 (2).jpg" type="image/x-icon">
+    <link rel="icon" href="/frontend/image/Logo3470-health3-removebg-preview.png" type="image/x-icon">
     
     <link rel="stylesheet" href="styles.css" />
 
@@ -25,7 +25,7 @@
         }
 
         body{
-            background:#f3f6fb;
+            background:#68c48b;
         }
     </style>
     
@@ -44,9 +44,37 @@
 
         <!-- NAV LINKS -->
         <div class="job-login-nav-links">
-            <a href="#">Jobs</a>
-            <a href="#">Courses</a>
-            <a href="#">Services</a>
+
+            <!-- Jobs Dropdown -->
+            <div class="job-login-dropdown">
+              <a href="#">Jobs</a>
+               <div class="job-login-dropdown-menu">
+                 <a href="#">Nurse Jobs</a>
+                 <a href="#">Doctor Jobs</a>
+                 <a href="#">Pharmacist Jobs</a>
+               </div>
+            </div>
+
+            <!-- Courses Dropdown -->
+            <div class="job-login-dropdown">
+              <a href="#">Courses</a>
+               <div class="job-login-dropdown-menu">
+                 <a href="#">Nursing Course</a>
+                 <a href="#">Lab Technician</a>
+                 <a href="#">Medical Coding</a>
+               </div>
+            </div>
+
+            <!-- Services Dropdown -->
+            <div class="job-login-dropdown">
+              <a href="#">Services</a>
+               <div class="job-login-dropdown-menu">
+                 <a href="#">Resume Building</a>
+                 <a href="#">Career Guidance</a>
+                 <a href="#">Job Alerts</a>
+               </div>
+            </div>
+
         </div>
 
         <!-- SEARCH BAR -->
@@ -64,46 +92,49 @@
     </div>
 
     <!-- MAIN SECTION -->
-    <div class="container">
+    <div class="job-lg-container">
 
         <!-- LEFT SIDE -->
-        <div class="left-box">
+        <div class="job-lg-left-box">
             <h2>New to 3470 Healthcare?</h2>
             <ul>
-                <li>✔ One click apply using your profile.</li>
-                <li>✔ Get healthcare job recommendations.</li>
-                <li>✔ Showcase profile to hospitals & institutes.</li>
-                <li>✔ Track application status easily.</li>
+                <li><i class="fa-regular fa-circle-check"></i> One click apply using your profile.</li>
+                <li><i class="fa-regular fa-circle-check"></i> Get healthcare job recommendations.</li>
+                <li><i class="fa-regular fa-circle-check"></i> Showcase profile to hospitals & institutes.</li>
+                <li><i class="fa-regular fa-circle-check"></i> Track application status easily.</li>
             </ul>
 
-            <button class="register-free">Register for Free</button>
+            <button class="job-lg-register-free">Register for Free</button>
         </div>
 
         <!-- RIGHT SIDE LOGIN -->
-        <div class="right-box">
+        <div class="job-lg-right-box">
             <h2>Login</h2>
 
-            <div class="input-group">
-                <label>Email ID</label>
-                <input type="email" placeholder="Enter Email">
+            <div class="job-lg-input-group">
+                <label>Email ID / Username</label>
+                <input type="email" placeholder="Enter Email / Username">
             </div>
 
-            <div class="input-group">
+            <div class="job-lg-input-group">
                 <label>Password</label>
                 <input type="password" placeholder="Enter Password">
             </div>
 
-            <div class="forgot">
+            <div class="job-lg-forgot">
                 <a href="#">Forgot Password?</a>
             </div>
 
-            <button class="login-main">Login</button>
+            <button class="job-lg-login-main">Login</button>
 
-            <div class="divider">OR</div>
+            <div class="job-lg-divider">---------- OR ----------</div>
 
-            <button class="google-btn">Sign in with Google</button>
+            <button class="job-lg-google-btn">
+              <img src="/frontend/image/google-icon.png" alt="Google">
+              <span>Sign in with Google</span>
+            </button>
+
         </div>
-
     </div>
 
 </body>
