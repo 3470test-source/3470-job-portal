@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3470 Healthcare & Training Institutes Job portal - Login</title>
+    <title>3470 Healthcare & Training Institutes Job portal - Login job seeker</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="/frontend/image/Logo3470-health3-removebg-preview.png" type="image/x-icon">
+    <link rel="icon" href="/image/Logo3470-health3-removebg-preview.png" type="image/x-icon">
     
     <link rel="stylesheet" href="styles.css" />
 
@@ -37,7 +37,7 @@
 
         <!-- LOGO -->
         <div class="job-login-logo-container">
-            <img src="../frontend/image/Logo3470-health3-removebg-preview.png"
+            <img src="/image/Logo3470-health3-removebg-preview.png"
                  alt="3470 Healthcare Logo"
                  class="job-login-logo-img">
         </div>
@@ -85,8 +85,8 @@
 
         <!-- BUTTONS -->
         <div class="job-login-nav-buttons">
-            <button class="job-lg-login-btn">Login</button>
-            <button class="job-lg-register-btn">Register</button>
+            <a href="/frontend/login.html" class="job-lg-login-btn">Login</a>
+            <a href="/frontend/register.html" class="job-lg-register-btn">Register</a>
         </div>
 
     </div>
@@ -104,7 +104,7 @@
                 <li><i class="fa-regular fa-circle-check"></i> Track application status easily.</li>
             </ul>
 
-            <button class="job-lg-register-free">Register for Free</button>
+            <button class="job-lg-register-free" onclick="goToRegister()">Register for Free</button>
         </div>
 
         <!-- RIGHT SIDE LOGIN -->
@@ -130,12 +130,21 @@
             <div class="job-lg-divider">---------- OR ----------</div>
 
             <button class="job-lg-google-btn">
-              <img src="/frontend/image/google-icon.png" alt="Google">
+              <img src="/image/google-icon.png" alt="Google">
               <span>Sign in with Google</span>
             </button>
 
         </div>
     </div>
+
+    <!-- Go to register page -->
+    <script>
+
+        function goToRegister() {
+          window.location.href = "/frontend/register.html";
+        }
+
+    </script>
 
 </body>
 </html>
