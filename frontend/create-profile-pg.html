@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3470 Healthcare & Training Institutes Job portal - Create profile page</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/image/Logo3470-health3-removebg-preview.png" type="image/x-icon">
+    
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+        background:#f4f6f9;
+    }
+
+    .Skills-profile-section #skillList {
+      margin-top:10px;
+    }
+
+    .skill-tag{
+      display:inline-block;
+      background:#e8f0fe;
+      color:#1a73e8;
+      padding:6px 12px;
+      margin:5px;
+      border-radius:20px;
+      font-size:14px;
+    }
+
+    /* textarea{
+      resize:vertical;
+    } */
+
+    button{
+      margin-top:15px;
+      padding:10px 18px;
+      border:none;
+      background:#007bff;
+      color:white;
+      font-size:14px;
+      border-radius:5px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:#0056b3;
+    }
+
+    
+</style>
+
+
+</head>
+<body>
+
+
+<!-- NAVBAR -->
+    <div class="job-login-navbar">
+
+        <!-- LOGO -->
+        <div class="job-login-logo-container">
+            <img src="/image/Logo3470-health3-removebg-preview.png"
+                 alt="3470 Healthcare Logo"
+                 class="job-login-logo-img">
+        </div>
+
+        <!-- NAV LINKS -->
+        <div class="job-login-nav-links">
+
+            <!-- Jobs Dropdown -->
+            <div class="job-login-dropdown">
+              <a href="#">Jobs</a>
+               <div class="job-login-dropdown-menu">
+                 <a href="#">Nurse Jobs</a>
+                 <a href="#">Doctor Jobs</a>
+                 <a href="#">Pharmacist Jobs</a>
+               </div>
+            </div>
+
+            <!-- Courses Dropdown -->
+            <div class="job-login-dropdown">
+              <a href="#">Courses</a>
+               <div class="job-login-dropdown-menu">
+                 <a href="#">Nursing Course</a>
+                 <a href="#">Lab Technician</a>
+                 <a href="#">Medical Coding</a>
+               </div>
+            </div>
+
+            <!-- Services Dropdown -->
+            <div class="job-login-dropdown">
+              <a href="#">Services</a>
+               <div class="job-login-dropdown-menu">
+                 <a href="#">Resume Building</a>
+                 <a href="#">Career Guidance</a>
+                 <a href="#">Job Alerts</a>
+               </div>
+            </div>
+
+        </div>
+
+        <!-- SEARCH BAR -->
+        <div class="job-login-search-bar">
+            <input type="text" placeholder="Search jobs, courses, hospitals...">
+            <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+
+        <!-- BUTTONS -->
+        <div class="job-login-nav-buttons">
+            <a href="/frontend/login.html" class="job-lg-login-btn">Login</a>
+            <a href="/frontend/register.html" class="job-lg-register-btn">Register</a>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+<div class="job-profile-create">
+   <h2>Create Your Profile</h2>
+   <p>Create your 3470Healthcare profile to apply for jobs and track your applications.</p>
+</div>
+
+<form class="profileForm-create" id="profileForm-create">
+
+    <!-- Basic Information -->
+    <div class="basic-profile-section">
+      <h3>Basic Information</h3>
+
+        <label>Full Name</label>
+        <input type="text" id="name">
+
+        <label>Email ID</label>
+        <input type="text" id="Email">
+
+        <label>Phone Number</label>
+        <input type="text" id="phone">
+
+        <label>Location</label>
+        <input type="text" id="location">
+
+        <label>Job Title</label>
+        <input type="text" id="jobTitle">
+
+        <label>Experience Type</label>
+        <select id="experienceType" onchange="toggleExperience()">
+          <option value="">Select</option>
+          <option value="fresher">Fresher</option>
+          <option value="experienced">Experienced</option>
+        </select>
+
+    </div>
+
+    <!-- Professional Summary -->
+    <div class="Professional-profile-section">
+      <h3>Professional Summary</h3>
+      <textarea rows="5" id="summary"></textarea>
+    </div>
+
+    <!-- Skills -->
+    <div class="Skills-profile-section">
+      <h3>Skills</h3>
+      <input type="text" id="skillInput" placeholder="Add skill">
+      <button type="button" onclick="addSkill()">Add Skill</button>
+    <div id="skillList"></div>
+
+ </div>
+
+    <!-- Education -->
+    <div class="Education-profile-section">
+      <h3>Education</h3>
+
+      <label>Degree</label>
+      <input type="text" id="degree">
+
+      <label>College</label>
+      <input type="text" id="college">
+
+      <label>Year of Passing</label>
+      <input type="number" id="year">
+
+    </div>
+
+    <!-- Work Experience -->
+    <div class="Experience-profile-section" id="experienceSection" style="display:none">
+      <h3>Work Experience</h3>
+
+      <div id="experienceContainer">
+       <div class="experience-box">
+
+       <label>Company Name</label>
+       <input type="text" class="company">
+
+       <label>Role</label>
+       <input type="text" class="role">
+
+       <label>Years</label>
+       <input type="text" class="years">
+
+       <label>Description</label>
+       <textarea rows="5" class="desc"></textarea>
+
+       <button type="button" class="cre-pro-remove-btn" onclick="removeExperience(this)">Remove</button>
+
+      </div>
+
+    </div>
+
+    <button type="button" class="cre-pro-another-btn" onclick="addExperience()">Add Another Company</button>
+
+</div>
+
+        <!-- Projects -->
+        <div class="Projects-profile-section">
+           <h3>Projects</h3>
+
+           <div id="projectContainer">
+            <div class="project-box">
+
+            <label>Project Title</label>
+            <input type="text" class="projectTitle">
+
+            <label>Technologies Used</label>
+            <input type="text" class="projectTech">
+
+            <label>Project Link</label>
+            <input type="text" class="projectLink">
+
+            <label>Description</label>
+            <textarea rows="5" class="projectDesc"></textarea>
+
+        <button type="button" class="cre-pro-remove-btn" onclick="removeProject(this)">Remove</button>
+
+    </div>
+
+</div>
+
+    <button type="button" class="cre-pro-another-btn" onclick="addProject()">Add Another Project</button>
+
+</div>
+
+        <!-- Resume -->
+        <div class="Resume-profile-section">
+          <h3>Upload Resume</h3>
+          <input type="file">
+        </div>
+
+    <button type="button" onclick="saveProfile()">Save Profile</button>
+
+</form>
+
+
+
+<!------------------ JavaScripts ------------------->
+
+<script>
+
+let skills=[];
+
+function toggleExperience(){
+
+let type=document.getElementById("experienceType").value;
+let section=document.getElementById("experienceSection");
+
+if(type==="experienced"){
+section.style.display="block";
+}else{
+section.style.display="none";
+document.getElementById("experienceContainer").innerHTML="";
+}
+
+}
+
+function addSkill(){
+
+let input=document.getElementById("skillInput");
+let skill=input.value;
+
+if(skill!=""){
+
+skills.push(skill);
+
+let tag=document.createElement("span");
+tag.className="skill-tag";
+tag.innerText=skill;
+
+document.getElementById("skillList").appendChild(tag);
+
+input.value="";
+}
+
+}
+
+function addExperience(){
+
+let container=document.getElementById("experienceContainer");
+
+let div=document.createElement("div");
+
+div.className="experience-box";
+
+div.innerHTML=`
+
+<label>Company Name</label>
+<input type="text" class="company">
+
+<label>Role</label>
+<input type="text" class="role">
+
+<label>Years</label>
+<input type="text" class="years">
+
+<label>Description</label>
+<textarea rows="5" class="desc"></textarea>
+
+<button type="button" class="cre-pro-remove-btn" onclick="removeProject(this)">Remove</button>
+
+`;
+
+container.appendChild(div);
+
+}
+
+function removeExperience(button){
+
+button.parentElement.remove();
+
+}
+
+function addProject(){
+
+let container=document.getElementById("projectContainer");
+
+let div=document.createElement("div");
+
+div.className="project-box";
+
+div.innerHTML=`
+
+<label>Project Title</label>
+<input type="text" class="projectTitle">
+
+<label>Technologies Used</label>
+<input type="text" class="projectTech">
+
+<label>Project Link</label>
+<input type="text" class="projectLink">
+
+<label>Description</label>
+<textarea rows="5" class="projectDesc"></textarea>
+
+<button type="button" class="cre-pro-remove-btn" onclick="removeProject(this)">Remove</button>
+
+`;
+
+container.appendChild(div);
+
+}
+
+function removeProject(button){
+
+button.parentElement.remove();
+
+}
+
+function saveProfile(){
+
+let experiences=[];
+let projects=[];
+
+document.querySelectorAll(".experience-box").forEach(box=>{
+
+let company=box.querySelector(".company")?.value || "";
+let role=box.querySelector(".role")?.value || "";
+let years=box.querySelector(".years")?.value || "";
+let desc=box.querySelector(".desc")?.value || "";
+
+experiences.push({
+company,
+role,
+years,
+desc
+});
+
+});
+
+document.querySelectorAll(".project-box").forEach(box=>{
+
+let title=box.querySelector(".projectTitle").value;
+let tech=box.querySelector(".projectTech").value;
+let link=box.querySelector(".projectLink").value;
+let desc=box.querySelector(".projectDesc").value;
+
+projects.push({
+title,
+tech,
+link,
+desc
+});
+
+});
+
+let profile={
+
+name:document.getElementById("name").value,
+phone:document.getElementById("phone").value,
+location:document.getElementById("location").value,
+jobTitle:document.getElementById("jobTitle").value,
+summary:document.getElementById("summary").value,
+skills:skills,
+
+education:{
+degree:document.getElementById("degree").value,
+college:document.getElementById("college").value,
+year:document.getElementById("year").value
+},
+
+experience:experiences,
+projects:projects
+
+};
+
+console.log(profile);
+
+alert("Profile Saved Successfully!");
+
+}
+
+</script>
+
+</body>
+</html>

@@ -423,3 +423,181 @@
 
 
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+                               /*------------- Create profile page  --------------------*/
+
+.job-profile-create h2 {
+   text-align:center;
+   margin-top:40px;
+   font-size: 34px;
+   color: #15772c;
+}
+
+.job-profile-create p {
+   text-align:center;
+   margin-top:20px;
+   font-size: 18px;
+   color:#666;
+}
+
+.profileForm-create{
+   width:60%;
+   margin:30px auto;
+   background:white;
+   padding:50px;
+   border-radius:10px;
+   box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.basic-profile-section h3 {
+   text-align:center;
+   margin-top:5px;
+   margin-bottom:20px;
+   font-size: 22px;
+   color:#0851be;
+}
+
+.Professional-profile-section h3 {
+   text-align:center;
+   margin-top:5px;
+   margin-bottom:20px;
+   font-size: 22px;
+   color:#0851be;
+}
+
+.Skills-profile-section h3 {
+   text-align:center;
+   margin-top:5px;
+   margin-bottom:20px;
+   font-size: 22px;
+   color:#0851be;
+}
+
+.Education-profile-section h3 {
+   text-align:center;
+   margin-top:5px;
+   margin-bottom:20px;
+   font-size: 22px;
+   color:#0851be;
+}
+
+.Experience-profile-section h3 {
+   text-align:center;
+   margin-top:5px;
+   margin-bottom:20px;
+   font-size: 22px;
+   color:#0851be;
+}
+
+.Projects-profile-section h3 {
+   text-align:center;
+   margin-top:5px;
+   margin-bottom:20px;
+   font-size: 22px;
+   color:#0851be;
+}
+
+.Resume-profile-section h3 {
+   text-align:center;
+   margin-top:5px;
+   margin-bottom:20px;
+   font-size: 22px;
+   color:#0851be;
+}
+
+.basic-profile-section,
+.Professional-profile-section,
+.Skills-profile-section,
+.Education-profile-section,
+.Experience-profile-section,
+.Projects-profile-section,
+.Resume-profile-section {
+   border:1px solid #c7c5c5;
+   padding:20px;
+   margin-bottom:20px;
+   border-radius:8px;
+}
+
+.basic-profile-section label,
+.Professional-profile-section label,
+.Skills-profile-section label,
+.Education-profile-section label,
+.Experience-profile-section label,
+.Projects-profile-section label,
+.Resume-profile-section label {
+  display:block;
+  margin-top:20px;
+  font-weight:bold;
+  color:#444;
+}
+
+.basic-profile-section input[type="text"],
+.Skills-profile-section input[type="text"],
+.Education-profile-section input[type="text"],
+.Experience-profile-section input[type="text"],
+.Projects-profile-section input[type="text"] {
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  border:1px solid #ccc;
+  border-radius:5px;
+  font-size:14px;
+}
+
+.Education-profile-section input[type="number"] {
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  border:1px solid #ccc;
+  border-radius:5px;
+  font-size:14px;
+}
+
+.basic-profile-section select {
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  border:1px solid #ccc; 
+  border-radius:5px;
+  font-size:14px;
+}
+
+.Professional-profile-section textarea,
+.Experience-profile-section textarea,
+.Projects-profile-section textarea {
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  border:1px solid #ccc;
+  border-radius:5px;
+  font-size:14px;
+}
+
+.Experience-profile-section .experience-box,
+.Projects-profile-section .project-box {
+  border:1px dashed #ccc;
+  padding:15px;
+  margin-bottom:15px;
+  border-radius:6px;
+  background:#fafafa;
+}
+
+.cre-pro-remove-btn {
+  background:#e74c3c;
+  margin-top:10px;
+}
+
+.cre-pro-remove-btn:hover {
+  background:#c0392b;
+}
+
+.profileForm-create > button {
+  width:100%;
+  padding:12px;
+  font-size:16px;
+  background:#28a745;
+}
+
+.profileForm-create > button:hover {
+  background:#1e7e34;
+}                               
