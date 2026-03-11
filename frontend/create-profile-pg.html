@@ -16,7 +16,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
 
-    <style>
+<style>
 
     *{
       margin:0;
@@ -26,7 +26,7 @@
     }
 
     body {
-        background:#f4f6f9;
+      background:#d2dff5;
     }
 
     .Skills-profile-section #skillList {
@@ -40,35 +40,61 @@
       padding:6px 12px;
       margin:5px;
       border-radius:20px;
-      font-size:14px;
+      font-size:15px;
     }
 
-    /* textarea{
+    textarea{
       resize:vertical;
-    } */
+    }
 
-    button{
-      margin-top:15px;
-      padding:10px 18px;
-      border:none;
-      background:#007bff;
-      color:white;
-      font-size:14px;
-      border-radius:5px;
+    .remove-skill{
+      margin-left:8px;
+      cursor:pointer;
+      font-weight:bold;
+      color:#555;
+      font-size: 15px;
+    }
+
+    .remove-skill:hover{
+      color:red;
+    }
+
+    .exp-duration{
+      display:flex;
+      gap:30px;
+      margin-bottom:15px;
+      flex-wrap:wrap;
+    }
+
+    .exp-field{
+      display:flex; 
+      flex-direction:column;
+    }
+
+    .exp-field input{
+      padding:8px;
+      border:1px solid #ccc;
+      border-radius:6px;
+      width:200px;
+      margin-top: 5px;
+    }
+
+    .exp-current{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      margin-top:22px;
+     }
+
+    .exp-current input{
       cursor:pointer;
     }
 
-    button:hover{
-      background:#0056b3;
-    }
-
-    
 </style>
 
 
 </head>
 <body>
-
 
 <!-- NAVBAR -->
     <div class="job-login-navbar">
@@ -129,12 +155,7 @@
 
     </div>
 
-
-
-
-
-
-
+<!------------ Create the profile --------------->
 
 <div class="job-profile-create">
    <h2>Create Your Profile</h2>
@@ -142,6 +163,17 @@
 </div>
 
 <form class="profileForm-create" id="profileForm-create">
+
+      <!-- Profile Photo -->
+      <div class="Photo-profile-section">
+        <h3>Add Profile Photo</h3>
+        <p>Upload a clear photo to make your profile stronger.</p>
+      <div class="photo-upload-box">
+        <img id="profilePreview" src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
+        <input type="file" id="profilePhoto" accept="image/*" onchange="previewPhoto(event)">
+      </div>
+</div>
+
 
     <!-- Basic Information -->
     <div class="basic-profile-section">
@@ -214,8 +246,26 @@
        <label>Role</label>
        <input type="text" class="role">
 
-       <label>Years</label>
-       <input type="text" class="years">
+       <label>Experience Duration</label>
+
+        <div class="exp-duration">
+
+          <div class="exp-field">
+            <label>From</label>
+            <input type="month" class="fromYear">
+          </div>
+
+          <div class="exp-field">
+            <label>To</label>
+            <input type="month" class="toYear">
+          </div>
+
+        <div class="exp-current">
+          <label>
+          <input type="checkbox" class="currentJob"> Currently Working
+          </label>
+        </div>
+      </div>
 
        <label>Description</label>
        <textarea rows="5" class="desc"></textarea>
@@ -246,6 +296,27 @@
             <label>Project Link</label>
             <input type="text" class="projectLink">
 
+          <label>Project Duration</label>
+
+           <div class="exp-duration">
+
+            <div class="exp-field">
+              <label>From</label>
+              <input type="month" class="projectFrom">
+            </div>
+
+          <div class="exp-field">
+            <label>To</label>
+            <input type="month" class="projectTo">
+          </div>
+
+          <div class="exp-current">
+            <label>
+              <input type="checkbox" class="projectCurrent"> Currently Working
+            </label>
+          </div>
+        </div>
+
             <label>Description</label>
             <textarea rows="5" class="projectDesc"></textarea>
 
@@ -265,7 +336,7 @@
           <input type="file">
         </div>
 
-    <button type="button" onclick="saveProfile()">Save Profile</button>
+    <button type="button" class="create-save-btn" onclick="saveProfile()">Save Profile</button>
 
 </form>
 
@@ -276,6 +347,8 @@
 <script>
 
 let skills=[];
+
+/*--- EXPERIENCE TYPE SHOW/HIDE ---*/
 
 function toggleExperience(){
 
@@ -291,35 +364,48 @@ document.getElementById("experienceContainer").innerHTML="";
 
 }
 
-function addSkill(){
 
-let input=document.getElementById("skillInput");
-let skill=input.value;
+/*---- SKILLS ----*/
 
-if(skill!=""){
+function addSkill() {
+
+let input = document.getElementById("skillInput");
+let skill = input.value.trim();
+
+if (skill !== "") {
 
 skills.push(skill);
 
-let tag=document.createElement("span");
-tag.className="skill-tag";
-tag.innerText=skill;
+let tag = document.createElement("span");
+tag.className = "skill-tag";
+
+tag.innerHTML = skill + " <span class='remove-skill' onclick='removeSkill(this)'>×</span>";
 
 document.getElementById("skillList").appendChild(tag);
 
-input.value="";
+input.value = "";
+}
 }
 
+function removeSkill(element) {
+
+let tag = element.parentElement;
+tag.remove();
+
 }
+
+
+/*---- EXPERIENCE ----*/
 
 function addExperience(){
 
-let container=document.getElementById("experienceContainer");
+let container = document.getElementById("experienceContainer");
 
-let div=document.createElement("div");
+let div = document.createElement("div");
 
-div.className="experience-box";
+div.className = "experience-box";
 
-div.innerHTML=`
+div.innerHTML = `
 
 <label>Company Name</label>
 <input type="text" class="company">
@@ -327,13 +413,32 @@ div.innerHTML=`
 <label>Role</label>
 <input type="text" class="role">
 
-<label>Years</label>
-<input type="text" class="years">
+<label>Experience Duration</label>
+
+<div class="exp-duration">
+
+  <div class="exp-field">
+    <label>From</label>
+    <input type="month" class="fromYear">
+  </div>
+
+  <div class="exp-field">
+    <label>To</label>
+    <input type="month" class="toYear">
+  </div>
+
+  <div class="exp-current">
+    <label>
+      <input type="checkbox" class="currentJob"> Currently Working
+    </label>
+  </div>
+
+</div>
 
 <label>Description</label>
 <textarea rows="5" class="desc"></textarea>
 
-<button type="button" class="cre-pro-remove-btn" onclick="removeProject(this)">Remove</button>
+<button type="button" class="cre-pro-remove-btn" onclick="removeExperience(this)">Remove</button>
 
 `;
 
@@ -343,9 +448,30 @@ container.appendChild(div);
 
 function removeExperience(button){
 
-button.parentElement.remove();
+let box=button.closest(".experience-box");
+
+box.remove();
 
 }
+
+/*----- EXPERIENCE CURRENTLY WORKING -----*/
+
+document.addEventListener("change", function(e){
+
+if(e.target.classList.contains("currentJob")){
+
+let box = e.target.closest(".experience-box");
+let toField = box.querySelector(".toYear");
+
+toField.disabled = e.target.checked;
+
+}
+
+});
+
+
+
+/*------ PROJECTS ------*/
 
 function addProject(){
 
@@ -366,10 +492,34 @@ div.innerHTML=`
 <label>Project Link</label>
 <input type="text" class="projectLink">
 
+<label>Project Duration</label>
+
+<div class="exp-duration">
+
+<div class="exp-field">
+<label>From</label>
+<input type="month" class="projectFrom">
+</div>
+
+<div class="exp-field">
+<label>To</label>
+<input type="month" class="projectTo">
+</div>
+
+<div class="exp-current">
+<label>
+<input type="checkbox" class="projectCurrent"> Currently Working
+</label>
+</div>
+
+</div>
+
 <label>Description</label>
 <textarea rows="5" class="projectDesc"></textarea>
 
-<button type="button" class="cre-pro-remove-btn" onclick="removeProject(this)">Remove</button>
+<button type="button" class="cre-pro-remove-btn" onclick="removeProject(this)">
+Remove
+</button>
 
 `;
 
@@ -377,11 +527,48 @@ container.appendChild(div);
 
 }
 
+
 function removeProject(button){
 
-button.parentElement.remove();
+let box=button.closest(".project-box");
+
+box.remove();
 
 }
+
+/*----- PROJECT CURRENTLY WORKING -----*/
+
+document.addEventListener("change",function(e){
+
+if(e.target.classList.contains("projectCurrent")){
+
+let box=e.target.closest(".project-box");
+
+let toField=box.querySelector(".projectTo");
+
+toField.disabled=e.target.checked;
+
+}
+
+});
+
+
+/*---- PROFILE PHOTO PREVIEW ----*/
+
+function previewPhoto(event){
+
+let reader = new FileReader();
+
+reader.onload = function(){
+document.getElementById("profilePreview").src = reader.result;
+}
+
+reader.readAsDataURL(event.target.files[0]);
+
+}
+
+
+/*---- SAVE PROFILE -----*/
 
 function saveProfile(){
 
@@ -392,29 +579,41 @@ document.querySelectorAll(".experience-box").forEach(box=>{
 
 let company=box.querySelector(".company")?.value || "";
 let role=box.querySelector(".role")?.value || "";
-let years=box.querySelector(".years")?.value || "";
+let from = box.querySelector(".fromYear")?.value || "";
+let to = box.querySelector(".toYear")?.value || "";
+let current = box.querySelector(".currentJob")?.checked || false;
 let desc=box.querySelector(".desc")?.value || "";
 
 experiences.push({
 company,
 role,
-years,
+from,
+to,
+current,
 desc
 });
 
 });
+
+
 
 document.querySelectorAll(".project-box").forEach(box=>{
 
 let title=box.querySelector(".projectTitle").value;
 let tech=box.querySelector(".projectTech").value;
 let link=box.querySelector(".projectLink").value;
+let from = box.querySelector(".projectFrom").value;
+let to = box.querySelector(".projectTo").value;
+let current = box.querySelector(".projectCurrent")?.checked || false;
 let desc=box.querySelector(".projectDesc").value;
 
 projects.push({
 title,
 tech,
 link,
+from,
+to,
+current,
 desc
 });
 
