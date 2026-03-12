@@ -194,8 +194,8 @@
 }
 
 .job-lg-input-group input:focus {
-    border: 1px solid #0aa06e;   /* medical green */
-    outline: none;               /* remove default blue outline */
+    border: 1px solid #0aa06e;  
+    outline: none;               
     box-shadow: 0 0 0 3px rgba(10, 160, 110, 0.15);
 }
 
@@ -264,41 +264,60 @@
 }
 
 /*--- Main nav link ---*/
-.job-login-dropdown a {
-    padding: 5px 15px;
-    margin:0 10px;
+.job-login-dropdown a{
+    padding:8px 15px;
     text-decoration:none;
     color:#0558b8;
     font-size:20px;
 }
 
-/*--- Dropdown menu hidden by default ---*/
-.job-login-dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background:rgb(245, 241, 241);
-    min-width: 200px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    border-radius: 6px;
-    padding: 10px 0;
-    z-index: 100;
-    margin-top: 10px;
+/*--- Dropdown hidden ---*/
+.job-login-dropdown-menu{
+    display:none;
+    position:absolute;
+    top:100%;
+    left:0;
+    background:#d2ecec;
+    padding:25px;
+    min-width:600px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+    border-radius:10px;
+    flex-direction:row;
+    gap:50px;
+    margin-top: 15px;
 }
 
-/*--- Dropdown links ---*/
-.job-login-dropdown-menu a {
-    display: block;
-    padding: 10px 15px;
-    text-decoration: none;
-    color: #333;
-    font-size: 14px;
+.job-login-dropdown:hover .job-login-dropdown-menu{
+    display:flex;
 }
 
-/*--- Show dropdown on hover ---*/
-.job-login-dropdown:hover .job-login-dropdown-menu {
-    display: block;
+.menu-column{
+    display:flex;
+    flex-direction:column;
+    flex:1;  
+}
+
+.menu-column h4{
+    margin-bottom:10px;
+    color:#0558b8;
+    font-size:16px;
+}
+
+.menu-column a{
+    padding:6px 0;
+    text-decoration:none;
+    color:#333;
+    font-size:14px;
+}
+
+.job-login-dropdown-menu .menu-column a:hover{
+    background: #068d53;
+    color: white;
+    border-radius: 9px;
+}
+
+.menu-column a:hover{
+    color:#007bff;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------------ */
