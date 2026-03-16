@@ -61,61 +61,62 @@
   margin-bottom: 20px;
 }
 
-
-
-
-
-
-
 .job-board-search-box {
-    display:flex;
-    align-items:center;
-    gap:10px;
-    background:white;
-    padding:10px;
-    border-radius:10px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.1);
-
-
-
-    display:flex;
-    align-items:center;
-    justify-content:center;   /* THIS LINE centers the inputs */
-    gap:10px;
-    padding:10px;
-    border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;   
+  gap:20px;
+  padding:10px;
 }
 
-.job-board-search-box .input-box{
-    display:flex;
-    align-items:center;
-    border:1px solid #ccc;
-    padding:8px 10px;
-    border-radius:6px;
+.job-board-search-box .input-box {
+  display:flex;
+  align-items:center;
+  border:1px solid #ccc;
+  padding:14px 26px;
+  border-radius:50px;
+  background-color:white;
 }
 
-.job-board-search-box .input-box i{
-    color:#555;
-    margin-right:8px;
+.job-board-search-box .input-box:focus-within {
+  border: 1px solid #0aa06e;
+  box-shadow: 0 0 0 3px rgba(10, 160, 110, 0.15);
 }
 
-.job-board-search-box .input-box input{
-    border:none;
-    outline:none;
-    font-size:14px;
+.job-board-search-box .input-box i {
+  color:#555;
+  margin-right:15px;
 }
+
+.job-board-search-box .input-box input {
+  border:none;
+  outline:none;
+  font-size:16px;
+  width:250px;
+  background: none;
+}
+
+
+
+
+
+
+
+
+
+
 
 .job-board-search-box button{
-    background:#2a55e5;
-    color:white;
-    border:none;
-    padding:10px 20px;
-    border-radius:6px;
-    cursor:pointer;
+  background:#2a55e5;
+  color:white;
+  border:none;
+  padding:10px 20px;
+  border-radius:6px;
+  cursor:pointer;
 }
 
 .job-board-search-box button:hover{
-    background:#1a3fc4;
+  background:#1a3fc4;
 }
 
 
@@ -310,13 +311,6 @@ padding:20px;
 
     </div>
 
-
-
-
-    
-
-
-
    <!-- Home Hero Section -->
    <section class="job-board-home-pg">
 
@@ -327,7 +321,7 @@ padding:20px;
 
       <div class="input-box">
        <i class="fa-solid fa-magnifying-glass"></i>
-       <input type="text" placeholder="Job title, Keywords, or Company">
+       <input type="text" placeholder="Job title / Keywords / Company">
       </div>
 
       <div class="input-box">
@@ -337,6 +331,16 @@ padding:20px;
 
     <button>Search</button>
 </section>
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- Job Categories -->
