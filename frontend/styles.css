@@ -2,105 +2,190 @@
 
 /* ===== NAVBAR ===== */
 .job-login-navbar {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:15px 60px;
-    background:white;
-    box-shadow:0 2px 5px rgba(0,0,0,0.05);
-    gap:20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 60px;
+  background:white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-/*--- LOGO ---*/
-.job-login-logo-container {
-    display:flex;
-    align-items:center;
-}
+/* ===== LOGO ===== */
 
 .job-login-logo-img {
-    height:80px;
-    object-fit:contain;
+  height:80px;
+  object-fit:contain;
 }
 
-/*--- SEARCH BAR ---*/
+.job-login-logo-container {
+  display:flex;
+  align-items:center;
+}
+
+/* ===== NAV LINKS ===== */
+
+.job-login-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.job-login-nav-links a {
+  text-decoration: none;
+  font-size: 20px;
+  color:#0558b8;
+  padding: 6px 10px;
+  transition: 0.3s;
+}
+
+/*--- Hover ---*/
+
+.job-login-nav-links a:hover {
+  background: #068d53;
+  color: white;
+  border-radius: 9px;
+}
+
+/* ===== DROPDOWN ===== */
+
+.job-login-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/*--- Main nav link ---*/
+.job-login-dropdown a {
+  padding:6px 10px;
+  text-decoration:none;
+  color:#0558b8;
+  font-size:20px;
+}
+
+/*--- Dropdown hidden ---*/
+.job-login-dropdown-menu {
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  background:#d2ecec;
+  padding:25px;
+  min-width:600px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  border-radius:10px;
+  flex-direction:row;
+  gap:50px;
+  margin-top: 15px;
+}
+
+.job-login-dropdown:hover .job-login-dropdown-menu {
+  display:flex;
+}
+
+/* ===== MEGA MENU ===== */
+
+.menu-column {
+  display:flex;
+  flex-direction:column;
+  flex:1;  
+}
+
+.menu-column h4{
+  margin-bottom:10px;
+  color:#0558b8;
+  font-size:16px;
+}
+
+.menu-column a {
+  text-decoration: none;
+  color: #555;
+  font-size: 14px;
+  margin: 4px 0;    
+}
+
+.job-login-dropdown-menu .menu-column a:hover{
+  background: #068d53;
+  color: white;
+  border-radius: 9px;
+}
+
+.menu-column a:hover{
+  color:#007bff;
+}
+
+/* ===== SEARCH BAR ===== */
+
 .job-login-search-bar {
-    display:flex;
-    align-items:center;
-    background:#f1f3f8;
-    border-radius:30px;
-    padding:5px;
-    width:350px;
+  display:flex;
+  align-items:center;
+  background:#f1f3f8;
+  border-radius:30px;
+  width:320px;
+  padding: 4px 10px;  
 }
 
 .job-login-search-bar input {
-    border:none;
-    outline:none;
-    background:transparent;
-    padding:8px 15px;
-    width:100%;
-    font-size:15px;
+  border:none;
+  outline:none;
+  background:transparent;
+  padding: 8px;
+  width:100%;
+  font-size:14px;
 }
 
 .job-login-search-bar button {
-    background:#2a55e5;
-    color:white;
-    border:none;
-    border-radius:50%;
-    width:35px;
-    height:35px;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:14px;
+  background:#2a55e5;
+  color:white;
+  border:none;
+  border-radius:50%;
+  width:35px;
+  height:35px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
 }
 
-/*--- NAV LINKS ---*/
-/* .job-login-nav-links a {
-    margin:0 20px;
-    text-decoration:none;
-    color:#0558b8;
-    font-size:20px;
-    color: rgba(8, 20, 133, 0.986);
-} */
+/* ===== LOGIN / REGISTER BUTTONS ===== */
 
-.job-login-nav-links a:hover {
-    background: #068d53;
-    color: white;
-    border-radius: 9px;
+.job-login-nav-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .job-login-nav-buttons a {
-    padding:8px 28px;
-    border-radius:20px;
-    border:none;
-    cursor:pointer;
-    margin-left:10px;
-    font-size:16px;
+  padding:8px 28px;
+  border-radius:20px;
+  border:none;
+  cursor:pointer;
+  margin-left:10px;
+  font-size:16px;
 }
 
 .job-lg-login-btn {
-    background: #ddd7d7;
-    color:#063ae6;
+  background: #e6e6e6;
+  padding: 7px 18px;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #0a2fa3;
+  font-weight: 500;
 }
 
 .job-lg-login-btn:hover {
-    background: #1685df;
-    color: white;
-}
-
-.job-lg-login-btn,
-.job-lg-register-btn {
-    display: inline-block;
-    padding: 8px 18px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: 500;
+  background: #2a55e5;
+  color: white;
 }
 
 .job-lg-register-btn {
-    background:#038022;
-    color:white;
+  background:#038022;
+  color:white;
+  padding: 7px 18px;
+  border-radius: 6px;
+  text-decoration: none;
 }
 
 .job-lg-register-btn:hover {
@@ -257,68 +342,6 @@
     object-fit: contain;
 }
 
-/*--- Dropdown container ---*/
-.job-login-dropdown {
-    position: relative;
-    display: inline-block;
-}
-
-/*--- Main nav link ---*/
-.job-login-dropdown a{
-    padding:8px 15px;
-    text-decoration:none;
-    color:#0558b8;
-    font-size:20px;
-}
-
-/*--- Dropdown hidden ---*/
-.job-login-dropdown-menu{
-    display:none;
-    position:absolute;
-    top:100%;
-    left:0;
-    background:#d2ecec;
-    padding:25px;
-    min-width:600px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.08);
-    border-radius:10px;
-    flex-direction:row;
-    gap:50px;
-    margin-top: 15px;
-}
-
-.job-login-dropdown:hover .job-login-dropdown-menu{
-    display:flex;
-}
-
-.menu-column{
-    display:flex;
-    flex-direction:column;
-    flex:1;  
-}
-
-.menu-column h4{
-    margin-bottom:10px;
-    color:#0558b8;
-    font-size:16px;
-}
-
-.menu-column a{
-    padding:6px 0;
-    text-decoration:none;
-    color:#333;
-    font-size:14px;
-}
-
-.job-login-dropdown-menu .menu-column a:hover{
-    background: #068d53;
-    color: white;
-    border-radius: 9px;
-}
-
-.menu-column a:hover{
-    color:#007bff;
-}
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------------ */
 

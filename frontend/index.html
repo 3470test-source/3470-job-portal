@@ -16,19 +16,156 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
 
-    <style>
-        *{
-          margin:0;
-          padding:0;
-          box-sizing:border-box;
-        }
+<style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
 
-        body{
-          background:#68c48b;
-        }
-    </style>
-    
-</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*----- Home job portal -----*/
+
+.job-board-home-pg {
+  text-align:center;
+  padding:60px;
+  background:#f4f6f8;
+}
+
+.job-board-home-pg h1 {
+  font-size: 38px;
+  margin-bottom: 20px;
+}
+
+.job-board-home-pg p {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+.job-board-search-box {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:white;
+    padding:10px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+
+
+
+    display:flex;
+    align-items:center;
+    justify-content:center;   /* THIS LINE centers the inputs */
+    gap:10px;
+    padding:10px;
+    border-radius:10px;
+}
+
+.job-board-search-box .input-box{
+    display:flex;
+    align-items:center;
+    border:1px solid #ccc;
+    padding:8px 10px;
+    border-radius:6px;
+}
+
+.job-board-search-box .input-box i{
+    color:#555;
+    margin-right:8px;
+}
+
+.job-board-search-box .input-box input{
+    border:none;
+    outline:none;
+    font-size:14px;
+}
+
+.job-board-search-box button{
+    background:#2a55e5;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.job-board-search-box button:hover{
+    background:#1a3fc4;
+}
+
+
+
+
+
+
+
+/* Categories */
+
+/* .categories{
+text-align:center;
+padding:40px;
+}
+
+.category-list{
+display:flex;
+justify-content:center;
+gap:20px;
+}
+
+.category{
+border:1px solid #ccc;
+padding:15px;
+} */
+
+/* Jobs */
+
+/* .featured-jobs{
+padding:40px;
+}
+
+.job-card{
+border:1px solid #ddd;
+padding:20px;
+margin-bottom:10px;
+} */
+
+/* Footer */
+
+footer{
+background:#222;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+</style>
+
+</head> 
 <body>
 
     <!-- NAVBAR -->
@@ -46,7 +183,7 @@
 
           <!-- HOME -->
           <a href="/frontend/index.html" class="nav-home">Home</a>
-          
+
            <div class="job-login-dropdown">
              <a href="#">Jobs</a>
 
@@ -159,7 +296,6 @@
 
 </div>
 
-
         <!-- SEARCH BAR -->
         <div class="job-login-search-bar">
             <input type="text" placeholder="Search jobs, courses, hospitals...">
@@ -174,60 +310,83 @@
 
     </div>
 
-    <!-- MAIN SECTION -->
-    <div class="job-lg-container">
 
-        <!-- LEFT SIDE -->
-        <div class="job-lg-left-box">
-            <h2>New to 3470 Healthcare?</h2>
-            <ul>
-                <li><i class="fa-regular fa-circle-check"></i> One click apply using your profile.</li>
-                <li><i class="fa-regular fa-circle-check"></i> Get healthcare job recommendations.</li>
-                <li><i class="fa-regular fa-circle-check"></i> Showcase profile to hospitals & institutes.</li>
-                <li><i class="fa-regular fa-circle-check"></i> Track application status easily.</li>
-            </ul>
 
-            <button class="job-lg-register-free" onclick="goToRegister()">Register for Free</button>
-        </div>
 
-        <!-- RIGHT SIDE LOGIN -->
-        <div class="job-lg-right-box">
-            <h2>Login</h2>
+    
 
-            <div class="job-lg-input-group">
-                <label>Email ID / Username</label>
-                <input type="email" placeholder="Enter Email / Username">
-            </div>
 
-            <div class="job-lg-input-group">
-                <label>Password</label>
-                <input type="password" placeholder="Enter Password">
-            </div>
 
-            <div class="job-lg-forgot">
-                <a href="#">Forgot Password?</a>
-            </div>
+   <!-- Home Hero Section -->
+   <section class="job-board-home-pg">
 
-            <button class="job-lg-login-main">Login</button>
+      <h1>Start Your Career Journey Today</h1>
+      <p>Discover jobs that match your skills and experience.</p>
 
-            <div class="job-lg-divider">---------- OR ----------</div>
+    <div class="job-board-search-box">
 
-            <button class="job-lg-google-btn">
-              <img src="/image/google-icon.png" alt="Google">
-              <span>Sign in with Google</span>
-            </button>
+      <div class="input-box">
+       <i class="fa-solid fa-magnifying-glass"></i>
+       <input type="text" placeholder="Job title, Keywords, or Company">
+      </div>
 
-        </div>
-    </div>
+      <div class="input-box">
+       <i class="fa-solid fa-location-dot"></i>
+       <input type="text" placeholder="Location">
+      </div>
 
-    <!-- Go to register page -->
-    <script>
+    <button>Search</button>
+</section>
 
-        function goToRegister() {
-          window.location.href = "/frontend/register.html";
-        }
 
-    </script>
+<!-- Job Categories -->
+
+<!-- <section class="categories">
+
+<h2>Popular Job Categories</h2>
+
+<div class="category-list">
+
+<div class="category">Software Testing</div>
+<div class="category">Web Development</div>
+<div class="category">Data Analyst</div>
+<div class="category">UI/UX Designer</div>
+
+</div>
+
+</section> -->
+
+
+<!-- Featured Jobs -->
+
+<!-- <section class="featured-jobs">
+
+<h2>Latest Jobs</h2>
+
+<div class="job-card">
+<h3>Automation Tester</h3>
+<p>ABC Technologies</p>
+<p>Chennai</p>
+<button>View Job</button>
+</div>
+
+<div class="job-card">
+<h3>Frontend Developer</h3>
+<p>XYZ Solutions</p>
+<p>Bangalore</p>
+<button>View Job</button>
+</div>
+
+</section> -->
+
+
+<!-- Footer -->
+
+<footer>
+
+<p>© 2026 MyJobPortal</p>
+
+</footer>
 
 </body>
 </html>
