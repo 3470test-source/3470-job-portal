@@ -31,59 +31,11 @@
 
 
 
-
- /* Top Banner */
-.home-job-top-banner {
-  width: 100%;
-  background:#f4f6f8;
-  padding: 60px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  margin-top: -80px;
-}
-
-
-
-
-
-
-
-
-
-
-.home-job-banner-content {
+.categories {
+  padding: 40px;
   text-align: center;
-  max-width: 700px;
-}
-
-.home-job-banner-content h1 {
-  font-size: 32px;
-  font-weight: 600;
-  color: #1c1c1c;
-  margin-bottom: 15px;
-}
-
-.home-job-banner-content p {
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 25px;
-}
-
-.home-job-banner-btn {
-  display: inline-block;
-  background-color: #2a55e5;
-  color: white;
-  padding: 12px 28px;
-  border-radius: 8px;
-  text-decoration: none;
-  font-size: 16px;
-  transition: 0.3s ease;
-}
-
-.home-job-banner-btn:hover {
-  background-color: #1a3fc4;
+  background:#f4f6f8;
+  margin-top: -40px;
 }
 
 
@@ -95,59 +47,40 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-/* Categories */
-
-.categories{
-text-align:center;
-padding:40px;
+.categories h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
 }
 
-.category-list{
-display:flex;
-justify-content:center;
-gap:20px;
+.category-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
 }
 
-.category{
-border:1px solid #ccc;
-padding:15px;
+.category-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: 0.3s;
 }
 
-/* Jobs */
-
-.featured-jobs{
-padding:40px;
-}
-
-.job-card{
-border:1px solid #ddd;
-padding:20px;
-margin-bottom:10px;
+.category-card:hover {
+  transform: translateY(-5px);
+  background-color: #007bff;
+  color: #fff;
 }
 
 
 
 
 
-/*--- Footer ---*/
-.home-job-footer {
-  background:#07533a;
-  color:white;
-  text-align:center;
-  padding:20px;
-  font-size: 16px;
-}
+
+
+
 
 </style>
 
@@ -317,13 +250,6 @@ margin-bottom:10px;
     <button>Search</button>
 </section>
 
-
-
-
-
-
-
-
 <!-- Top Banner Section -->
 <section class="home-job-top-banner">
   <div class="home-job-banner-content">
@@ -336,57 +262,73 @@ margin-bottom:10px;
 </section>
 
 
-
-
-
-
-
-
 <!-- Job Categories -->
-
 <!-- <section class="categories">
+  <h2>Popular Job Categories</h2>
 
-<h2>Popular Job Categories</h2>
-
-<div class="category-list">
-
-<div class="category">Software Testing</div>
-<div class="category">Web Development</div>
-<div class="category">Data Analyst</div>
-<div class="category">UI/UX Designer</div>
-
-</div>
-
+  <div class="category-container">
+    <div class="category-card">💻 IT & Software Development</div>
+    <div class="category-card">🧪 Testing / QA (Manual & Automation)</div>
+    <div class="category-card">📊 Data Science & Analytics</div>
+    <div class="category-card">🏦 Banking & Finance</div>
+    <div class="category-card">📈 Sales & Marketing</div>
+    <div class="category-card">🧑‍💼 Human Resources (HR)</div>
+    <div class="category-card">🎨 UI/UX Design</div>
+    <div class="category-card">🏭 Manufacturing & Production</div>
+    <div class="category-card">🚚 Logistics & Supply Chain</div>
+    <div class="category-card">🏥 Healthcare & Medical</div>
+    <div class="category-card">🎓 Education & Training</div>
+    <div class="category-card">🛒 E-commerce & Retail</div>
+    <div class="category-card">🔧 Engineering (Mechanical, Civil, Electrical)</div>
+    <div class="category-card">☁️ Cloud & DevOps</div>
+  </div>
 </section> -->
 
 
-<!-- Featured Jobs -->
 
-<!-- <section class="featured-jobs">
+<section class="categories">
+  <h2>Popular Job Categories</h2>
 
-<h2>Latest Jobs</h2>
+  <div class="category-container">
+    <div class="category-card"><i class="fas fa-laptop-code"></i> IT & Software Development</div>
+    <div class="category-card"><i class="fas fa-vial"></i> Testing / QA</div>
+    <div class="category-card"><i class="fas fa-chart-line"></i> Data Science</div>
+    <div class="category-card"><i class="fas fa-university"></i> Banking & Finance</div>
+    <div class="category-card"><i class="fas fa-bullhorn"></i> Sales & Marketing</div>
+    <div class="category-card"><i class="fas fa-users"></i> Human Resources</div>
+    <div class="category-card"><i class="fas fa-palette"></i> UI/UX Design</div>
+    <div class="category-card"><i class="fas fa-industry"></i> Manufacturing</div>
+    <div class="category-card"><i class="fas fa-truck"></i> Logistics</div>
+    <div class="category-card"><i class="fas fa-heartbeat"></i> Healthcare</div>
+    <div class="category-card"><i class="fas fa-graduation-cap"></i> Education</div>
+    <div class="category-card"><i class="fas fa-shopping-cart"></i> E-commerce</div>
+    <div class="category-card"><i class="fas fa-cogs"></i> Engineering</div>
+    <div class="category-card"><i class="fas fa-cloud"></i> Cloud & DevOps</div>
+  </div>
+</section>
 
-<div class="job-card">
-<h3>Automation Tester</h3>
-<p>ABC Technologies</p>
-<p>Chennai</p>
-<button>View Job</button>
-</div>
 
-<div class="job-card">
-<h3>Frontend Developer</h3>
-<p>XYZ Solutions</p>
-<p>Bangalore</p>
-<button>View Job</button>
-</div>
-
-</section> -->
 
 
 <!-- Footer -->
 <footer class="home-job-footer">
     <p>© 2026 MyJobPortal. All rights reserved. Connecting talent with the right opportunities.</p>
 </footer>
+
+
+
+<!-- <script>
+  const cards = document.querySelectorAll(".category-card");
+
+  cards.forEach(card => {
+    card.addEventListener("click", () => {
+      const category = card.innerText;
+
+      // Redirect to jobs page with query
+      window.location.href = `/jobs?category=${encodeURIComponent(category)}`;
+    });
+  });
+</script> -->
 
 </body>
 </html>
