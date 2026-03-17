@@ -388,9 +388,6 @@
 }
                                             
 
-
-
-
 /*--- RIGHT SIDE ---*/
 .jobseeker-register-right {
     flex: 1;
@@ -742,3 +739,72 @@
   
 /* --------------------------------------------------------------------------------------------------------------------------------------- */
 
+                              /*------------------------ Home page job portal ----------------------*/
+
+
+/*----- Home job portal -----*/
+
+.job-board-home-pg {
+  text-align:center;
+  padding:60px;
+  background:#f4f6f8;
+}
+
+.job-board-home-pg h1 {
+  font-size: 38px;
+  margin-bottom: 20px;
+}
+
+.job-board-home-pg p {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.job-board-search-box {
+  display:flex;
+  align-items:center;
+  justify-content:center;   
+  gap:20px;
+  padding:10px;
+}
+
+.job-board-search-box .input-box {
+  display:flex;
+  align-items:center;
+  border:1px solid #ccc;
+  padding:14px 26px;
+  border-radius:50px;
+  background-color:white;
+}
+
+.job-board-search-box .input-box:focus-within {
+  border: 1px solid #0aa06e;
+  box-shadow: 0 0 0 3px rgba(10, 160, 110, 0.15);
+}
+
+.job-board-search-box .input-box i {
+  color:#555;
+  margin-right:15px;
+}
+
+.job-board-search-box .input-box input {
+  border:none;
+  outline:none;
+  font-size:16px;
+  width:250px;
+  background: none;
+}
+
+.job-board-search-box button{
+  background:#2a55e5;
+  color:white;
+  border:none;
+  padding:14px 26px;
+  border-radius:50px;
+  cursor:pointer;
+  font-size:15px;
+}
+
+.job-board-search-box button:hover{
+  background:#1a3fc4;
+}                              
