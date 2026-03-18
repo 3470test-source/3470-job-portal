@@ -869,3 +869,72 @@
   padding:20px;
   font-size: 16px;
 }
+
+
+/*---- Popular Job Categories ----*/
+
+.home-job-categories {
+  padding: 40px;
+  text-align: center;
+  background:#f4f6f8;
+  margin-top: -40px;
+}
+
+.home-job-categories h2 {
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+.home-job-category-desc {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.home-jobportal-category-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.home-job-category-card {
+  background: #fff;
+  padding: 15px 20px; 
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.home-job-category-card i {
+  font-size: 20px;
+  color: #007bff;
+  min-width: 25px;
+}
+
+.home-job-category-card:hover i {
+  color: #fff;
+}
+
+.home-job-category-card:hover {
+  transform: translateY(-5px);
+  background-color: #007bff;
+  color: #fff;
+}
+
+/*--- Optional: show full text on hover ---*/
+.home-job-category-card:hover {
+  overflow: visible;
+  white-space: normal;
+}
+
+
+/* -------------------------------------------------------------------------------------------------------------------------------------- */

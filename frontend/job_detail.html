@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Job Details</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+      background: #f5f7fa;
+    }
+
+    .job-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .btn {
+      background: green;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      margin-top: 15px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Job Details</h2>
+
+<div class="job-box">
+  <h3 id="title"></h3>
+  <p id="company"></p>
+  <p id="location"></p>
+  <p id="description"></p>
+
+  <input type="file" id="resume">
+  <br><br>
+
+  <button class="btn" onclick="applyJob()">Apply Now</button>
+</div>
+
+<script>
+const jobs = [
+  {
+    id: 1,
+    title: "QA Tester",
+    company: "ABC Tech",
+    location: "Chennai",
+    desc: "Responsible for manual and automation testing."
+  },
+  {
+    id: 2,
+    title: "Frontend Developer",
+    company: "XYZ Pvt Ltd",
+    location: "Bangalore",
+    desc: "Develop UI using React and modern JS."
+  }
+];
+
+const params = new URLSearchParams(window.location.search);
+const jobId = parseInt(params.get("id"));
+
+const job = jobs.find(j => j.id === jobId);
+
+if (job) {
+  document.getElementById("title").innerText = job.title;
+  document.getElementById("company").innerText = job.company;
+  document.getElementById("location").innerText = job.location;
+  document.getElementById("description").innerText = job.desc;
+}
+
+function applyJob() {
+  const file = document.getElementById("resume").files[0];
+
+  if (!file) {
+    alert("Please upload your resume");
+    return;
+  }
+
+  alert("Application submitted successfully!");
+}
+</script>
+
+</body>
+</html>
