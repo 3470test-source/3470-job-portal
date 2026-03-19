@@ -1,166 +1,514 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="dashboard.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3470 Healthcare & Training Institutes Job portal - Login job seeker</title>
 
-  <style>
-   body {
-  margin: 0;
-  font-family: Arial;
-}
+    <!-- Favicon -->
+    <link rel="icon" href="/image/Logo3470-health3-removebg-preview.png" type="image/x-icon">
+    
+    <link rel="stylesheet" href="styles.css" />
 
-.dashboard {
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+<style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+/*--- RIGHT SIDE ---*/
+.header-notification-nav-right {
   display: flex;
-  height: 100vh;
+  align-items: center;
+  gap: 20px;
 }
 
-/* Sidebar */
-.sidebar {
-  width: 250px;
-  background: #007bff;
-  color: white;
+
+/*--- ICON BOX ---*/
+.notification-icon-box {
+  position: relative;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.notification-icon-box {
+  font-size: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.side-menu-container {
+  display: flex;
   padding: 20px;
 }
 
-.sidebar ul {
-  list-style: none;
-  padding: 0;
+.sidebar-dash-job {
+  width: 280px;
+  background: #dde7fa;
+  padding: 15px;
+  height: 90vh;
+  overflow-y: auto;
+  border-radius: 10px;
 }
 
-.sidebar li {
-  padding: 10px;
+.sidebar-dash-job h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.filter-Work-Mode,
+.filter-Experience,
+.filter-Department,
+.filter-Salary,
+.filter-Company-Type,
+.filter-Role-Category,
+.filter-Education,
+.filter-Location,
+.filter-Freshness,
+.filter-Posted-By {
+  margin: 15px 0;
+}
+
+.filter-Work-Mode h4,
+.filter-Experience h4,
+.filter-Department h4,
+.filter-Salary h4,
+.filter-Company-Type h4,
+.filter-Role-Category h4,
+.filter-Education h4,
+.filter-Location h4,
+.filter-Freshness h4,
+.filter-Posted-By h4 {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #a0a3a5;
+}
+
+.filter-Work-Mode label,
+.filter-Experience label,
+.filter-Department label,
+.filter-Salary label,
+.filter-Company-Type label,
+.filter-Role-Category label,
+.filter-Education label,
+.filter-Location label,
+.filter-Freshness label,
+.filter-Posted-By label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 5px;
   cursor: pointer;
 }
 
-.sidebar li:hover {
-  background: #0056b3;
+/*--- Range ---*/
+.dash-job-range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
 }
 
-/* Content */
-.content {
-  flex: 1;
-  padding: 20px;
-  background: #f5f7fa;
+/*--- Collapsible ---*/
+.dash-job-filter-header {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
 }
 
-.section {
+/*--- Hide content ---*/
+.dash-job-hidden {
   display: none;
 }
 
-.section.active {
-  display: block;
+/* View more button */
+.dash-sider-view-more {
+  border: none;
+  background: none;
+  color: blue;
+  cursor: pointer;
+  font-size: 12px;
+  display: block;          /* important */
+  margin: 10px auto;       /* center horizontally */
 }
 
-/* Cards */
-.job-card {
-  background: white;
-  padding: 15px;
-  margin: 10px 0;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-  </style>
+</style>
 
-</head>
+</head> 
 <body>
 
-<div class="dashboard">
+    <!-- NAVBAR -->
+    <div class="job-login-navbar">
 
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h2>My Dashboard</h2>
-    <ul>
-      <li onclick="showSection('profile')">Profile</li>
-      <li onclick="showSection('applied')">Applied Jobs</li>
-      <li onclick="showSection('saved')">Saved Jobs</li>
-      <li onclick="showSection('recommended')">Recommended</li>
-    </ul>
+        <!-- LOGO -->
+        <div class="job-login-logo-container">
+            <img src="/image/Logo3470-health3-removebg-preview.png"
+                alt="3470 Healthcare Logo"
+                class="job-login-logo-img">
+        </div>
+
+        <!-- Dropdown field  -->
+        <div class="job-login-nav-links">
+
+          <!-- HOME -->
+          <a href="/frontend/index.html" class="nav-home">Home</a>
+
+           <div class="job-login-dropdown">
+             <a href="#">Jobs</a>
+
+        <div class="job-login-dropdown-menu mega-menu">
+
+        <!-- Column 1 -->
+        <div class="menu-column">
+            <h4>Popular Categories</h4>
+            <a href="#">IT Jobs</a>
+            <a href="#">Sales Jobs</a>
+            <a href="#">Healthcare Jobs</a>
+            <a href="#">HR Jobs</a>
+            <a href="#">Marketing Jobs</a>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="menu-column">
+            <h4>Jobs in Demand</h4>
+            <a href="#">Fresher Jobs</a>
+            <a href="#">MNC Jobs</a>
+            <a href="#">Remote Jobs</a>
+            <a href="#">Work From Home Jobs</a>
+            <a href="#">Walk-in Jobs</a>
+            <a href="#">Part-Time Jobs</a>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="menu-column">
+            <h4>Jobs by Location</h4>
+            <a href="#">Jobs in Chennai</a>
+            <a href="#">Jobs in Bangalore</a>
+            <a href="#">Jobs in Delhi</a>
+            <a href="#">Jobs in Mumbai</a>
+            <a href="#">Jobs in Hyderabad</a>
+            <a href="#">Jobs in Pune</a>
+        </div>
+    </div>
   </div>
 
-  <!-- Main Content -->
-  <div class="content">
 
-    <!-- Profile -->
-    <div id="profile" class="section active">
-      <h2>Profile</h2>
-      <p>Name: Vignesh</p>
-      <p>Email: vignesh@email.com</p>
-      <button>Edit Profile</button>
+  <!-- Companies Dropdown -->
+  <div class="job-login-dropdown">
+    <a href="#">Companies</a>
+
+    <div class="job-login-dropdown-menu mega-menu">
+
+      <!-- Column 1 -->
+      <div class="menu-column">
+        <h4>Explore Categories</h4>
+        <a href="#">Hospitals</a>
+        <a href="#">Clinics</a>
+        <a href="#">Diagnostic Centers</a>
+        <a href="#">Pharmaceutical Companies</a>
+        <a href="#">Medical Device Companies</a>
+        <a href="#">Healthcare Startups</a>
+      </div>
+
+      <!-- Column 2 -->
+      <div class="menu-column">
+        <h4>Explore Collections</h4>
+        <a href="#">Top Healthcare Companies</a>
+        <a href="#">Hospital Chains</a>
+        <a href="#">Pharma Companies</a>
+        <a href="#">Diagnostic Companies</a>
+        <a href="#">Featured Employers</a>
+        <a href="#">Research Organizations</a>
+      </div>
+
+      <!-- Column 3 -->
+      <div class="menu-column">
+        <h4>Company Insights</h4>
+        <a href="#">Interview Questions</a>
+        <a href="#">Company Salaries</a>
+        <a href="#">Company Reviews</a>
+        <a href="#">Salary Calculator</a>
+      </div>
+
     </div>
+  </div>
 
-    <!-- Applied Jobs -->
-    <div id="applied" class="section">
-      <h2>Applied Jobs</h2>
-      <div id="appliedJobs"></div>
+  <!-- Services -->
+  <div class="job-login-dropdown">
+    <a href="#">Services</a>
+
+    <div class="job-login-dropdown-menu mega-menu">
+
+      <div class="menu-column">
+        <h4>Career Services</h4>
+        <a href="#">Resume Building</a>
+        <a href="#">Career Guidance</a>
+        <a href="#">Interview Preparation</a>
+      </div>
+
+      <div class="menu-column">
+        <h4>Job Support</h4>
+        <a href="#">Job Alerts</a>
+        <a href="#">Profile Boost</a>
+        <a href="#">Priority Applications</a>
+      </div>
+
+      <div class="menu-column">
+        <h4>Employer Services</h4>
+        <a href="#">Post a Job</a>
+        <a href="#">Candidate Search</a>
+        <a href="#">Hiring Assistance</a>
+      </div>
+
     </div>
-
-    <!-- Saved Jobs -->
-    <div id="saved" class="section">
-      <h2>Saved Jobs</h2>
-      <div id="savedJobs"></div>
-    </div>
-
-    <!-- Recommended -->
-    <div id="recommended" class="section">
-      <h2>Recommended Jobs</h2>
-      <div id="recommendedJobs"></div>
-    </div>
-
   </div>
 
 </div>
 
-<script src="dashboard.js"></script>
+    <!-- SEARCH BAR -->
+    <div class="job-login-search-bar">
+        <input type="text" placeholder="Search jobs, courses, hospitals...">
+        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+
+    <!-- Notification -->
+    <div class="header-notification-nav-right">
+      <div class="notification-icon-box" id="notifBox">
+        <i class="fa-regular fa-bell"></i>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<div class="side-menu-container">
+
+<!-- SIDEBAR -->
+<aside class="sidebar-dash-job">
+
+<h3>All Filters</h3>
+
+<hr>
+
+<!-- Work Mode -->
+<div class="filter-Work-Mode">
+  <h4>Work Mode</h4>
+    <label><input type="checkbox"> Work from office</label>
+    <label><input type="checkbox"> Hybrid</label>
+</div>
+
+<hr>
+
+<!-- Experience -->
+<div class="filter-Experience">
+  <h4>Experience</h4>
+    <input type="range" min="0" max="30" value="5" id="expRange">
+    
+  <div class="dash-job-range-labels">
+    <span>0 Yrs</span>
+    <span>30 Yrs</span>
+  </div>
+</div>
+
+<hr>
+
+<!-- Department -->
+<div class="filter-Department">
+  <h4>Department</h4>
+    <label><input type="checkbox"> IT</label>
+    <label><input type="checkbox"> Finance</label>
+</div>
+
+<hr>
+
+<!-- Salary -->
+<div class="filter-Salary">
+
+<div class="dash-job-filter-header" onclick="toggleRole()">
+    <h4>Salary</h4>
+    <span id="arrow">▼</span>
+  </div>
+
+<div id="roleContent">
+    <label><input type="checkbox"> 0-3 Lakhs</label>
+    <label><input type="checkbox"> 3-6 Lakhs</label>
+    <label><input type="checkbox"> 6-10 Lakhs</label>
+
+    <!-- Hidden items -->
+    <div id="moreRoles" class="dash-job-hidden">
+      <label><input type="checkbox"> 10-15 Lakhs</label>
+      <label><input type="checkbox"> 15-25 Lakhs</label>
+      <label><input type="checkbox"> 25-50 Lakhs</label>
+    </div>
+
+    <button class="dash-sider-view-more" onclick="toggleMore(event)">View More</button>
+  </div>
+
+</div>
+
+<hr>
+
+<!-- Company Type -->
+<div class="filter-Company-Type">
+
+  <div class="dash-job-filter-header" onclick="toggleRole()">
+    <h4>Company Type</h4>
+    <span id="arrow">▼</span>
+  </div>
+
+<div id="roleContent">
+    <label><input type="checkbox"> Foreign MNC</label>
+    <label><input type="checkbox"> Corporate</label>
+    <label><input type="checkbox"> Startup</label>
+
+    <!-- Hidden items -->
+    <div id="moreRoles" class="dash-job-hidden">
+      <label><input type="checkbox"> Indian MNC</label>
+      <label><input type="checkbox"> Healthcare</label>
+      <label><input type="checkbox"> Govt/PSU</label>
+    </div>
+
+    <button class="dash-sider-view-more" onclick="toggleMore(event)">View More</button>
+  </div>
+
+</div>
+
+<hr>
+
+<!-- Posted By -->
+<div class="filter-Posted-By">
+  <h4>Posted By</h4>
+    <label><input type="checkbox" value="company"> Company Jobs</label>
+    <label><input type="checkbox" value="consultant"> Consultant Jobs</label>
+  </div>
+
+<hr>
+
+<!-- Role -->
+<div class="filter-Role-Category">
+
+  <div class="dash-job-filter-header" onclick="toggleRole()">
+    <h4>Role Category</h4>
+    <span id="arrow">▼</span>
+  </div>
+
+  <div id="roleContent">
+    <label><input type="checkbox"> Testing</label>
+    <label><input type="checkbox"> Dev</label>
+
+    <!-- Hidden items -->
+    <div id="moreRoles" class="dash-job-hidden">
+      <label><input type="checkbox"> Support</label>
+      <label><input type="checkbox"> Analyst</label>
+    </div>
+
+    <button class="dash-sider-view-more" onclick="toggleMore(event)">View More</button>
+  </div>
+
+</div>
+
+<hr>
+
+<!-- Education -->
+<div class="filter-Education">
+  <h4>Education</h4>
+    <label><input type="checkbox"> BCA</label>
+    <label><input type="checkbox"> BE</label>
+</div>
+
+<hr>
+
+<!-- Location -->
+<div class="filter-Location">
+  <h4>Location</h4>
+    <label><input type="checkbox"> Chennai</label>
+    <label><input type="checkbox"> Bangalore</label>
+</div>
+
+<hr>
+
+<!-- Freshness -->
+<div class="filter-Freshness">
+  <h4>Freshness</h4>
+    <label><input type="radio" name="freshness" value="30"> Last 30 days</label>
+    <label><input type="radio" name="freshness" value="15"> Last 15 days</label>
+    <label><input type="radio" name="freshness" value="7"> Last 7 days</label>
+    <label><input type="radio" name="freshness" value="3"> Last 3 days</label>
+    <label><input type="radio" name="freshness" value="1"> Last 1 day</label>
+</div>
+
+</aside>
+
+</div>
 
 
 <script>
-// Switch sections
-function showSection(sectionId) {
-  document.querySelectorAll(".section").forEach(sec => {
-    sec.classList.remove("active");
-  });
+  function toggleRole() {
+  let content = document.getElementById("roleContent");
+  let arrow = document.getElementById("arrow");
 
-  document.getElementById(sectionId).classList.add("active");
+  if (content.style.display === "none") {
+    content.style.display = "block";
+    arrow.innerHTML = "▼";
+  } else {
+    content.style.display = "none";
+    arrow.innerHTML = "▶";
+  }
 }
 
-// Sample Data
-const appliedJobs = [
-  { title: "QA Tester", company: "ABC Tech" },
-  { title: "Automation Tester", company: "TestCorp" }
-];
+function toggleMore(event) {
+  event.stopPropagation();
 
-const savedJobs = [
-  { title: "Frontend Dev", company: "XYZ Pvt Ltd" }
-];
+  let more = document.getElementById("moreRoles");
+  let btn = event.target;
 
-const recommendedJobs = [
-  { title: "SDET", company: "TechSoft" },
-  { title: "QA Engineer", company: "Infosys" }
-];
-
-// Render function
-function renderJobs(data, containerId) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = "";
-
-  data.forEach(job => {
-    const div = document.createElement("div");
-    div.className = "job-card";
-    div.innerHTML = `
-      <h3>${job.title}</h3>
-      <p>${job.company}</p>
-    `;
-    container.appendChild(div);
-  });
+  if (more.classList.contains("dash-job-hidden")) {
+    more.classList.remove("dash-job-hidden");
+    btn.innerText = "View Less";
+  } else {
+    more.classList.add("dash-job-hidden");
+    btn.innerText = "View More";
+  }
 }
 
-// Load data
-renderJobs(appliedJobs, "appliedJobs");
-renderJobs(savedJobs, "savedJobs");
-renderJobs(recommendedJobs, "recommendedJobs");
 </script>
 
 
-</body>
+
+
+
+
+
+  </body>
 </html>
+
