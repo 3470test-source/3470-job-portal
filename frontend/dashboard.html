@@ -30,7 +30,6 @@
   gap: 20px;
 }
 
-
 /*--- ICON BOX ---*/
 .notification-icon-box {
   position: relative;
@@ -41,6 +40,173 @@
 .notification-icon-box {
   font-size: 25px;
 }
+
+
+
+
+
+
+
+
+
+
+
+/* Modal Background */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+}
+
+/* Modal Box */
+.modal-content {
+  background: #fff;
+  width: 650px;
+  max-height: 80vh;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 10px;
+  overflow-y: auto;
+}
+
+/* Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Close */
+.close {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Search */
+.modal-search {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+/* Body (3 columns like Naukri) */
+.modal-body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.modal-body label {
+  font-size: 14px;
+}
+
+/* Footer */
+.modal-footer {
+  text-align: right;
+  margin-top: 15px;
+}
+
+.apply-btn {
+  background: #2a6df4;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Container (pill shape) */
+.header-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90px;
+  height: 40px;
+  background: #f2f2f2;
+  border-radius: 25px;
+  padding: 5px;
+}
+
+/* Icon wrapper (both menu + profile) */
+.icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Anchor tag should fill entire circle */
+.icon a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+
+/* Icon styling */
+.icon i {
+  font-size: 16px;
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+/* Hover effect */
+.icon:hover {
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.icon:hover i {
+  color: #000;
+}
+
+/* Optional active state */
+.icon.active {
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.icon.active i {
+  color: #000;
+}
+
+
+
+
 
 
 
@@ -105,6 +271,16 @@
 .filter-Posted-By h4 {
   font-size: 14px;
   margin-bottom: 8px;
+}
+
+#expValue {
+  font-weight: bold;
+  color: #2a6df4;
+  margin-top: 10px;
+}
+
+.filter-Experience p {
+  margin: 10px 0;
 }
 
 hr {
@@ -303,13 +479,22 @@ hr {
         <i class="fa-regular fa-bell"></i>
       </div>
     </div>
+
+<!-- Profile Btn -->
+<div class="header-toggle">
+  <div class="icon menu">
+    <i class="fas fa-bars"></i>
+  </div>
+  <div class="icon profile">
+    <a href="/frontend/create_profile_pg.html" class="profile-link">
+      <i class="fas fa-user"></i>
+    </a>
+  </div>
 </div>
 
+</div>
 
-
-
-
-
+<!------------ Main dashboard side menu ------------->
 
 <div class="side-menu-container">
 
@@ -325,6 +510,7 @@ hr {
   <h4>Work Mode</h4>
     <label><input type="checkbox"> Work from office</label>
     <label><input type="checkbox"> Hybrid</label>
+    <label><input type="checkbox"> Remote</label>
 </div>
 
 <hr>
@@ -332,7 +518,10 @@ hr {
 <!-- Experience -->
 <div class="filter-Experience">
   <h4>Experience</h4>
-    <input type="range" min="0" max="30" value="5" id="expRange">
+    <input type="range" min="0" max="30" value="0" id="expRange">
+
+  <!-- Dynamic value -->
+  <p>Selected: <span id="expValue">0</span> Yrs</p>
     
   <div class="dash-job-range-labels">
     <span>0 Yrs</span>
@@ -342,33 +531,82 @@ hr {
 
 <hr>
 
-<!-- Department -->
+<!-------- Department -------->
 <div class="filter-Department">
-  <h4>Department</h4>
-    <label><input type="checkbox"> IT</label>
-    <label><input type="checkbox"> Finance</label>
+
+  <div class="dash-job-filter-header" onclick="toggleRole(this)">
+    <h4>Department</h4>
+    <span id="arrow" class="arrow">▼</span>
+  </div>
+ 
+    <div class="roleContent" class="roleContent">
+      <label><input type="checkbox"> IT & Information Security</label>
+      <label><input type="checkbox"> Engineering - Software & QA</label>
+      <label><input type="checkbox"> Consulting</label>
+      <label><input type="checkbox"> Quality Assurance</label>
+      <button class="dash-sider-view-more" onclick="openModal(event,'deptModal')">View More</button>
+    </div>
+</div>
+
+<div id="deptModal" class="modal">
+  <div class="modal-content">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h3>Department</h3>
+      <span class="close" onclick="closeModal('deptModal')">&times;</span>
+    </div>
+
+    <!-- Search -->
+    <input type="text" placeholder="Search Department" class="modal-search">
+
+    <!-- Body -->
+    <div class="modal-body">
+      <label><input type="checkbox"> Engineering - Software & QA</label>
+      <label><input type="checkbox"> IT & Information Security</label>
+      <label><input type="checkbox"> Data Science & Analytics</label>
+      <label><input type="checkbox"> Finance & Accounting</label>
+      <label><input type="checkbox"> Sales & Business Development</label>
+      <label><input type="checkbox"> Marketing & Communication</label>
+      <label><input type="checkbox"> Healthcare & Life Sciences</label>
+      <label><input type="checkbox"> HR & Recruitment</label>
+      <label><input type="checkbox"> Teaching & Education</label>
+      <label><input type="checkbox"> Consulting</label>
+      <label><input type="checkbox"> Quality Assurance</label>
+      <label><input type="checkbox"> UX, Design & Architecture</label>
+      <label><input type="checkbox"> Other</label>
+    </div>
+
+    <!-- Footer -->
+    <div class="modal-footer">
+      <button class="apply-btn" onclick="applySelection('deptModal')">Apply</button>
+    </div>
+
+  </div>
 </div>
 
 <hr>
 
-<!-- Salary -->
+<!---------- Salary ----------->
 <div class="filter-Salary">
 
-<div class="dash-job-filter-header" onclick="toggleRole()">
+<div class="dash-job-filter-header" onclick="toggleRole(this)">
     <h4>Salary</h4>
-    <span id="arrow">▼</span>
+    <span id="arrow" class="arrow">▼</span>
   </div>
 
-<div id="roleContent">
+<div id="roleContent" class="roleContent">
     <label><input type="checkbox"> 0-3 Lakhs</label>
     <label><input type="checkbox"> 3-6 Lakhs</label>
     <label><input type="checkbox"> 6-10 Lakhs</label>
 
     <!-- Hidden items -->
-    <div id="moreRoles" class="dash-job-hidden">
+    <div id="moreRoles" class="moreRoles dash-job-hidden">
       <label><input type="checkbox"> 10-15 Lakhs</label>
       <label><input type="checkbox"> 15-25 Lakhs</label>
       <label><input type="checkbox"> 25-50 Lakhs</label>
+      <label><input type="checkbox"> 50-75 Lakhs</label>
+      <label><input type="checkbox"> 75-100 Lakhs</label>
     </div>
 
     <button class="dash-sider-view-more" onclick="toggleMore(event)">View More</button>
@@ -381,21 +619,22 @@ hr {
 <!-- Company Type -->
 <div class="filter-Company-Type">
 
-  <div class="dash-job-filter-header" onclick="toggleRole()">
+  <div class="dash-job-filter-header" onclick="toggleRole(this)">
     <h4>Company Type</h4>
-    <span id="arrow">▼</span>
+    <span id="arrow" class="arrow">▼</span>
   </div>
 
-<div id="roleContent">
+<div id="roleContent" class="roleContent">
     <label><input type="checkbox"> Foreign MNC</label>
     <label><input type="checkbox"> Corporate</label>
     <label><input type="checkbox"> Startup</label>
 
     <!-- Hidden items -->
-    <div id="moreRoles" class="dash-job-hidden">
+    <div id="moreRoles" class="moreRoles dash-job-hidden">
       <label><input type="checkbox"> Indian MNC</label>
       <label><input type="checkbox"> Healthcare</label>
       <label><input type="checkbox"> Govt/PSU</label>
+      <label><input type="checkbox"> MNC</label>
     </div>
 
     <button class="dash-sider-view-more" onclick="toggleMore(event)">View More</button>
@@ -414,45 +653,174 @@ hr {
 
 <hr>
 
-<!-- Role -->
+
+<!------------------------ Role Category ------------------------->
 <div class="filter-Role-Category">
 
-  <div class="dash-job-filter-header" onclick="toggleRole()">
+  <div class="dash-job-filter-header" onclick="toggleRole(this)">
     <h4>Role Category</h4>
-    <span id="arrow">▼</span>
+    <span id="arrow" class="arrow">▼</span>
   </div>
 
-  <div id="roleContent">
-    <label><input type="checkbox"> Testing</label>
-    <label><input type="checkbox"> Dev</label>
+  <div class="roleContent" class="roleContent">
+      <label><input type="checkbox"> Software Development</label>
+      <label><input type="checkbox"> Quality Assurance and Testing</label>
+      <label><input type="checkbox"> IT Consulting</label>
+      <label><input type="checkbox"> IT Security</label>
+      <button class="dash-sider-view-more" onclick="openModal(event,'roleModal')">View More</button>
+    </div>
+</div>
 
-    <!-- Hidden items -->
-    <div id="moreRoles" class="dash-job-hidden">
-      <label><input type="checkbox"> Support</label>
-      <label><input type="checkbox"> Analyst</label>
+
+<div id="roleModal" class="modal">
+  <div class="modal-content">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h3>Role Category</h3>
+      <span class="close" onclick="closeModal('roleModal')">&times;</span>
     </div>
 
-    <button class="dash-sider-view-more" onclick="toggleMore(event)">View More</button>
+    <!-- Search -->
+    <input type="text" placeholder="Search Role Category" class="modal-search">
+
+    <!-- Body -->
+    <div class="modal-body">
+      <label><input type="checkbox"> Software Development</label>
+      <label><input type="checkbox"> Quality Assurance and Testing</label>
+      <label><input type="checkbox"> IT Consulting</label>
+      <label><input type="checkbox"> IT Security</label>
+      <label><input type="checkbox"> DevOps</label>
+      <label><input type="checkbox"> IT & Information Security</label>
+      <label><input type="checkbox"> IT Infrastructure Services</label>
+      <label><input type="checkbox"> IT Network</label>
+      <label><input type="checkbox"> Healthcare & Life Science</label>
+      <label><input type="checkbox"> Human Resources</label>
+      <label><input type="checkbox"> Technology / IT</label>
+      <label><input type="checkbox"> UI / UX</label>
+      <label><input type="checkbox"> Other Consulting</label>
+      <label><input type="checkbox"> Banking Operations</label>
+      <label><input type="checkbox"> Business Intelligence & Analytics</label>
+    </div>
+
+    <!-- Footer -->
+    <div class="modal-footer">
+      <button class="apply-btn" onclick="applySelection('roleModal')">Apply</button>
+    </div>
+
+  </div>
+</div>
+  
+<hr>
+
+<!------------ Education ------------->
+<div class="filter-Education">
+
+<div class="dash-job-filter-header" onclick="toggleRole(this)">
+    <h4>Education</h4>
+    <span id="arrow" class="arrow">▼</span>
   </div>
 
+  <div class="roleContent" class="roleContent">
+      <label><input type="checkbox"> M.Pharma</label>
+      <label><input type="checkbox"> B.Pharma</label>
+      <label><input type="checkbox"> BCA - Bachelor of Computer</label>
+      <label><input type="checkbox"> Any Graduate</label>
+      <button class="dash-sider-view-more" onclick="openModal(event,'eduModal')">View More</button>
+    </div>
+</div>
+
+<div id="eduModal" class="modal">
+  <div class="modal-content">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h3>Education</h3>
+      <span class="close" onclick="closeModal('eduModal')">&times;</span>
+    </div>
+
+    <!-- Search -->
+    <input type="text" placeholder="Search Education" class="modal-search">
+
+    <!-- Body -->
+    <div class="modal-body">
+      <label><input type="checkbox"> Any Postgraduate</label>
+      <label><input type="checkbox"> M.Tech</label>
+      <label><input type="checkbox"> MCA</label>
+      <label><input type="checkbox"> MS/M.Sc(Science)</label>
+      <label><input type="checkbox"> MBA/PGDM</label>
+      <label><input type="checkbox"> Medical-MS/MD</label>
+      <label><input type="checkbox"> M.Pharma</label>
+      <label><input type="checkbox"> PG Diploma</label>
+      <label><input type="checkbox"> M.Com</label>
+      <label><input type="checkbox"> Any Graduate</label>
+      <label><input type="checkbox"> B.Sc - Bachelor of Science</label>
+      <label><input type="checkbox"> BCA - Bachelor of Computer</label>
+      <label><input type="checkbox"> B.Pharma</label>
+    </div>
+
+    <!-- Footer -->
+    <div class="modal-footer">
+      <button class="apply-btn" onclick="applySelection('eduModal')">Apply</button>
+    </div>
+
+  </div>
 </div>
 
 <hr>
 
-<!-- Education -->
-<div class="filter-Education">
-  <h4>Education</h4>
-    <label><input type="checkbox"> BCA</label>
-    <label><input type="checkbox"> BE</label>
-</div>
-
-<hr>
-
-<!-- Location -->
+<!--------------- Location ------------------------>
 <div class="filter-Location">
-  <h4>Location</h4>
-    <label><input type="checkbox"> Chennai</label>
-    <label><input type="checkbox"> Bangalore</label>
+
+  <div class="dash-job-filter-header" onclick="toggleRole(this)">
+    <h4>Location</h4>
+    <span id="arrow" class="arrow">▼</span>
+  </div>
+
+<div class="roleContent" class="roleContent">
+      <label><input type="checkbox"> Chennai</label>
+      <label><input type="checkbox"> Bangalore</label>
+      <label><input type="checkbox"> Hyderabad</label>
+      <label><input type="checkbox"> Pune</label>
+      <button class="dash-sider-view-more" onclick="openModal(event,'locationModal')">View More</button>
+    </div>
+</div>
+
+<div id="locationModal" class="modal">
+  <div class="modal-content">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <h3>Location</h3>
+      <span class="close" onclick="closeModal('locationModal')">&times;</span>
+    </div>
+
+    <!-- Search -->
+    <input type="text" placeholder="Search Location" class="modal-search">
+
+    <!-- Body -->
+    <div class="modal-body">
+      <label><input type="checkbox"> Chennai</label>
+      <label><input type="checkbox"> Bangalore</label>
+      <label><input type="checkbox"> Hyderabad</label>
+      <label><input type="checkbox"> Pune</label>
+      <label><input type="checkbox"> Delhi / NCR</label>
+      <label><input type="checkbox"> Mumbai</label>
+      <label><input type="checkbox"> Kolkata</label>
+      <label><input type="checkbox"> Coimbatore</label>
+      <label><input type="checkbox"> Trichy</label>
+      <label><input type="checkbox"> Thiruvananthapuram</label>
+      <label><input type="checkbox"> Kochi</label>
+      <label><input type="checkbox"> Noida</label>
+      <label><input type="checkbox"> Ahmedabad</label>
+    </div>
+
+    <!-- Footer -->
+    <div class="modal-footer">
+      <button class="apply-btn" onclick="applySelection('locationModal')">Apply</button>
+    </div>
+
+  </div>
 </div>
 
 <hr>
@@ -472,10 +840,54 @@ hr {
 </div>
 
 
-<script>
-  function toggleRole() {
-  let content = document.getElementById("roleContent");
-  let arrow = document.getElementById("arrow");
+<script src="main.js"></script>
+
+<!-- <script>
+
+// OPEN MODAL
+function openModal(modalId) {
+  event.stopPropagation(); // prevent collapse
+  document.getElementById(modalId).style.display = "block";
+}
+
+// CLOSE MODAL
+function closeModal(modalId) {
+  document.getElementById(modalId).style.display = "none";
+}
+
+// APPLY BUTTON
+function applyDepartment() {
+  const checked = document.querySelectorAll("#deptModal input:checked");
+
+  let selected = [];
+  checked.forEach(cb => {
+    selected.push(cb.parentElement.textContent.trim());
+  });
+
+  console.log("Selected Departments:", selected);
+
+  // Close modal after apply
+  closeModal();
+}
+
+
+// ✅ RUN ON PAGE LOAD
+const expRange = document.getElementById("expRange");
+const expValue = document.getElementById("expValue");
+
+// default value
+expValue.textContent = expRange.value;
+
+// update on slider move
+expRange.addEventListener("input", function () {
+  expValue.textContent = "0 - " + this.value;
+});
+
+
+// ✅ TOGGLE FILTER SECTIONS
+function toggleRole(element) {
+  const content = element.nextElementSibling;
+  const arrow = element.querySelector("span");
 
   if (content.style.display === "none") {
     content.style.display = "block";
@@ -486,11 +898,13 @@ hr {
   }
 }
 
+
+// ✅ VIEW MORE / LESS
 function toggleMore(event) {
   event.stopPropagation();
 
-  let more = document.getElementById("moreRoles");
-  let btn = event.target;
+  const btn = event.target;
+  const more = btn.previousElementSibling;
 
   if (more.classList.contains("dash-job-hidden")) {
     more.classList.remove("dash-job-hidden");
@@ -500,12 +914,125 @@ function toggleMore(event) {
     btn.innerText = "View More";
   }
 }
+</script> -->
 
+
+
+
+<script>
+  // =========================
+// ✅ OPEN MODAL
+// =========================
+function openModal(e, modalId) {
+  e.stopPropagation(); // prevent collapse
+  document.getElementById(modalId).style.display = "block";
+}
+
+
+// =========================
+// ✅ CLOSE MODAL
+// =========================
+function closeModal(modalId) {
+  document.getElementById(modalId).style.display = "none";
+}
+
+
+// =========================
+// ✅ APPLY BUTTON (WORKS FOR ALL MODALS)
+// =========================
+function applySelection(modalId) {
+  const checked = document.querySelectorAll(`#${modalId} input:checked`);
+
+  let selected = [];
+  checked.forEach(cb => {
+    selected.push(cb.parentElement.textContent.trim());
+  });
+
+  console.log(modalId + " Selected:", selected);
+
+  // close modal
+  closeModal(modalId);
+}
+
+
+// =========================
+// ✅ EXPERIENCE RANGE
+// =========================
+const expRange = document.getElementById("expRange");
+const expValue = document.getElementById("expValue");
+
+if (expRange && expValue) {
+  expValue.textContent = expRange.value;
+
+  expRange.addEventListener("input", function () {
+    expValue.textContent = "0 - " + this.value;
+  });
+}
+
+
+// =========================
+// ✅ TOGGLE FILTER SECTIONS
+// =========================
+function toggleRole(element) {
+  const content = element.nextElementSibling;
+  const arrow = element.querySelector("span");
+
+  const isHidden = window.getComputedStyle(content).display === "none";
+
+  if (isHidden) {
+    content.style.display = "block";
+    arrow.innerHTML = "▼";
+  } else {
+    content.style.display = "none";
+    arrow.innerHTML = "▶";
+  }
+}
+
+
+// =========================
+// ✅ VIEW MORE / LESS
+// =========================
+function toggleMore(event) {
+  event.stopPropagation();
+
+  const btn = event.target;
+  const more = btn.previousElementSibling;
+
+  more.classList.toggle("dash-job-hidden");
+
+  btn.innerText = more.classList.contains("dash-job-hidden")
+    ? "View More"
+    : "View Less";
+}
+
+
+// =========================
+// ✅ CLOSE MODAL ON OUTSIDE CLICK
+// =========================
+window.onclick = function (e) {
+  document.querySelectorAll(".modal").forEach(modal => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+};
+
+
+// =========================
+// ✅ SEARCH FILTER INSIDE MODAL
+// =========================
+document.querySelectorAll(".modal-search").forEach(input => {
+  input.addEventListener("keyup", function () {
+    const filter = this.value.toLowerCase();
+    const labels = this.parentElement.querySelectorAll(".modal-body label");
+
+    labels.forEach(label => {
+      const text = label.textContent.toLowerCase();
+      label.style.display = text.includes(filter) ? "" : "none";
+    });
+  });
+});
 </script>
-
-
-
-
 
 
 
