@@ -938,3 +938,429 @@
 
 
 /* -------------------------------------------------------------------------------------------------------------------------------------- */
+
+                                        /*------- Dashboard sidebar all menu ---------*/
+
+.side-menu-container {
+  display: flex;
+  padding: 20px;
+}
+
+.sidebar-dash-job {
+  width: 280px;
+  background: #dde7fa;
+  padding: 15px;
+  height: 90vh;
+  overflow-y: auto;
+  border-radius: 10px;
+}
+
+.sidebar-dash-job h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.filter-Work-Mode,
+.filter-Experience,
+.filter-Department,
+.filter-Salary,
+.filter-Company-Type,
+.filter-Role-Category,
+.filter-Education,
+.filter-Location,
+.filter-Freshness,
+.filter-Posted-By {
+  margin: 15px 0;
+}
+
+.filter-Work-Mode h4,
+.filter-Experience h4,
+.filter-Department h4,
+.filter-Salary h4,
+.filter-Company-Type h4,
+.filter-Role-Category h4,
+.filter-Education h4,
+.filter-Location h4,
+.filter-Freshness h4,
+.filter-Posted-By h4 {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+#expValue {
+  font-weight: bold;
+  color: #2a6df4;
+  margin-top: 10px;
+}
+
+.filter-Experience p {
+  margin: 10px 0;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #a0a3a5;
+}
+
+.filter-Work-Mode label,
+.filter-Experience label,
+.filter-Department label,
+.filter-Salary label,
+.filter-Company-Type label,
+.filter-Role-Category label,
+.filter-Education label,
+.filter-Location label,
+.filter-Freshness label,
+.filter-Posted-By label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+/*--- Range ---*/
+.dash-job-range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+/*--- Collapsible ---*/
+.dash-job-filter-header {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+/*--- Hide content ---*/
+.dash-job-hidden {
+  display: none;
+}
+
+/*--- View more button ---*/
+.dash-sider-view-more {
+  border: none;
+  background: none;
+  color: blue;
+  cursor: pointer;
+  font-size: 12px;
+  display: block;          
+  margin: 10px auto;       
+}
+
+
+                                    /*--------------- sidebar menu view search apply -----------*/
+                                    
+
+/*---- Modal Background ----*/
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+}
+
+/*---- Modal Box ----*/
+.modal-content {
+  background: #fff;
+  width: 650px;
+  max-height: 80vh;
+  margin: 5% auto;
+  padding: 20px;
+  border-radius: 10px;
+  overflow-y: auto;
+}
+
+/*---- Header ----*/
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*---- Close ----*/
+.close {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/*---- Search ----*/
+.modal-search {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+}
+
+/*---- Body (3 columns like Naukri) ----*/
+.modal-body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.modal-body label {
+  font-size: 14px;
+}
+
+/*--- Footer ---*/
+.modal-footer {
+  text-align: right;
+  margin-top: 15px;
+}
+
+.apply-btn {
+  background: #2a6df4;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------ */
+
+                                           /*------------ header profile Icon -----------*/
+
+
+/*--- Container (pill shape) ---*/
+.header-toggle-profile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90px;
+  height: 40px;
+  background: #f2f2f2;
+  border-radius: 25px;
+  padding: 10px;
+}
+
+/*--- Icon wrapper (both menu + profile) ---*/
+.icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+}
+
+/*--- Anchor tag should fill entire circle ---*/
+.icon a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+
+/*--- Icon styling ---*/
+.icon i {
+  font-size: 16px;
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+/*--- Hover effect ---*/
+.icon:hover {
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.icon:hover i {
+  color: #000;
+}
+
+/*--- Optional active state ---*/
+.icon.active {
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.icon.active i {
+  color: #000;
+}
+
+
+/* ----------------------------------------------------------------------------------------------------------------------------- */
+                                                  
+                                      /*----------- Notifications --------------*/
+
+/*--- RIGHT SIDE ---*/
+.header-notification-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/*--- ICON BOX ---*/
+.notification-icon-box {
+  position: relative;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.notification-icon-box {
+  font-size: 25px;
+}
+
+/*------- Notification Panel --------*/
+.notification-panel {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  width: 350px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+}
+
+/*------ Active class (open) --------*/
+.notification-panel.active {
+  right: 0;
+}
+
+/*------ Header --------*/
+.notif-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.notif-header h3 {
+ font-size: 20px;
+}
+
+.notifi-close-btn {
+  font-size: 36px;
+  cursor: pointer;
+}
+
+/*--- Body ---*/
+.notif-body {
+  padding: 15px;
+  overflow-y: auto;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------- */
+
+                                          /*----------- profile panel menu --------------*/
+
+/*---- Profile Panel ----*/
+.profile-panel {
+  position: fixed;
+  top: 0;
+  right: -350px;
+  width: 350px;
+  height: 100%;
+  background: #fff;
+  box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+}
+
+/*---- Active state ----*/
+.profile-panel.active {
+  right: 0;
+}       
+
+/*----- Header -----*/
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.profile-header h3 {
+  font-size: 20px;
+}
+
+.profile-close-btn {
+  font-size: 36px;
+  cursor: pointer;
+}
+
+/*--- Body ---*/
+.profile-body {
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.profile-info {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.profile-info h4 {
+  font-size: 22px;
+  margin-bottom: 10px
+}
+
+.profile-info p {
+  font-size: 18px;
+}
+
+.profile-avatar {
+  font-size: 70px;
+  color: #2a6df4;
+  margin-bottom: 10px;
+}
+
+.profile-menu {
+  list-style: none;
+  padding: 0;
+}
+
+.profile-menu li {
+  margin: 12px 0;
+}
+
+.profile-menu a {
+  text-decoration: none;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+  font-size: 16px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+/*---- Icon styling ----*/
+.profile-menu i {
+  font-size: 16px;
+  color: #078651;
+  width: 20px; /* align all icons */
+  text-align: center;
+}
+
+/*---- Hover effect ----*/
+.profile-menu a:hover {
+  background: #f2f6ff;
+}
+
+/* -------------------------------------------------------------------------------------------------------------------- */

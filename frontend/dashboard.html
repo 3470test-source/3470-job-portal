@@ -17,29 +17,13 @@
     />
 
 <style>
+
     *{
       margin:0;
       padding:0;
       box-sizing:border-box;
     }
 
-/*--- RIGHT SIDE ---*/
-.header-notification-nav-right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-/*--- ICON BOX ---*/
-.notification-icon-box {
-  position: relative;
-  cursor: pointer;
-  font-size: 20px;
-}
-
-.notification-icon-box {
-  font-size: 25px;
-}
 
 
 
@@ -51,77 +35,11 @@
 
 
 
-/* Modal Background */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.4);
-}
 
-/* Modal Box */
-.modal-content {
-  background: #fff;
-  width: 650px;
-  max-height: 80vh;
-  margin: 5% auto;
-  padding: 20px;
-  border-radius: 10px;
-  overflow-y: auto;
-}
 
-/* Header */
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Close */
-.close {
-  font-size: 22px;
-  cursor: pointer;
-}
-
-/* Search */
-.modal-search {
-  width: 100%;
-  padding: 10px;
-  margin: 15px 0;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-}
-
-/* Body (3 columns like Naukri) */
-.modal-body {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.modal-body label {
-  font-size: 14px;
-}
-
-/* Footer */
-.modal-footer {
-  text-align: right;
-  margin-top: 15px;
-}
-
-.apply-btn {
-  background: #2a6df4;
-  color: white;
-  border: none;
-  padding: 8px 20px;
-  border-radius: 20px;
-  cursor: pointer;
+/*---- JOB LIST ----*/
+.dash-job-list-container {
+  flex:1;
 }
 
 
@@ -129,209 +47,67 @@
 
 
 
+/* JOB CARD */
+.job-card-list-dash {
+  background:rgb(238, 236, 236);
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:20px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Container (pill shape) */
-.header-toggle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 90px;
-  height: 40px;
-  background: #f2f2f2;
-  border-radius: 25px;
-  padding: 5px;
+  max-width:750px;   /* 🔥 control width */
+  margin-left:auto;
+  margin-right:auto; /* center card */
 }
 
-/* Icon wrapper (both menu + profile) */
-.icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  position: relative;
+.job-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
-/* Anchor tag should fill entire circle */
-.icon a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  text-decoration: none;
+.company-logo{
+  width:60px;  
 }
 
-/* Icon styling */
-.icon i {
-  font-size: 16px;
-  color: #555;
-  transition: color 0.3s ease;
+.job-title-section{
+  flex:1;
+  margin-left:10px;
 }
 
-/* Hover effect */
-.icon:hover {
-  background: #ffffff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
-
-.icon:hover i {
-  color: #000;
-}
-
-/* Optional active state */
-.icon.active {
-  background: #ffffff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
-
-.icon.active i {
-  color: #000;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.side-menu-container {
-  display: flex;
-  padding: 20px;
-}
-
-.sidebar-dash-job {
-  width: 280px;
-  background: #dde7fa;
-  padding: 15px;
-  height: 90vh;
-  overflow-y: auto;
-  border-radius: 10px;
-}
-
-.sidebar-dash-job h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-}
-
-.filter-Work-Mode,
-.filter-Experience,
-.filter-Department,
-.filter-Salary,
-.filter-Company-Type,
-.filter-Role-Category,
-.filter-Education,
-.filter-Location,
-.filter-Freshness,
-.filter-Posted-By {
-  margin: 15px 0;
-}
-
-.filter-Work-Mode h4,
-.filter-Experience h4,
-.filter-Department h4,
-.filter-Salary h4,
-.filter-Company-Type h4,
-.filter-Role-Category h4,
-.filter-Education h4,
-.filter-Location h4,
-.filter-Freshness h4,
-.filter-Posted-By h4 {
-  font-size: 14px;
-  margin-bottom: 8px;
-}
-
-#expValue {
-  font-weight: bold;
-  color: #2a6df4;
-  margin-top: 10px;
-}
-
-.filter-Experience p {
-  margin: 10px 0;
-}
-
-hr {
-  border: none;
-  border-top: 1px solid #a0a3a5;
-}
-
-.filter-Work-Mode label,
-.filter-Experience label,
-.filter-Department label,
-.filter-Salary label,
-.filter-Company-Type label,
-.filter-Role-Category label,
-.filter-Education label,
-.filter-Location label,
-.filter-Freshness label,
-.filter-Posted-By label {
-  display: block;
-  font-size: 13px;
+.job-title-section h3 {
   margin-bottom: 5px;
-  cursor: pointer;
 }
 
-/*--- Range ---*/
-.dash-job-range-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
+.job-details{
+  margin:15px 0;
+  display:flex;
+  gap:15px;
+  font-size:14px;
 }
 
-/*--- Collapsible ---*/
-.dash-job-filter-header {
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
+.job-desc{
+  font-size:14px;
+  color:#555;
 }
 
-/*--- Hide content ---*/
-.dash-job-hidden {
-  display: none;
+.job-footer{
+  display:flex;
+  justify-content:space-between;
+  margin-top:10px;
 }
 
-/* View more button */
-.dash-sider-view-more {
-  border: none;
-  background: none;
-  color: blue;
-  cursor: pointer;
-  font-size: 12px;
-  display: block;          /* important */
-  margin: 10px auto;       /* center horizontally */
+.apply-btn{
+  background:#0d6efd;
+  color:white;
+  border:none;
+  padding:8px 16px;
+  border-radius:50px;
+  cursor:pointer;
+}
+
+.apply-btn:hover {
+  background:#078d34;  
 }
 
 </style>
@@ -469,7 +245,7 @@ hr {
 
     <!-- SEARCH BAR -->
     <div class="job-login-search-bar">
-        <input type="text" placeholder="Search jobs, courses, hospitals...">
+        <input type="text" placeholder="Search jobs, companies, or keywords...">
         <button><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
 
@@ -480,9 +256,21 @@ hr {
       </div>
     </div>
 
+<!-- Notification Slider -->
+<div id="notificationPanel" class="notification-panel">
+
+  <!-- Notification Header -->
+  <div class="notif-header">
+    <h3>Notifications</h3>
+    <span class="notifi-close-btn" onclick="closeNotification()">&times;</span>
+  </div>
+
+</div>
+
+
 <!-- Profile Btn -->
-<div class="header-toggle">
-  <div class="icon menu">
+<div class="header-toggle-profile">
+  <div class="icon menu" id="menuBtn">
     <i class="fas fa-bars"></i>
   </div>
   <div class="icon profile">
@@ -490,6 +278,37 @@ hr {
       <i class="fas fa-user"></i>
     </a>
   </div>
+</div>
+
+
+
+
+
+<!-- Profile Slider -->
+<div id="profilePanel" class="profile-panel">
+
+  <!-- Header -->
+  <div class="profile-header">
+    <h3>My Profile</h3>
+    <span class="profile-close-btn" onclick="closeProfilePanel()">&times;</span>
+  </div>
+
+  <!-- Body -->
+  <div class="profile-body">
+    <div class="profile-info">
+      <i class="fas fa-user-circle profile-avatar"></i>
+      <h4>Vignesh</h4>
+      <p>Software Test Engineer</p>
+    </div>
+
+    <ul class="profile-menu">
+      <li><a href="/frontend/create_profile_pg.html"><i class="fas fa-user"></i>View Profile</a></li>
+      <li><a href="#"><i class="fas fa-briefcase"></i>My Applications</a></li>
+      <li><a href="#"><i class="fas fa-bookmark"></i>Saved Jobs</a></li>
+      <li><a href="/frontend/login.html"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+    </ul>
+  </div>
+
 </div>
 
 </div>
@@ -835,206 +654,220 @@ hr {
     <label><input type="radio" name="freshness" value="1"> Last 1 day</label>
 </div>
 
-</aside>
+  </aside>
 
+
+
+
+
+
+
+
+
+
+
+  <!-- JOB LIST -->
+  <main class="dash-job-list-container">
+
+    <!-- JOB CARD 1 -->
+    <div class="job-card-list-dash">
+      <div class="job-header">
+        <img src="https://via.placeholder.com/50" class="company-logo">
+
+        <div class="job-title-section">
+          <h3>Software Test Engineer</h3>
+          <p>TCS</p>
+        </div>
+
+        <i class="fa-regular fa-bookmark"></i>
+      </div>
+
+      <div class="job-details">
+        <span><i class="fa fa-briefcase"></i> 2-4 Years</span>
+        <span><i class="fa fa-location-dot"></i> Chennai</span>
+        <span><i class="fa fa-indian-rupee-sign"></i> 4-6 LPA</span>
+      </div>
+
+      <p class="job-desc">
+        Experience in Selenium, Cypress automation testing required.
+      </p>
+
+      <div class="job-footer">
+        <span>2 days ago</span>
+        <button class="apply-btn">Apply</button>
+      </div>
+    </div>
+
+
+
+    <!-- JOB CARD 2 -->
+    <div class="job-card-list-dash">
+      <div class="job-header">
+        <img src="https://via.placeholder.com/50" class="company-logo">
+
+        <div class="job-title-section">
+          <h3>QA Automation Engineer</h3>
+          <p>Infosys</p>
+        </div>
+
+        <i class="fa-regular fa-bookmark"></i>
+      </div>
+
+      <div class="job-details">
+        <span><i class="fa fa-briefcase"></i> 3-5 Years</span>
+        <span><i class="fa fa-location-dot"></i> Bangalore</span>
+        <span><i class="fa fa-indian-rupee-sign"></i> 5-8 LPA</span>
+      </div>
+
+      <p class="job-desc">
+        Strong experience in Selenium WebDriver & TestNG.
+      </p>
+
+      <div class="job-footer">
+        <span>1 day ago</span>
+        <button class="apply-btn">Apply</button>
+      </div>
+    </div>
+
+
+<!-- Healthcare Job -->
+<div class="job-card-list-dash">
+  <div class="job-header">
+    <img src="/image/Logo3470-health3-removebg-preview.png" class="company-logo">
+
+    <div class="job-title-section">
+      <h3>Medical coding</h3>
+      <p>3470healthcare Pvt Ltd</p>
+    </div>
+
+    <i class="fa-regular fa-bookmark"></i>
+  </div>
+
+  <div class="job-details">
+    <span><i class="fa fa-briefcase"></i> 1-3 Years</span>
+    <span><i class="fa fa-location-dot"></i> Chennai</span>
+    <span><i class="fa fa-indian-rupee-sign"></i> 2-4 LPA</span>
+  </div>
+
+  <p class="job-desc">
+    Looking for qualified life science BMCT, CPC experience.
+  </p>
+
+  <div class="job-footer">
+    <span>3 days ago</span>
+    <button class="apply-btn">Apply</button>
+  </div>
 </div>
 
 
-<script src="main.js"></script>
+<!-- Software Developer -->
+<div class="job-card-list-dash">
+  <div class="job-header">
+    <img src="https://via.placeholder.com/50" class="company-logo">
 
-<!-- <script>
+    <div class="job-title-section">
+      <h3>Frontend Developer</h3>
+      <p>Zoho</p>
+    </div>
 
-// OPEN MODAL
-function openModal(modalId) {
-  event.stopPropagation(); // prevent collapse
-  document.getElementById(modalId).style.display = "block";
-}
+    <i class="fa-regular fa-bookmark"></i>
+  </div>
 
-// CLOSE MODAL
-function closeModal(modalId) {
-  document.getElementById(modalId).style.display = "none";
-}
+  <div class="job-details">
+    <span><i class="fa fa-briefcase"></i> 2-5 Years</span>
+    <span><i class="fa fa-location-dot"></i> Chennai</span>
+    <span><i class="fa fa-indian-rupee-sign"></i> 6-10 LPA</span>
+  </div>
 
-// APPLY BUTTON
-function applyDepartment() {
-  const checked = document.querySelectorAll("#deptModal input:checked");
+  <p class="job-desc">
+    Strong knowledge in HTML, CSS, JavaScript and React.
+  </p>
 
-  let selected = [];
-  checked.forEach(cb => {
-    selected.push(cb.parentElement.textContent.trim());
-  });
-
-  console.log("Selected Departments:", selected);
-
-  // Close modal after apply
-  closeModal();
-}
-
-
-// ✅ RUN ON PAGE LOAD
-const expRange = document.getElementById("expRange");
-const expValue = document.getElementById("expValue");
-
-// default value
-expValue.textContent = expRange.value;
-
-// update on slider move
-expRange.addEventListener("input", function () {
-  expValue.textContent = "0 - " + this.value;
-});
+  <div class="job-footer">
+    <span>1 day ago</span>
+    <button class="apply-btn">Apply</button>
+  </div>
+</div>
 
 
-// ✅ TOGGLE FILTER SECTIONS
-function toggleRole(element) {
-  const content = element.nextElementSibling;
-  const arrow = element.querySelector("span");
+<!-- QA Automation -->
+<div class="job-card-list-dash">
+  <div class="job-header">
+    <img src="https://via.placeholder.com/50" class="company-logo">
 
-  if (content.style.display === "none") {
-    content.style.display = "block";
-    arrow.innerHTML = "▼";
-  } else {
-    content.style.display = "none";
-    arrow.innerHTML = "▶";
-  }
-}
+    <div class="job-title-section">
+      <h3>Automation Test Engineer</h3>
+      <p>Wipro</p>
+    </div>
 
+    <i class="fa-regular fa-bookmark"></i>
+  </div>
 
-// ✅ VIEW MORE / LESS
-function toggleMore(event) {
-  event.stopPropagation();
+  <div class="job-details">
+    <span><i class="fa fa-briefcase"></i> 2-4 Years</span>
+    <span><i class="fa fa-location-dot"></i> Bangalore</span>
+    <span><i class="fa fa-indian-rupee-sign"></i> 4-7 LPA</span>
+  </div>
 
-  const btn = event.target;
-  const more = btn.previousElementSibling;
+  <p class="job-desc">
+    Experience in Selenium, TestNG, Jenkins required.
+  </p>
 
-  if (more.classList.contains("dash-job-hidden")) {
-    more.classList.remove("dash-job-hidden");
-    btn.innerText = "View Less";
-  } else {
-    more.classList.add("dash-job-hidden");
-    btn.innerText = "View More";
-  }
-}
-</script> -->
+  <div class="job-footer">
+    <span>2 days ago</span>
+    <button class="apply-btn">Apply</button>
+  </div>
+</div>
 
 
 
 
-<script>
-  // =========================
-// ✅ OPEN MODAL
-// =========================
-function openModal(e, modalId) {
-  e.stopPropagation(); // prevent collapse
-  document.getElementById(modalId).style.display = "block";
-}
 
 
-// =========================
-// ✅ CLOSE MODAL
-// =========================
-function closeModal(modalId) {
-  document.getElementById(modalId).style.display = "none";
-}
 
 
-// =========================
-// ✅ APPLY BUTTON (WORKS FOR ALL MODALS)
-// =========================
-function applySelection(modalId) {
-  const checked = document.querySelectorAll(`#${modalId} input:checked`);
-
-  let selected = [];
-  checked.forEach(cb => {
-    selected.push(cb.parentElement.textContent.trim());
-  });
-
-  console.log(modalId + " Selected:", selected);
-
-  // close modal
-  closeModal(modalId);
-}
 
 
-// =========================
-// ✅ EXPERIENCE RANGE
-// =========================
-const expRange = document.getElementById("expRange");
-const expValue = document.getElementById("expValue");
-
-if (expRange && expValue) {
-  expValue.textContent = expRange.value;
-
-  expRange.addEventListener("input", function () {
-    expValue.textContent = "0 - " + this.value;
-  });
-}
 
 
-// =========================
-// ✅ TOGGLE FILTER SECTIONS
-// =========================
-function toggleRole(element) {
-  const content = element.nextElementSibling;
-  const arrow = element.querySelector("span");
-
-  const isHidden = window.getComputedStyle(content).display === "none";
-
-  if (isHidden) {
-    content.style.display = "block";
-    arrow.innerHTML = "▼";
-  } else {
-    content.style.display = "none";
-    arrow.innerHTML = "▶";
-  }
-}
 
 
-// =========================
-// ✅ VIEW MORE / LESS
-// =========================
-function toggleMore(event) {
-  event.stopPropagation();
-
-  const btn = event.target;
-  const more = btn.previousElementSibling;
-
-  more.classList.toggle("dash-job-hidden");
-
-  btn.innerText = more.classList.contains("dash-job-hidden")
-    ? "View More"
-    : "View Less";
-}
 
 
-// =========================
-// ✅ CLOSE MODAL ON OUTSIDE CLICK
-// =========================
-window.onclick = function (e) {
-  document.querySelectorAll(".modal").forEach(modal => {
-    if (e.target === modal) {
-      modal.style.display = "none";
-    }
-  });
-};
 
 
-// =========================
-// ✅ SEARCH FILTER INSIDE MODAL
-// =========================
-document.querySelectorAll(".modal-search").forEach(input => {
-  input.addEventListener("keyup", function () {
-    const filter = this.value.toLowerCase();
-    const labels = this.parentElement.querySelectorAll(".modal-body label");
-
-    labels.forEach(label => {
-      const text = label.textContent.toLowerCase();
-      label.style.display = text.includes(filter) ? "" : "none";
-    });
-  });
-});
-</script>
 
 
+
+
+
+  </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<script src="/frontend/main.js"></script>
 
   </body>
 </html>
