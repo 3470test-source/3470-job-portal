@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3470 Healthcare & Training Institutes Job portal - Employer Dashborad</title>
+  
+
+  <style>
+
+    * {
+     box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to right, #eef2f3, #dfe9f3);
+      margin: 0;
+      padding: 20px;
+    }
+
+
+/*--- CENTER FORM ---*/
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+    
+.form-container {
+  margin: auto;
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  animation: fadeIn 0.5s ease;
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0960b3;
+  font-size: 28px;
+}
+
+.form-container input, 
+.form-container textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: 0.3s;      
+}
+
+.form-container textarea {
+  height: 100px;
+}
+
+.form-container input:focus,
+.form-container textarea:focus {
+  border-color: #0d6efd;
+  outline: none;
+  box-shadow: 0 0 5px rgba(10, 103, 241, 0.3);
+}
+
+.form-container button {
+  width: 100%;
+  padding: 12px;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.form-container button:hover {
+  background: #036925;
+}
+
+/*--- IMAGE ---*/
+.preview-img {
+  width: 80px;
+  display: none;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+/*--- JOB SECTION ---*/
+.jobs-section {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.jobs-section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0960b3;
+  font-size: 28px;
+}
+
+/*---- GRID (2 COLUMN) ----*/
+.job-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+  </style>
+</head>
+
+<body>
+
+
+
+<!-- Post a Job -->
+<div class="form-wrapper">  
+  <div class="form-container">
+    <h2>Employer Post a Job</h2>
+
+      <input type="text" id="title" placeholder="Job Title" />
+      <input type="text" id="company" placeholder="Company Name" />
+
+      <!-- FILE UPLOAD -->
+      <input type="file" id="logo" accept="image/*" onchange="previewLogo()" />
+      <img id="preview" class="preview-img"/>
+
+      <input type="text" id="experience" placeholder="Experience (e.g. 1-4 Yrs)" />
+      <input type="text" id="location" placeholder="Location" />
+      <input type="text" id="salary" placeholder="Salary (e.g. 4-6 LPA)" />
+
+      <input type="text" id="skills" placeholder="Skills (comma separated)" />
+
+      <textarea id="description" placeholder="Job Description"></textarea>
+
+    <button onclick="postJob()">Post Job</button>
+  </div>
+</div>
+
+  <!-- JOB LIST -->
+  <div class="jobs-section">
+    <h2>Posted Jobs</h2>
+    <div id="employerJobs" class="job-grid"></div>
+  </div>
+
+
+
+<script>
+
+  function previewLogo() {
+    const file = document.getElementById("logo").files[0];
+    const preview = document.getElementById("preview");
+
+    if (file) {
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = "block";
+    }
+  }
+
+  async function postJob() {
+
+    const title = document.getElementById("title").value;
+    const company = document.getElementById("company").value;
+
+    if (!title || !company) {
+      alert("Title and Company are required!");
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append("title", title);
+    formData.append("company", company);
+    formData.append("experience", document.getElementById("experience").value);
+    formData.append("location", document.getElementById("location").value);
+    formData.append("salary", document.getElementById("salary").value);
+    formData.append("skills", document.getElementById("skills").value);
+    formData.append("description", document.getElementById("description").value);
+
+    const file = document.getElementById("logo").files[0];
+    if (file) {
+      formData.append("logo", file);
+    }
+
+    try {
+      const res = await fetch("http://localhost:3000/jobs", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await res.json();
+
+      alert("✅ " + data.message);
+
+      // 🔥 Clear form
+      document.querySelectorAll("input, textarea").forEach(el => el.value = "");
+      document.getElementById("preview").style.display = "none";
+
+    } catch (err) {
+      alert("❌ Error posting job");
+      console.error(err);
+    }
+  }
+
+</script>
+
+
+<script>
+
+// 🔥 Load jobs
+async function loadEmployerJobs() {
+  const res = await fetch("http://localhost:3000/jobs");
+  const jobs = await res.json();
+
+  const container = document.getElementById("employerJobs");
+  container.innerHTML = "";
+
+  jobs.forEach(job => {
+
+    const div = document.createElement("div");
+    div.style.border = "1px solid #ccc";
+    div.style.padding = "10px";
+    div.style.margin = "10px 0";
+
+    div.innerHTML = `
+      <h4>${job.title} - ${job.company}</h4>
+      <p>${job.location} | ${job.salary}</p>
+
+      <button onclick="deleteJob(${job.id})" style="background:red;color:white;">
+        Delete Job
+      </button>
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+// 🔥 Delete job
+async function deleteJob(id) {
+
+  if (!confirm("Are you sure to delete this job?")) return;
+
+  await fetch(`http://localhost:3000/jobs/${id}`, {
+    method: "DELETE"
+  });
+
+  alert("Job Deleted ✅");
+
+  loadEmployerJobs(); // refresh list
+}
+
+window.onload = loadEmployerJobs;
+
+</script>
+
+ </body>
+</html>
