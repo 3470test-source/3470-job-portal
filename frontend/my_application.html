@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3470 Healthcare & Training Institutes Job portal - My Application</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/image/Logo3470-health3-removebg-preview.png" type="image/x-icon">
+    
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+
+        *{
+           margin:0;
+           padding:0;
+           box-sizing:border-box;
+        }
+
+    </style>
+
+  </head> 
+<body>
+
+    <!-- NAVBAR -->
+    <div class="job-login-navbar">
+
+        <!-- LOGO -->
+        <div class="job-login-logo-container">
+            <img src="/image/Logo3470-health3-removebg-preview.png"
+                alt="3470 Healthcare Logo"
+                class="job-login-logo-img">
+        </div>
+
+        <!-- Dropdown field  -->
+        <div class="job-login-nav-links">
+
+          <!-- HOME -->
+          <a href="/frontend/index.html" class="nav-home">Home</a>
+
+           <div class="job-login-dropdown">
+             <a href="#">Jobs</a>
+
+        <div class="job-login-dropdown-menu mega-menu">
+
+        <!-- Column 1 -->
+        <div class="menu-column">
+            <h4>Popular Categories</h4>
+            <a href="#">IT Jobs</a>
+            <a href="#">Sales Jobs</a>
+            <a href="#">Healthcare Jobs</a>
+            <a href="#">HR Jobs</a>
+            <a href="#">Marketing Jobs</a>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="menu-column">
+            <h4>Jobs in Demand</h4>
+            <a href="#">Fresher Jobs</a>
+            <a href="#">MNC Jobs</a>
+            <a href="#">Remote Jobs</a>
+            <a href="#">Work From Home Jobs</a>
+            <a href="#">Walk-in Jobs</a>
+            <a href="#">Part-Time Jobs</a>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="menu-column">
+            <h4>Jobs by Location</h4>
+            <a href="#">Jobs in Chennai</a>
+            <a href="#">Jobs in Bangalore</a>
+            <a href="#">Jobs in Delhi</a>
+            <a href="#">Jobs in Mumbai</a>
+            <a href="#">Jobs in Hyderabad</a>
+            <a href="#">Jobs in Pune</a>
+        </div>
+    </div>
+  </div>
+
+
+  <!-- Companies Dropdown -->
+  <div class="job-login-dropdown">
+    <a href="#">Companies</a>
+
+    <div class="job-login-dropdown-menu mega-menu">
+
+      <!-- Column 1 -->
+      <div class="menu-column">
+        <h4>Explore Categories</h4>
+        <a href="#">Hospitals</a>
+        <a href="#">Clinics</a>
+        <a href="#">Diagnostic Centers</a>
+        <a href="#">Pharmaceutical Companies</a>
+        <a href="#">Medical Device Companies</a>
+        <a href="#">Healthcare Startups</a>
+      </div>
+
+      <!-- Column 2 -->
+      <div class="menu-column">
+        <h4>Explore Collections</h4>
+        <a href="#">Top Healthcare Companies</a>
+        <a href="#">Hospital Chains</a>
+        <a href="#">Pharma Companies</a>
+        <a href="#">Diagnostic Companies</a>
+        <a href="#">Featured Employers</a>
+        <a href="#">Research Organizations</a>
+      </div>
+
+      <!-- Column 3 -->
+      <div class="menu-column">
+        <h4>Company Insights</h4>
+        <a href="#">Interview Questions</a>
+        <a href="#">Company Salaries</a>
+        <a href="#">Company Reviews</a>
+        <a href="#">Salary Calculator</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Services -->
+  <div class="job-login-dropdown">
+    <a href="#">Services</a>
+
+    <div class="job-login-dropdown-menu mega-menu">
+
+      <div class="menu-column">
+        <h4>Career Services</h4>
+        <a href="#">Resume Building</a>
+        <a href="#">Career Guidance</a>
+        <a href="#">Interview Preparation</a>
+      </div>
+
+      <div class="menu-column">
+        <h4>Job Support</h4>
+        <a href="#">Job Alerts</a>
+        <a href="#">Profile Boost</a>
+        <a href="#">Priority Applications</a>
+      </div>
+
+      <div class="menu-column">
+        <h4>Employer Services</h4>
+        <a href="#">Post a Job</a>
+        <a href="#">Candidate Search</a>
+        <a href="#">Hiring Assistance</a>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+    <!-- SEARCH BAR -->
+    <div class="job-login-search-bar">
+        <input type="text" placeholder="Search jobs, companies, or keywords...">
+        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+
+    <!-- Notification -->
+    <div class="header-notification-nav-right">
+      <div class="notification-icon-box" id="notifBox">
+        <i class="fa-regular fa-bell"></i>
+      </div>
+    </div>
+
+<!-- Notification Slider -->
+<div id="notificationPanel" class="notification-panel">
+
+  <!-- Notification Header -->
+  <div class="notif-header">
+    <h3>Notifications</h3>
+    <span class="notifi-close-btn" onclick="closeNotification()">&times;</span>
+  </div>
+
+</div>
+
+
+<!-- Profile Btn -->
+<div class="header-toggle-profile">
+  <div class="icon menu" id="menuBtn">
+    <i class="fas fa-bars"></i>
+  </div>
+  <div class="icon profile">
+    <a href="/frontend/create_profile_pg.html" class="profile-link">
+      <i class="fas fa-user"></i>
+    </a>
+  </div>
+</div>
+
+
+<!-- Profile Slider -->
+<div id="profilePanel" class="profile-panel">
+
+  <!-- Header -->
+  <div class="profile-header">
+    <h3>My Profile</h3>
+    <span class="profile-close-btn" onclick="closeProfilePanel()">&times;</span>
+  </div>
+
+  <!-- Body -->
+  <div class="profile-body">
+    <div class="profile-info">
+      <i class="fas fa-user-circle profile-avatar"></i>
+      <h4>Vignesh</h4>
+      <p>Software Test Engineer</p>
+    </div>
+
+    <ul class="profile-menu">
+      <li><a href="/frontend/create_profile_pg.html"><i class="fas fa-user"></i>View Profile</a></li>
+      <li><a href="/frontend/my_application.html"><i class="fas fa-briefcase"></i>My Applications</a></li>
+      <li><a href="/frontend/saved_job.html"><i class="fas fa-bookmark"></i>Saved Jobs</a></li>
+      <li><a href="/frontend/login.html"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+    </ul>
+  </div>
+
+</div>
+
+</div>
+
+
+ <!-- My Application -->
+<div class="my-application">
+   <h2>My Applications</h2>
+   <div id="applications"></div>
+</div>
+
+
+<!-- JavaScripts -->
+<script src="/frontend/main.js"></script>
+
+
+<script>
+
+async function loadApplications() {
+
+  const res = await fetch("http://localhost:3000/jobs");
+  const jobs = await res.json();
+
+  const appliedIds = JSON.parse(localStorage.getItem("appliedJobs")) || [];
+
+  const container = document.getElementById("applications");
+  container.innerHTML = "";
+
+  const appliedJobs = jobs.filter(job =>
+    appliedIds.includes(Number(job.id))
+  );
+
+  if (appliedJobs.length === 0) {
+    container.innerHTML = "<p>No applications yet 😢</p>";
+    return;
+  }
+
+  appliedJobs.reverse().forEach(job => {
+
+    const div = document.createElement("div");
+    div.className = "job-card-list-dash";
+
+    div.innerHTML = `
+      <div class="job-header-dash">
+
+        <img src="http://localhost:3000${job.logo || '/uploads/default.png'}" 
+             class="company-logo-dash">
+
+        <div class="job-title-section">
+          <h3>${job.title}</h3>
+          <p>${job.company}</p>
+        </div>
+
+        <span style="color:green; font-weight:bold;">Applied ✅</span>
+
+      </div>
+
+      <div class="job-details">
+        <span>${job.experience}</span>
+        <span>${job.location}</span>
+        <span>${job.salary}</span>
+      </div>
+
+      <p class="job-desc">${job.description}</p>
+
+      <p><b>Skills:</b> ${job.skills}</p>
+
+      <div class="job-footer">
+        <span>${timeAgo(job.createdAt)}</span>
+        <button class="apply-btn-dash" disabled>
+          Applied
+        </button>
+      </div>    
+    `;
+
+    container.appendChild(div);
+  });
+}
+
+
+// TIME AGO
+function timeAgo(date) {
+  const sec = Math.floor((new Date() - new Date(date)) / 1000);
+
+  if (sec < 60) return "Just now";
+  if (sec < 3600) return Math.floor(sec/60) + " mins ago";
+  if (sec < 86400) return Math.floor(sec/3600) + " hrs ago";
+
+  return Math.floor(sec/86400) + " days ago";
+}
+
+window.onload = loadApplications;
+
+</script>
+
+  </body>
+</html>    

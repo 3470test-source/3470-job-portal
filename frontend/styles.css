@@ -1363,4 +1363,308 @@ hr {
   background: #f2f6ff;
 }
 
-/* -------------------------------------------------------------------------------------------------------------------- */
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+                                             /* ---------------------- 
+                                                  Employer Dashboard
+                                                ---------------------- */
+
+                    /*------------------- Employer the posted a jobs show card -----------*/
+
+/*--- JOB SECTION ---*/
+.jobs-section-employer-dash {
+  max-width: 1000px;
+  margin: auto;
+}
+
+.jobs-section-employer-dash h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0960b3;
+  font-size: 28px;
+}
+
+/*---- GRID (2 COLUMN) ----*/
+.job-employer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.job-card-employer {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.job-card-employer:hover {
+  transform: translateY(-5px);
+}
+
+.job-header-employer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.job-header-employer img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  margin-top: -15px;
+}
+
+.job-title-employer {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.company-name-employer {
+  color: #555;
+  font-size: 16px;
+}
+
+.job-info-employer {
+  font-size: 14px;
+  margin: 8px 0;
+  color: #666;
+}
+
+.skills-employer {
+  margin-top: 10px;
+}
+
+.skill-tag-employer {
+  display: inline-block;
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin: 5px;
+  font-size: 14px;
+}
+
+.job-desc-employer {
+  font-size: 14px;
+  margin-top: 10px;
+  color: #444;
+}
+
+.delete-btn-employer {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border: none;
+  background: #ff4d4d;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.delete-btn-employer:hover {
+  background: #d93636;
+}
+ 
+                                  /*----------------- Employer post a job form -------------------------*/
+
+/*--- CENTER FORM ---*/
+.form-wrapper-employer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+    
+.form-container-employer {
+  margin: auto;
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(10px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+  
+.form-container-employer h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0960b3;
+  font-size: 28px;
+}
+
+.form-container-employer input, 
+.form-container-employer textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: 0.3s;      
+}
+
+.form-container-employer textarea {
+  height: 100px;
+}
+
+.form-container-employer input:focus,
+.form-container-employer textarea:focus {
+  border-color: #0d6efd;
+  outline: none;
+  box-shadow: 0 0 5px rgba(10, 103, 241, 0.3);
+}
+
+.form-container-employer button {
+  width: 100%;
+  padding: 12px;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.form-container-employer button:hover {
+  background: #036925;
+}
+
+/*--- IMAGE ---*/
+.preview-img-emp {
+  width: 80px;
+  display: none;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------- */
+
+                                        /*----------------------
+                                           job seeker dashboard  
+                                          ----------------------*/
+
+/*---- JOB LIST ----*/
+.dash-job-list-container {
+  flex:1;
+}
+
+/*--- JOB CARD ---*/
+.job-card-list-dash {
+  background:rgb(238, 236, 236);
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:20px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  max-width:800px;   /* 🔥 control width */
+  margin-left:auto;
+  margin-right:auto; /* center card */
+}
+
+.job-header-dash {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.company-logo-dash {
+  width:60px;  
+}
+
+.job-title-section {
+  flex:1;
+  margin-left:10px;
+}
+
+.job-title-section h3 {
+  margin-bottom: 5px;
+}
+
+.job-details {
+  margin:15px 0;
+  display:flex;
+  gap:15px;
+  font-size:14px;
+}
+
+.job-desc {
+  font-size:14px;
+  color:#555;
+  margin-bottom: 15px;
+}
+
+.job-footer {
+  display:flex;
+  justify-content:space-between;
+  margin-top:10px;
+}
+
+.apply-btn-dash {
+  background:#0d6efd;
+  color:white;
+  border:none;
+  padding:8px 16px;
+  border-radius:50px;
+  cursor:pointer;
+}
+
+.apply-btn-dash:hover {
+  background:#078d34;  
+}
+
+                  /*--- saved job saved and unsaved ---*/
+
+.fa-bookmark {
+  cursor: pointer;
+}
+
+.fa-bookmark.saved {
+  color: #0d6efd;
+}
+
+
+                        /*--- Saved a Job ---*/
+
+
+/*-- CONTAINER ---*/
+.saved-Jobs h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #0960b3;
+  font-size: 28px;
+  margin-top: 25px;
+}
+
+
+                       /*---- My application ----*/
+
+/*--- CONTAINER ---*/
+.my-application h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #0960b3;
+  font-size: 28px;
+  margin-top: 25px;
+}
+
+/*--- DISABLED BUTTON ---*/
+.apply-btn-dash:disabled {
+  background: gray;
+  cursor: not-allowed;
+}
+
+/*--- APPLIED STATUS BADGE ---*/
+.applied-badge {
+  color: green;
+  font-weight: bold;
+  font-size: 14px;
+}

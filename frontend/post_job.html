@@ -4,12 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>3470 Healthcare & Training Institutes Job portal - Employer Dashborad</title>
-  
 
+    <!-- Favicon -->
+    <link rel="icon" href="/image/Logo3470-health3-removebg-preview.png" type="image/x-icon">
+    
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  
   <style>
 
     * {
-     box-sizing: border-box;
+      box-sizing:border-box;
     }
 
     body {
@@ -18,120 +28,23 @@
       padding: 20px;
     }
 
-
-/*--- CENTER FORM ---*/
-.form-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 40px;
-}
-    
-.form-container {
-  margin: auto;
-  width: 100%;
-  max-width: 600px;
-  background: #fff;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-  animation: fadeIn 0.5s ease;
-}
-
-.form-container h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #0960b3;
-  font-size: 28px;
-}
-
-.form-container input, 
-.form-container textarea {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  transition: 0.3s;      
-}
-
-.form-container textarea {
-  height: 100px;
-}
-
-.form-container input:focus,
-.form-container textarea:focus {
-  border-color: #0d6efd;
-  outline: none;
-  box-shadow: 0 0 5px rgba(10, 103, 241, 0.3);
-}
-
-.form-container button {
-  width: 100%;
-  padding: 12px;
-  background: #0d6efd;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: 0.3s;
-}
-
-.form-container button:hover {
-  background: #036925;
-}
-
-/*--- IMAGE ---*/
-.preview-img {
-  width: 80px;
-  display: none;
-  margin-top: 10px;
-  border-radius: 6px;
-}
-
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(10px);}
-    to {opacity: 1; transform: translateY(0);}
-  }
-
-/*--- JOB SECTION ---*/
-.jobs-section {
-  max-width: 1000px;
-  margin: auto;
-}
-
-.jobs-section h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #0960b3;
-  font-size: 28px;
-}
-
-/*---- GRID (2 COLUMN) ----*/
-.job-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-}
-
   </style>
+
 </head>
 
 <body>
 
-
-
 <!-- Post a Job -->
-<div class="form-wrapper">  
-  <div class="form-container">
+<div class="form-wrapper-employer">  
+  <div class="form-container-employer">
     <h2>Employer Post a Job</h2>
-
+      
       <input type="text" id="title" placeholder="Job Title" />
       <input type="text" id="company" placeholder="Company Name" />
 
       <!-- FILE UPLOAD -->
       <input type="file" id="logo" accept="image/*" onchange="previewLogo()" />
-      <img id="preview" class="preview-img"/>
+      <img id="preview" class="preview-img-emp"/>
 
       <input type="text" id="experience" placeholder="Experience (e.g. 1-4 Yrs)" />
       <input type="text" id="location" placeholder="Location" />
@@ -146,11 +59,10 @@
 </div>
 
   <!-- JOB LIST -->
-  <div class="jobs-section">
+  <div class="jobs-section-employer-dash">
     <h2>Posted Jobs</h2>
-    <div id="employerJobs" class="job-grid"></div>
+    <div id="employerJobs" class="job-employer-grid"></div>
   </div>
-
 
 
 <script>
@@ -226,15 +138,41 @@ async function loadEmployerJobs() {
   jobs.forEach(job => {
 
     const div = document.createElement("div");
-    div.style.border = "1px solid #ccc";
-    div.style.padding = "10px";
-    div.style.margin = "10px 0";
+    div.classList.add("job-card-employer");
+
+    // convert skills string → array
+    const skills = job.skills ? job.skills.split(",") : [];
 
     div.innerHTML = `
-      <h4>${job.title} - ${job.company}</h4>
-      <p>${job.location} | ${job.salary}</p>
+      <div class="job-header-employer">
 
-      <button onclick="deleteJob(${job.id})" style="background:red;color:white;">
+       <img 
+  src="${job.logo ? 'http://localhost:3000/uploads/' + job.logo : 'https://via.placeholder.com/50'}"
+  onerror="this.src='https://via.placeholder.com/50'"
+  alt="logo"
+       />
+
+        <div>
+          <p class="job-title-employer">${job.title}</p>
+          <p class="company-name-employer">${job.company}</p>
+        </div>
+      </div>
+
+      <div class="job-info-employer">
+        📍 ${job.location} <br>
+        💰 ${job.salary} <br>
+        🎯 ${job.experience || "Not specified"} yrs experience
+      </div>
+
+      <div class="skills-employer">
+        ${skills.map(skill => `<span class="skill-tag-employer">${skill}</span>`).join("")}
+      </div>
+
+      <div class="job-desc-employer">
+        ${job.description || "No job description provided"}
+      </div>
+
+      <button class="delete-btn-employer" onclick="deleteJob(${job.id})">
         Delete Job
       </button>
     `;
@@ -245,7 +183,6 @@ async function loadEmployerJobs() {
 
 // 🔥 Delete job
 async function deleteJob(id) {
-
   if (!confirm("Are you sure to delete this job?")) return;
 
   await fetch(`http://localhost:3000/jobs/${id}`, {
@@ -254,7 +191,7 @@ async function deleteJob(id) {
 
   alert("Job Deleted ✅");
 
-  loadEmployerJobs(); // refresh list
+  loadEmployerJobs();
 }
 
 window.onload = loadEmployerJobs;

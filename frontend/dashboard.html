@@ -24,91 +24,6 @@
       box-sizing:border-box;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*---- JOB LIST ----*/
-.dash-job-list-container {
-  flex:1;
-}
-
-
-
-
-
-
-/* JOB CARD */
-.job-card-list-dash {
-  background:rgb(238, 236, 236);
-  padding:15px;
-  border-radius:10px;
-  margin-bottom:20px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.1);
-  max-width:800px;   /* 🔥 control width */
-  margin-left:auto;
-  margin-right:auto; /* center card */
-}
-
-.job-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.company-logo{
-  width:60px;  
-}
-
-.job-title-section{
-  flex:1;
-  margin-left:10px;
-}
-
-.job-title-section h3 {
-  margin-bottom: 5px;
-}
-
-.job-details{
-  margin:15px 0;
-  display:flex;
-  gap:15px;
-  font-size:14px;
-}
-
-.job-desc{
-  font-size:14px;
-  color:#555;
-}
-
-.job-footer{
-  display:flex;
-  justify-content:space-between;
-  margin-top:10px;
-}
-
-.apply-btn{
-  background:#0d6efd;
-  color:white;
-  border:none;
-  padding:8px 16px;
-  border-radius:50px;
-  cursor:pointer;
-}
-
-.apply-btn:hover {
-  background:#078d34;  
-}
-
 </style>
 
 </head> 
@@ -279,10 +194,6 @@
   </div>
 </div>
 
-
-
-
-
 <!-- Profile Slider -->
 <div id="profilePanel" class="profile-panel">
 
@@ -302,8 +213,8 @@
 
     <ul class="profile-menu">
       <li><a href="/frontend/create_profile_pg.html"><i class="fas fa-user"></i>View Profile</a></li>
-      <li><a href="#"><i class="fas fa-briefcase"></i>My Applications</a></li>
-      <li><a href="#"><i class="fas fa-bookmark"></i>Saved Jobs</a></li>
+      <li><a href="/frontend/my_application.html"><i class="fas fa-briefcase"></i>My Applications</a></li>
+      <li><a href="/frontend/saved_job.html"><i class="fas fa-bookmark"></i>Saved Jobs</a></li>
       <li><a href="/frontend/login.html"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
     </ul>
   </div>
@@ -397,7 +308,7 @@
 
     <!-- Footer -->
     <div class="modal-footer">
-      <button class="apply-btn" onclick="applySelection('deptModal')">Apply</button>
+      <button class="apply-btn-dash" onclick="applySelection('deptModal')">Apply</button>
     </div>
 
   </div>
@@ -523,7 +434,7 @@
 
     <!-- Footer -->
     <div class="modal-footer">
-      <button class="apply-btn" onclick="applySelection('roleModal')">Apply</button>
+      <button class="apply-btn-dash" onclick="applySelection('roleModal')">Apply</button>
     </div>
 
   </div>
@@ -579,7 +490,7 @@
 
     <!-- Footer -->
     <div class="modal-footer">
-      <button class="apply-btn" onclick="applySelection('eduModal')">Apply</button>
+      <button class="apply-btn-dash" onclick="applySelection('eduModal')">Apply</button>
     </div>
 
   </div>
@@ -635,7 +546,7 @@
 
     <!-- Footer -->
     <div class="modal-footer">
-      <button class="apply-btn" onclick="applySelection('locationModal')">Apply</button>
+      <button class="apply-btn-dash" onclick="applySelection('locationModal')">Apply</button>
     </div>
 
   </div>
@@ -655,7 +566,7 @@
 
   </aside>
 
-  <!-- JOB LIST -->
+  <!------ JOB LIST ------>
   <main class="dash-job-list-container">
 
     <div id="jobs"></div>
@@ -664,8 +575,8 @@
 
 </div>
 
+<!-- JavaScripts -->
 <script src="/frontend/main.js"></script>
-
 
 <script>
 async function loadJobs() {
@@ -682,17 +593,21 @@ async function loadJobs() {
     div.className = "job-card-list-dash";
 
     div.innerHTML = `
-      <div class="job-header">
+      <div class="job-header-dash">
 
         <img src="http://localhost:3000${job.logo || '/uploads/default.png'}" 
-             class="company-logo">
+             class="company-logo-dash">
 
         <div class="job-title-section">
           <h3>${job.title}</h3>
           <p>${job.company}</p>
         </div>
 
-        <i class="fa-regular fa-bookmark"></i>
+        <!-- ✅ SAVE ICON FIX -->
+        <i class="fa-${isSaved(job.id) ? 'solid saved' : 'regular'} fa-bookmark"
+          onclick="toggleSave(${job.id}, this)">
+        </i>
+        
       </div>
 
       <div class="job-details">
@@ -707,7 +622,7 @@ async function loadJobs() {
 
       <div class="job-footer">
         <span>${timeAgo(job.createdAt)}</span>
-        <button class="apply-btn" onclick="applyJob(${job.id})">Apply</button>
+        <button class="apply-btn-dash" onclick="applyJob(${job.id})">Apply</button>
       </div>
     `;
 
@@ -730,7 +645,95 @@ function applyJob(id) {
   alert("Applied for Job ID: " + id);
 }
 
-window.onload = loadJobs;
+
+
+// ================= SAVE JOB =================
+
+// Get saved jobs
+function getSavedJobs() {
+  return JSON.parse(localStorage.getItem("savedJobs")) || [];
+}
+
+// Check saved
+function isSaved(id) {
+  return getSavedJobs().includes(id);
+}
+
+// Toggle save
+function toggleSave(id, icon) {
+
+  let saved = getSavedJobs();
+
+  if (saved.includes(id)) {
+    // remove
+    saved = saved.filter(jobId => jobId !== id);
+    icon.classList.remove("fa-solid", "saved");
+    icon.classList.add("fa-regular");
+  } else {
+    // add
+    saved.push(id);
+    icon.classList.remove("fa-regular");
+    icon.classList.add("fa-solid", "saved");
+  }
+
+  localStorage.setItem("savedJobs", JSON.stringify(saved));
+}
+
+
+// ================= SAVE JOB =================
+
+// Get saved jobs
+function getSavedJobs() {
+  return JSON.parse(localStorage.getItem("savedJobs")) || [];
+}
+
+// Check saved
+function isSaved(id) {
+  return getSavedJobs().includes(id);
+}
+
+// Toggle save
+function toggleSave(id, icon) {
+
+  let saved = getSavedJobs();
+
+  if (saved.includes(id)) {
+    // remove
+    saved = saved.filter(jobId => jobId !== id);
+    icon.classList.remove("fa-solid", "saved");
+    icon.classList.add("fa-regular");
+  } else {
+    // add
+    saved.push(id);
+    icon.classList.remove("fa-regular");
+    icon.classList.add("fa-solid", "saved");
+  }
+
+  localStorage.setItem("savedJobs", JSON.stringify(saved));
+}
+
+
+// ================= LOAD =================
+    window.onload = loadJobs;
+    
+</script>
+
+<script>
+  function applyJob(id) {
+
+  let applied = JSON.parse(localStorage.getItem("appliedJobs")) || [];
+
+  if (applied.includes(id)) {
+    alert("Already applied ✅");
+    return;
+  }
+
+  applied.push(id);
+
+  localStorage.setItem("appliedJobs", JSON.stringify(applied));
+
+  alert("Application submitted successfully 🎉");
+}
 </script>
 
   </body>
