@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3470 Healthcare & Training Institutes Job portal - jobs details</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/image/Logo3470-health3-removebg-preview.png" type="image/x-icon">
+    
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+        .job-details-header {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background: #fff;
+}
+
+.job-highlights, 
+.job-description, 
+.job-role,
+.job-education,
+.job-skills,
+.job-match {
+  margin: 20px;
+  padding: 15px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.skill {
+  display: inline-block;
+  background: #e0f0ff;
+  padding: 5px 10px;
+  margin: 5px;
+  border-radius: 5px;
+}
+    </style>
+
+  </head> 
+<body>
+
+
+    <div id="jobDetailsContainer"></div>
+
+
+<!-- JavaScripts -->
+<script src="/frontend/main.js"></script>   
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const jobId = params.get("id");
+
+console.log("Job ID:", jobId); // ✅ debug
+
+async function loadJobDetails() {
+  try {
+    const res = await fetch(`http://localhost:3000/jobs/${jobId}`);
+    const job = await res.json();
+
+    if (!job) {
+      document.getElementById("jobDetailsContainer").innerHTML =
+        "<h2>Job not found ❌</h2>";
+      return;
+    }
+
+    renderJob(job);
+  } catch (err) {
+    document.getElementById("jobDetailsContainer").innerHTML =
+      "<h2>Error loading job ❌</h2>";
+  }
+}
+
+function renderJob(job) {
+
+  const container = document.getElementById("jobDetailsContainer");
+
+  container.innerHTML = `
+  
+  <!-- HEADER -->
+  <div class="job-details-header">
+
+    <!-- ✅ FIXED IMAGE -->
+    <img src="http://localhost:3000${job.logo || '/uploads/default.png'}" 
+         class="job-details-logo">
+
+    <div>
+      <h2>${job.title}</h2>
+      <p>${job.company}</p>
+      <p>📍 ${job.location}</p>
+    </div>
+
+  </div>
+
+  <!-- HIGHLIGHTS -->
+  <div class="job-highlights">
+    <h3>Job Highlights</h3>
+    <ul>
+      <li>💼 Experience: ${job.experience}</li>
+      <li>💰 Salary: ${job.salary}</li>
+      <li>📍 Location: ${job.location}</li>
+    </ul>
+  </div>
+
+  <!-- MATCH -->
+  <div class="job-match">
+    <h3>Job Match Score</h3>
+    <p>🔥 85% Match</p>
+  </div>
+
+  <!-- DESCRIPTION -->
+  <div class="job-description">
+    <h3>Job Description</h3>
+    <p>${job.description}</p>
+  </div>
+
+  <!-- ROLE -->
+  <div class="job-role">
+    <h3>Role Details</h3>
+    <p><b>Industry:</b> IT Services</p>
+    <p><b>Department:</b> Software Testing</p>
+    <p><b>Type:</b> Full Time</p>
+    <p><b>Category:</b> QA / Testing</p>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="job-education">
+    <h3>Education</h3>
+    <p>Any Graduate / BCA / MCA</p>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="job-skills">
+    <h3>Key Skills</h3>
+    ${
+      job.skills
+        ? job.skills.split(",").map(skill =>
+            `<span class="skill">${skill}</span>`
+          ).join("")
+        : "No skills"
+    }
+  </div>
+
+  <!-- APPLY BUTTON -->
+  <div style="margin:20px;">
+    <button onclick="applyJob(${job.id})">Apply Now</button>
+  </div>
+  `;
+}
+
+// ✅ APPLY
+function applyJob(id) {
+  let applied = JSON.parse(localStorage.getItem("appliedJobs")) || [];
+
+  if (applied.includes(id)) {
+    alert("Already applied ✅");
+    return;
+  }
+
+  applied.push(id);
+  localStorage.setItem("appliedJobs", JSON.stringify(applied));
+
+  alert("Application submitted 🎉");
+}
+
+loadJobDetails();
+</script>
+
+  </body>
+</html>
+ 
+    

@@ -29,7 +29,7 @@ const upload = multer({ storage });
 app.post("/jobs", upload.single("logo"), (req, res) => {
 
   const job = {
-    id: jobs.length + 1,
+    id: Date.now(),
     title: req.body.title,
     company: req.body.company,
     experience: req.body.experience,
@@ -49,6 +49,19 @@ app.post("/jobs", upload.single("logo"), (req, res) => {
 // ================= GET JOBS =================
 app.get("/jobs", (req, res) => {
   res.json(jobs);
+});
+
+
+// ================= GET SINGLE JOB =================
+app.get("/jobs/:id", (req, res) => {
+
+  const job = jobs.find(j => j.id == req.params.id);
+
+  if (!job) {
+    return res.status(404).json({ error: "Job not found" }); // ✅ FIXED
+  }
+
+  res.json(job);
 });
 
 

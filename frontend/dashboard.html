@@ -589,7 +589,16 @@ async function loadJobs() {
 
   jobs.reverse().forEach(job => {
 
-    const div = document.createElement("div");
+     const div = document.createElement("div"); 
+
+  // ✅ OPEN DETAILS PAGE (same tab better UX)
+  div.onclick = (e) => {
+  if (e.target.tagName === "I" || e.target.tagName === "BUTTON") return;
+  // window.open(`/frontend/job_details.html?id=${job.id}`, "_blank");
+  window.location.href = `/frontend/job_details.html?id=${job.id}`;
+};
+
+
     div.className = "job-card-list-dash";
 
     div.innerHTML = `
@@ -644,7 +653,6 @@ function timeAgo(date) {
 function applyJob(id) {
   alert("Applied for Job ID: " + id);
 }
-
 
 
 // ================= SAVE JOB =================
