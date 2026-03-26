@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3470 Healthcare & Training Institutes Job portal - jobs details</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Job Details</title>
 
     <!-- Favicon -->
     <link rel="icon" href="/image/Logo3470-health3-removebg-preview.png" type="image/x-icon">
@@ -16,92 +16,364 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
 
-    <style>
-        .job-details-header {
-  display: flex;
-  gap: 20px;
-  padding: 20px;
-  background: #fff;
-}
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap" rel="stylesheet">
 
-.job-highlights, 
-.job-description, 
-.job-role,
-.job-education,
-.job-skills,
-.job-match {
-  margin: 20px;
-  padding: 15px;
-  background: #fff;
-  border-radius: 8px;
-}
 
-.skill {
-  display: inline-block;
-  background: #e0f0ff;
-  padding: 5px 10px;
-  margin: 5px;
-  border-radius: 5px;
-}
-    </style>
+  <style>
 
-  </head> 
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f7fb;
+      margin: 0;
+    }
+
+    #jobDetailsContainer {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 10px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    .job-details-header {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .job-details-logo {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      border-radius: 10px;
+      border: 1px solid #eee;
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    h3 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    ul {
+      padding-left: 18px;
+    }
+
+    .skill {
+      display: inline-block;
+      background: #eef2ff;
+      color: #3730a3;
+      padding: 6px 12px;
+      margin: 5px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+
+    button {
+      background: #2563eb;
+      color: #fff;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+
+    button:hover {
+      background: #1e4fd6;
+    }
+
+    .back-btn {
+      background: #ccc;
+      color: #000;
+    }
+
+    .back-btn:hover {
+      background: #aaa;
+    }
+
+    .center {
+      text-align: center;
+      padding: 50px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
 <body>
 
+  <!-- NAVBAR -->
+    <div class="job-login-navbar">
 
-    <div id="jobDetailsContainer"></div>
+        <!-- LOGO -->
+        <div class="job-login-logo-container">
+            <img src="/image/Logo3470-health3-removebg-preview.png"
+                alt="3470 Healthcare Logo"
+                class="job-login-logo-img">
+        </div>
+
+        <!-- Dropdown field  -->
+        <div class="job-login-nav-links">
+
+          <!-- HOME -->
+          <a href="/frontend/index.html" class="nav-home">Home</a>
+
+           <div class="job-login-dropdown">
+             <a href="#">Jobs</a>
+
+        <div class="job-login-dropdown-menu mega-menu">
+
+        <!-- Column 1 -->
+        <div class="menu-column">
+            <h4>Popular Categories</h4>
+            <a href="#">IT Jobs</a>
+            <a href="#">Sales Jobs</a>
+            <a href="#">Healthcare Jobs</a>
+            <a href="#">HR Jobs</a>
+            <a href="#">Marketing Jobs</a>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="menu-column">
+            <h4>Jobs in Demand</h4>
+            <a href="#">Fresher Jobs</a>
+            <a href="#">MNC Jobs</a>
+            <a href="#">Remote Jobs</a>
+            <a href="#">Work From Home Jobs</a>
+            <a href="#">Walk-in Jobs</a>
+            <a href="#">Part-Time Jobs</a>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="menu-column">
+            <h4>Jobs by Location</h4>
+            <a href="#">Jobs in Chennai</a>
+            <a href="#">Jobs in Bangalore</a>
+            <a href="#">Jobs in Delhi</a>
+            <a href="#">Jobs in Mumbai</a>
+            <a href="#">Jobs in Hyderabad</a>
+            <a href="#">Jobs in Pune</a>
+        </div>
+    </div>
+  </div>
+
+
+  <!-- Companies Dropdown -->
+  <div class="job-login-dropdown">
+    <a href="#">Companies</a>
+
+    <div class="job-login-dropdown-menu mega-menu">
+
+      <!-- Column 1 -->
+      <div class="menu-column">
+        <h4>Explore Categories</h4>
+        <a href="#">Hospitals</a>
+        <a href="#">Clinics</a>
+        <a href="#">Diagnostic Centers</a>
+        <a href="#">Pharmaceutical Companies</a>
+        <a href="#">Medical Device Companies</a>
+        <a href="#">Healthcare Startups</a>
+      </div>
+
+      <!-- Column 2 -->
+      <div class="menu-column">
+        <h4>Explore Collections</h4>
+        <a href="#">Top Healthcare Companies</a>
+        <a href="#">Hospital Chains</a>
+        <a href="#">Pharma Companies</a>
+        <a href="#">Diagnostic Companies</a>
+        <a href="#">Featured Employers</a>
+        <a href="#">Research Organizations</a>
+      </div>
+
+      <!-- Column 3 -->
+      <div class="menu-column">
+        <h4>Company Insights</h4>
+        <a href="#">Interview Questions</a>
+        <a href="#">Company Salaries</a>
+        <a href="#">Company Reviews</a>
+        <a href="#">Salary Calculator</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Services -->
+  <div class="job-login-dropdown">
+    <a href="#">Services</a>
+
+    <div class="job-login-dropdown-menu mega-menu">
+
+      <div class="menu-column">
+        <h4>Career Services</h4>
+        <a href="#">Resume Building</a>
+        <a href="#">Career Guidance</a>
+        <a href="#">Interview Preparation</a>
+      </div>
+
+      <div class="menu-column">
+        <h4>Job Support</h4>
+        <a href="#">Job Alerts</a>
+        <a href="#">Profile Boost</a>
+        <a href="#">Priority Applications</a>
+      </div>
+
+      <div class="menu-column">
+        <h4>Employer Services</h4>
+        <a href="#">Post a Job</a>
+        <a href="#">Candidate Search</a>
+        <a href="#">Hiring Assistance</a>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+    <!-- SEARCH BAR -->
+    <div class="job-login-search-bar">
+        <input type="text" placeholder="Search jobs, companies, or keywords...">
+        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+
+    <!-- Notification -->
+    <div class="header-notification-nav-right">
+      <div class="notification-icon-box" id="notifBox">
+        <i class="fa-regular fa-bell"></i>
+      </div>
+    </div>
+
+<!-- Notification Slider -->
+<div id="notificationPanel" class="notification-panel">
+
+  <!-- Notification Header -->
+  <div class="notif-header">
+    <h3>Notifications</h3>
+    <span class="notifi-close-btn" onclick="closeNotification()">&times;</span>
+  </div>
+
+</div>
+
+
+<!-- Profile Btn -->
+<div class="header-toggle-profile">
+  <div class="icon menu" id="menuBtn">
+    <i class="fas fa-bars"></i>
+  </div>
+  <div class="icon profile">
+    <a href="/frontend/create_profile_pg.html" class="profile-link">
+      <i class="fas fa-user"></i>
+    </a>
+  </div>
+</div>
+
+<!-- Profile Slider -->
+<div id="profilePanel" class="profile-panel">
+
+  <!-- Header -->
+  <div class="profile-header">
+    <h3>My Profile</h3>
+    <span class="profile-close-btn" onclick="closeProfilePanel()">&times;</span>
+  </div>
+
+  <!-- Body -->
+  <div class="profile-body">
+    <div class="profile-info">
+      <i class="fas fa-user-circle profile-avatar"></i>
+      <h4>Vignesh</h4>
+      <p>Software Test Engineer</p>
+    </div>
+
+    <ul class="profile-menu">
+      <li><a href="/frontend/create_profile_pg.html"><i class="fas fa-user"></i>View Profile</a></li>
+      <li><a href="/frontend/my_application.html"><i class="fas fa-briefcase"></i>My Applications</a></li>
+      <li><a href="/frontend/saved_job.html"><i class="fas fa-bookmark"></i>Saved Jobs</a></li>
+      <li><a href="/frontend/login.html"><i class="fas fa-sign-out-alt"></i>Logout</a></li>
+    </ul>
+  </div>
+
+</div>
+
+</div>
+
+
+<!----- Job detials ----->
+<div id="jobDetailsContainer">
+  <div class="center">Loading job details...</div>
+</div>
 
 
 <!-- JavaScripts -->
-<script src="/frontend/main.js"></script>   
+<script src="/frontend/main.js"></script>
 
 <script>
+
 const params = new URLSearchParams(window.location.search);
 const jobId = params.get("id");
 
-console.log("Job ID:", jobId); // ✅ debug
-
+/*----- LOAD JOB DETAILS -----*/
 async function loadJobDetails() {
   try {
+    if (!jobId) {
+      throw new Error("No Job ID provided");
+    }
+
     const res = await fetch(`http://localhost:3000/jobs/${jobId}`);
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch job");
+    }
+
     const job = await res.json();
 
     if (!job) {
-      document.getElementById("jobDetailsContainer").innerHTML =
-        "<h2>Job not found ❌</h2>";
-      return;
+      throw new Error("Job not found");
     }
 
     renderJob(job);
+
   } catch (err) {
     document.getElementById("jobDetailsContainer").innerHTML =
-      "<h2>Error loading job ❌</h2>";
+      `<div class="center">❌ ${err.message}</div>`;
   }
 }
 
+/*----- RENDER JOB -----*/
 function renderJob(job) {
-
   const container = document.getElementById("jobDetailsContainer");
 
   container.innerHTML = `
-  
-  <!-- HEADER -->
-  <div class="job-details-header">
 
-    <!-- ✅ FIXED IMAGE -->
+  <!-- HEADER -->
+  <div class="card job-details-header">
     <img src="http://localhost:3000${job.logo || '/uploads/default.png'}" 
          class="job-details-logo">
 
     <div>
       <h2>${job.title}</h2>
-      <p>${job.company}</p>
+      <p><b>${job.company}</b></p>
       <p>📍 ${job.location}</p>
     </div>
-
   </div>
 
   <!-- HIGHLIGHTS -->
-  <div class="job-highlights">
+  <div class="card">
     <h3>Job Highlights</h3>
     <ul>
       <li>💼 Experience: ${job.experience}</li>
@@ -110,20 +382,14 @@ function renderJob(job) {
     </ul>
   </div>
 
-  <!-- MATCH -->
-  <div class="job-match">
-    <h3>Job Match Score</h3>
-    <p>🔥 85% Match</p>
-  </div>
-
   <!-- DESCRIPTION -->
-  <div class="job-description">
+  <div class="card">
     <h3>Job Description</h3>
     <p>${job.description}</p>
   </div>
 
   <!-- ROLE -->
-  <div class="job-role">
+  <div class="card">
     <h3>Role Details</h3>
     <p><b>Industry:</b> IT Services</p>
     <p><b>Department:</b> Software Testing</p>
@@ -132,49 +398,55 @@ function renderJob(job) {
   </div>
 
   <!-- EDUCATION -->
-  <div class="job-education">
+  <div class="card">
     <h3>Education</h3>
     <p>Any Graduate / BCA / MCA</p>
   </div>
 
   <!-- SKILLS -->
-  <div class="job-skills">
+  <div class="card">
     <h3>Key Skills</h3>
     ${
       job.skills
         ? job.skills.split(",").map(skill =>
-            `<span class="skill">${skill}</span>`
+            `<span class="skill">${skill.trim()}</span>`
           ).join("")
-        : "No skills"
+        : "No skills available"
     }
   </div>
 
-  <!-- APPLY BUTTON -->
-  <div style="margin:20px;">
+  <!-- ACTIONS -->
+  <div class="card">
     <button onclick="applyJob(${job.id})">Apply Now</button>
+    <!-- <button class="back-btn" onclick="goBack()">⬅ Back</button> -->
   </div>
   `;
 }
 
-// ✅ APPLY
+/*----- APPLY FUNCTION -----*/
 function applyJob(id) {
   let applied = JSON.parse(localStorage.getItem("appliedJobs")) || [];
 
   if (applied.includes(id)) {
-    alert("Already applied ✅");
+    alert("✅ Already applied!");
     return;
   }
 
   applied.push(id);
   localStorage.setItem("appliedJobs", JSON.stringify(applied));
 
-  alert("Application submitted 🎉");
+  alert("🎉 Application submitted successfully!");
 }
 
+/*----- BACK BUTTON -----*/
+function goBack() {
+  window.history.back();
+}
+
+/*----- INIT -----*/
 loadJobDetails();
+
 </script>
 
-  </body>
+</body>
 </html>
- 
-    

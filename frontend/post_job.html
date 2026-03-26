@@ -10,6 +10,8 @@
     
     <link rel="stylesheet" href="styles.css" />
 
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
     <!-- Font Awesome CDN -->
     <link
       rel="stylesheet"
@@ -38,21 +40,203 @@
 <div class="form-wrapper-employer">  
   <div class="form-container-employer">
     <h2>Employer Post a Job</h2>
-      
+        
+    <div class="form-group-post-job">
+      <label>Job Title</label>
       <input type="text" id="title" placeholder="Job Title" />
-      <input type="text" id="company" placeholder="Company Name" />
+    </div>
 
-      <!-- FILE UPLOAD -->
+    <div class="form-group-post-job">
+      <label>Company Name</label>
+      <input type="text" id="company" placeholder="Company Name" />
+    </div>
+
+    <div class="form-group-post-job">
+      <label>Company Logo</label>
       <input type="file" id="logo" accept="image/*" onchange="previewLogo()" />
       <img id="preview" class="preview-img-emp"/>
+    </div>
 
+    <div class="form-group-post-job">
+      <label>Experience</label>
       <input type="text" id="experience" placeholder="Experience (e.g. 1-4 Yrs)" />
+    </div>
+
+    <div class="form-group-post-job">
+      <label>Location</label>
       <input type="text" id="location" placeholder="Location" />
+    </div>
+
+    <div class="form-group-post-job">
+      <label>Salary</label>
       <input type="text" id="salary" placeholder="Salary (e.g. 4-6 LPA)" />
+    </div>
 
+    <!-------- Industry -------->
+    <div class="form-group-post-job">
+      <label>Industry</label>
+      <select id="industry">
+        <option value="">-- Select Industry --</option>
+           <!-- IT / Tech -->
+        <option>IT Services & Consulting</option>
+        <option>Software Product</option>
+        <option>Internet / E-commerce</option>
+        <option>AI / Machine Learning</option>
+           <!-- Healthcare -->
+        <option>Healthcare / Hospital</option>
+        <option>Pharmaceuticals</option>
+        <option>Medical Devices</option>
+        <option>Diagnostics / Labs</option>
+           <!-- Finance -->
+        <option>Banking</option>
+        <option>Financial Services</option>
+        <option>Insurance</option>
+        <option>FinTech</option>
+           <!-- Business -->
+        <option>Education / Training</option>
+        <option>Retail</option>
+        <option>FMCG</option>
+        <option>Marketing & Advertising</option>
+        <option>BPO / Call Center</option>
+           <!-- Engineering -->
+        <option>Manufacturing</option>
+        <option>Automobile</option>
+        <option>Construction / Real Estate</option>
+        <option>Energy / Power</option>
+           <!-- Others -->
+        <option>Logistics / Supply Chain</option>
+        <option>Travel & Hospitality</option>
+        <option>Media & Entertainment</option>
+        <option>Government / Public Sector</option>
+      </select>
+    </div>
+
+    <!-------- Department -------->
+    <div class="form-group-post-job">
+      <label>Department</label>
+      <select id="department">
+        <option value="">-- Select Department --</option>
+            <!-- IT / Software -->
+        <option>Software Development</option>
+        <option>Quality Assurance / Testing</option>
+        <option>DevOps</option>
+        <option>UI / UX Design</option>
+        <option>Data Science / Analytics</option>
+        <option>IT Support</option>
+            <!-- Healthcare -->
+        <option>Medical Services</option>
+        <option>Nursing</option>
+        <option>Pharmacy</option>
+        <option>Laboratory Services</option>
+        <option>Radiology</option>
+        <option>Medical Coding & Billing</option>
+        <option>Hospital Administration</option>
+            <!-- Business -->
+        <option>Human Resources (HR)</option>
+        <option>Sales & Business Development</option>
+        <option>Marketing & Advertising</option>
+        <option>Finance & Accounts</option>
+        <option>Customer Support</option>
+        <option>Operations</option>
+            <!-- Others -->
+        <option>Logistics & Supply Chain</option>
+        <option>Teaching / Education</option>
+        <option>Legal</option>
+      </select>
+    </div>
+
+    <!----- Job Type ----->
+    <div class="form-group-post-job">
+      <label>Job Type</label>
+      <select id="jobType">
+        <option value="">-- Select Job Type --</option>
+           <!-- Main Types -->
+        <option>Full Time</option>
+        <option>Part Time</option>
+        <option>Internship</option>
+        <option>Contract</option>
+        <option>Temporary</option>
+        <option>Freelance</option>
+           <!-- Work Style -->
+        <option>Remote</option>
+        <option>Work From Home</option>
+        <option>Hybrid</option>
+      </select>
+    </div>
+
+    <!-------- Role Category -------->
+    <div class="form-group-post-job">
+      <label>Role Category</label>
+      <select id="category">
+        <option value="">-- Select Category --</option>
+            <!-- IT / Software -->
+        <option>QA / Testing</option>
+        <option>Software Development</option>
+        <option>DevOps</option>
+        <option>UI / UX Design</option>
+        <option>Data Science / Analytics</option>
+            <!-- Healthcare -->
+        <option>Doctor</option>
+        <option>Nurse</option>
+        <option>Pharmacist</option>
+        <option>Lab Technician</option>
+        <option>Radiologist</option>
+        <option>Medical Coding</option>
+        <option>Medical Billing</option>
+        <option>Hospital Administration</option>
+        <option>Healthcare Support Staff</option>
+            <!-- Business -->
+        <option>HR</option>
+        <option>Sales</option>
+        <option>Marketing</option>
+        <option>Finance / Accounts</option>
+        <option>Customer Support</option>
+            <!-- Others -->
+        <option>Operations</option>
+        <option>Logistics</option>
+        <option>Teaching / Education</option>
+      </select>
+    </div>
+
+    <div class="form-group-post-job">
+      <label>Education</label>
+      <input type="text" id="education" placeholder="BCA / MCA / Any Graduate" />
+    </div>
+
+    <div class="form-group-post-job">
+      <label>Skills</label>
       <input type="text" id="skills" placeholder="Skills (comma separated)" />
+    </div>
 
+
+
+
+<!-- Job Highlights -->
+<div class="form-group-post-job">
+  <label>Job Highlights</label>
+  <div id="highlightsEditor" style="height: 120px;"></div>
+</div>
+
+<!-- Job Description -->
+<div class="form-group-post-job">
+  <label>Job Description</label>
+  <div id="descriptionEditor" style="height: 200px;"></div>
+</div>
+
+
+
+
+
+
+    <div class="form-group-post-job">
+      <label>Job Highlights</label>
+      <textarea id="highlights" placeholder="Enter each highlight on a new line"></textarea>
+    </div>
+
+    <div class="form-group-post-job">
+      <label>Job Description</label>
       <textarea id="description" placeholder="Job Description"></textarea>
+    </div>
 
     <button onclick="postJob()">Post Job</button>
   </div>
@@ -64,6 +248,8 @@
     <div id="employerJobs" class="job-employer-grid"></div>
   </div>
 
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
 
 <script>
 
@@ -95,7 +281,18 @@
     formData.append("location", document.getElementById("location").value);
     formData.append("salary", document.getElementById("salary").value);
     formData.append("skills", document.getElementById("skills").value);
-    formData.append("description", document.getElementById("description").value);
+    // formData.append("description", document.getElementById("description").value);
+
+    formData.append("industry", document.getElementById("industry").value);
+    formData.append("department", document.getElementById("department").value);
+    formData.append("jobType", document.getElementById("jobType").value);
+    formData.append("category", document.getElementById("category").value);
+    formData.append("education", document.getElementById("education").value);
+    // formData.append("highlights", document.getElementById("highlights").value);
+
+    formData.append("highlights", highlightsQuill.root.innerHTML);
+    formData.append("description", descriptionQuill.root.innerHTML);
+    
 
     const file = document.getElementById("logo").files[0];
     if (file) {
@@ -112,8 +309,8 @@
 
       alert("✅ " + data.message);
 
-      // 🔥 Clear form
-      document.querySelectorAll("input, textarea").forEach(el => el.value = "");
+      /*----- 🔥 Clear form -----*/
+      document.querySelectorAll("input, textarea, select").forEach(el => el.value = "");
       document.getElementById("preview").style.display = "none";
 
     } catch (err) {
@@ -127,7 +324,7 @@
 
 <script>
 
-// 🔥 Load jobs
+/*----- 🔥 Load jobs -----*/
 async function loadEmployerJobs() {
   const res = await fetch("http://localhost:3000/jobs");
   const jobs = await res.json();
@@ -140,22 +337,23 @@ async function loadEmployerJobs() {
     const div = document.createElement("div");
     div.classList.add("job-card-employer");
 
-    // convert skills string → array
+    /*--- convert skills string → array ---*/
     const skills = job.skills ? job.skills.split(",") : [];
 
     div.innerHTML = `
       <div class="job-header-employer">
 
        <img 
-  src="${job.logo ? 'http://localhost:3000/uploads/' + job.logo : 'https://via.placeholder.com/50'}"
-  onerror="this.src='https://via.placeholder.com/50'"
-  alt="logo"
+          src="${job.logo ? 'http://localhost:3000/uploads/' + job.logo : 'https://via.placeholder.com/50'}"
+          onerror="this.src='https://via.placeholder.com/50'"
+          alt="logo"
        />
 
-        <div>
-          <p class="job-title-employer">${job.title}</p>
-          <p class="company-name-employer">${job.company}</p>
-        </div>
+       <div>
+         <p class="job-title-employer">${job.title}</p>
+         <p class="company-name-employer">${job.company}</p>
+       </div>
+
       </div>
 
       <div class="job-info-employer">
@@ -178,10 +376,11 @@ async function loadEmployerJobs() {
     `;
 
     container.appendChild(div);
+
   });
 }
 
-// 🔥 Delete job
+/*----- 🔥 Delete job -----*/
 async function deleteJob(id) {
   if (!confirm("Are you sure to delete this job?")) return;
 
@@ -197,6 +396,48 @@ async function deleteJob(id) {
 window.onload = loadEmployerJobs;
 
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+  // Highlights editor (simple)
+  const highlightsQuill = new Quill('#highlightsEditor', {
+    theme: 'snow',
+    placeholder: 'Enter job highlights...',
+    modules: {
+      toolbar: [
+        ['bold', 'italic'],
+        [{ 'list': 'bullet' }, { 'list': 'ordered' }]
+      ]
+    }
+  });
+
+  // Description editor (full features)
+  const descriptionQuill = new Quill('#descriptionEditor', {
+    theme: 'snow',
+    placeholder: 'Enter job description...',
+    modules: {
+      toolbar: [
+        [{ 'header': [1, 2, false] }],
+        ['bold', 'italic', 'underline'],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        ['link']
+      ]
+    }
+  });
+</script>
+
+
+
 
  </body>
 </html>

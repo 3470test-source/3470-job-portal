@@ -1481,7 +1481,7 @@ hr {
 .form-container-employer {
   margin: auto;
   width: 100%;
-  max-width: 600px;
+  max-width: 800px;
   background: #fff;
   padding: 25px;
   border-radius: 12px;
@@ -1501,8 +1501,21 @@ hr {
   font-size: 28px;
 }
 
+/* --- FORM GROUP --- */
+.form-group-post-job {
+  margin-bottom: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- LABEL --- */
+.form-group-post-job label {
+  font-size: 16px;
+}
+
 .form-container-employer input, 
-.form-container-employer textarea {
+.form-container-employer textarea,
+.form-container-employer select {
   width: 100%;
   padding: 12px;
   margin: 10px 0;
@@ -1511,12 +1524,19 @@ hr {
   transition: 0.3s;      
 }
 
+/* --- DROPDOWN STYLE --- */
+.form-container-employer select {
+  cursor: pointer;
+  appearance: none;
+}
+
 .form-container-employer textarea {
   height: 100px;
 }
 
 .form-container-employer input:focus,
-.form-container-employer textarea:focus {
+.form-container-employer textarea:focus,
+.form-container-employer select:focus {
   border-color: #0d6efd;
   outline: none;
   box-shadow: 0 0 5px rgba(10, 103, 241, 0.3);
@@ -1668,3 +1688,5 @@ hr {
   font-weight: bold;
   font-size: 14px;
 }
+
+/* ------------------------------------------------------------------------------------------------------------------------------------ */

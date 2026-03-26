@@ -302,7 +302,7 @@ async function loadSavedJobs() {
 }
 
 
-// ✅ Remove saved
+/*----- ✅ Remove saved -----*/
 function removeSaved(id) {
 
   let saved = JSON.parse(localStorage.getItem("savedJobs")) || [];
@@ -315,13 +315,13 @@ function removeSaved(id) {
 }
 
 
-// ✅ Apply
+/*----- ✅ Apply -----*/
 function applyJob(id) {
   alert("Applied for Job ID: " + id);
 }
 
 
-// ✅ Time ago (same as dashboard)
+/*----- ✅ Time ago (same as dashboard) -----*/
 function timeAgo(date) {
   const sec = Math.floor((new Date() - new Date(date)) / 1000); 
 
@@ -333,8 +333,9 @@ function timeAgo(date) {
 }
 
 
-// LOAD
+/*----- LOAD -----*/
 window.onload = loadSavedJobs;
+
 </script>
 
   </body>

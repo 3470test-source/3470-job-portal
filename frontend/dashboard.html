@@ -578,6 +578,7 @@
 <!-- JavaScripts -->
 <script src="/frontend/main.js"></script>
 
+
 <script>
 async function loadJobs() {
 
@@ -591,21 +592,19 @@ async function loadJobs() {
 
      const div = document.createElement("div"); 
 
-  // ✅ OPEN DETAILS PAGE (same tab better UX)
+  /*----- ✅ OPEN DETAILS PAGE (same tab better UX) -----*/
   div.onclick = (e) => {
-  if (e.target.tagName === "I" || e.target.tagName === "BUTTON") return;
-  // window.open(`/frontend/job_details.html?id=${job.id}`, "_blank");
-  window.location.href = `/frontend/job_details.html?id=${job.id}`;
-};
+    if (e.target.closest("button")) return;
+      window.open(`/frontend/job_details.html?id=${job.id}`, "_blank", "noopener,noreferrer");
+  };
 
+  div.className = "job-card-list-dash";
 
-    div.className = "job-card-list-dash";
+  div.innerHTML = `
+    <div class="job-header-dash">
 
-    div.innerHTML = `
-      <div class="job-header-dash">
-
-        <img src="http://localhost:3000${job.logo || '/uploads/default.png'}" 
-             class="company-logo-dash">
+      <img src="http://localhost:3000${job.logo || '/uploads/default.png'}" 
+          class="company-logo-dash">
 
         <div class="job-title-section">
           <h3>${job.title}</h3>
@@ -617,17 +616,21 @@ async function loadJobs() {
           onclick="toggleSave(${job.id}, this)">
         </i>
         
-      </div>
+    </div>
 
-      <div class="job-details">
-        <span><i class="fa fa-briefcase"></i> ${job.experience}</span>
-        <span><i class="fa fa-location-dot"></i> ${job.location}</span>
-        <span><i class="fa fa-indian-rupee-sign"></i> ${job.salary}</span>
-      </div>
+    <div class="job-details">
+      <span><i class="fa fa-briefcase"></i> ${job.experience}</span>
+      <span><i class="fa fa-location-dot"></i> ${job.location}</span>
+      <span><i class="fa fa-indian-rupee-sign"></i> ${job.salary}</span>
+    </div>
 
-      <p class="job-desc">${job.description}</p>
+    <p class="job-desc">${job.description}</p>
 
-      <p><b>Skills:</b> ${job.skills}</p>
+    <p class="job-desc">${job.highlights}</p>
+
+    <p class="job-desc">
+  ${job.highlights ? job.highlights : "No highlights provided"}
+</p>
 
       <div class="job-footer">
         <span>${timeAgo(job.createdAt)}</span>
@@ -636,10 +639,11 @@ async function loadJobs() {
     `;
 
     container.appendChild(div);
+
   });
 }
 
-// ✅ Time ago
+/*----- ✅ Time ago -----*/
 function timeAgo(date) {
   const sec = Math.floor((new Date() - new Date(date)) / 1000);
 
@@ -654,31 +658,30 @@ function applyJob(id) {
   alert("Applied for Job ID: " + id);
 }
 
+/* ================= SAVE JOB ================= */
 
-// ================= SAVE JOB =================
-
-// Get saved jobs
+/*----- Get saved jobs -----*/
 function getSavedJobs() {
   return JSON.parse(localStorage.getItem("savedJobs")) || [];
 }
 
-// Check saved
+/*----- Check saved -----*/
 function isSaved(id) {
   return getSavedJobs().includes(id);
 }
 
-// Toggle save
+/*----- Toggle save -----*/
 function toggleSave(id, icon) {
 
   let saved = getSavedJobs();
 
   if (saved.includes(id)) {
-    // remove
+    /*--- remove ---*/
     saved = saved.filter(jobId => jobId !== id);
     icon.classList.remove("fa-solid", "saved");
     icon.classList.add("fa-regular");
   } else {
-    // add
+    /*--- add ---*/
     saved.push(id);
     icon.classList.remove("fa-regular");
     icon.classList.add("fa-solid", "saved");
@@ -688,30 +691,30 @@ function toggleSave(id, icon) {
 }
 
 
-// ================= SAVE JOB =================
+/* ================= SAVE JOB ================= */
 
-// Get saved jobs
+/*----- Get saved jobs -----*/
 function getSavedJobs() {
   return JSON.parse(localStorage.getItem("savedJobs")) || [];
 }
 
-// Check saved
+/*----- Check saved -----*/
 function isSaved(id) {
   return getSavedJobs().includes(id);
 }
 
-// Toggle save
+/*----- Toggle save -----*/
 function toggleSave(id, icon) {
 
   let saved = getSavedJobs();
 
   if (saved.includes(id)) {
-    // remove
+    /*----- remove -----*/
     saved = saved.filter(jobId => jobId !== id);
     icon.classList.remove("fa-solid", "saved");
     icon.classList.add("fa-regular");
   } else {
-    // add
+    /*--- add ---*/
     saved.push(id);
     icon.classList.remove("fa-regular");
     icon.classList.add("fa-solid", "saved");
@@ -720,14 +723,7 @@ function toggleSave(id, icon) {
   localStorage.setItem("savedJobs", JSON.stringify(saved));
 }
 
-
-// ================= LOAD =================
-    window.onload = loadJobs;
-    
-</script>
-
-<script>
-  function applyJob(id) {
+function applyJob(id) {
 
   let applied = JSON.parse(localStorage.getItem("appliedJobs")) || [];
 
@@ -742,7 +738,13 @@ function toggleSave(id, icon) {
 
   alert("Application submitted successfully 🎉");
 }
+
+
+/* ================= LOAD ================= */
+    window.onload = loadJobs;
+    
 </script>
+
 
   </body>
 </html>
