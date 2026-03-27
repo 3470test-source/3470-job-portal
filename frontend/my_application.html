@@ -278,12 +278,15 @@ async function loadApplications() {
       </div>
 
       <div class="job-details">
-        <span>${job.experience}</span>
-        <span>${job.location}</span>
-        <span>${job.salary}</span>
+        <span><i class="fa fa-briefcase"></i> ${job.experience}</span>
+        <span><i class="fa fa-location-dot"></i> ${job.location}</span>
+        <span><i class="fa fa-indian-rupee-sign"></i> ${job.salary}</span>
       </div>
 
-      <p class="job-desc">${job.description}</p>
+      <div class="job-desc">
+        <b>Job Highlights:</b>
+        ${job.highlights ? job.highlights : "<p>No highlights provided</p>"}
+      </div>
 
       <p><b>Skills:</b> ${job.skills}</p>
 

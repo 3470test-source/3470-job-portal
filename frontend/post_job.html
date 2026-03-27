@@ -208,34 +208,16 @@
       <input type="text" id="skills" placeholder="Skills (comma separated)" />
     </div>
 
-
-
-
-<!-- Job Highlights -->
-<div class="form-group-post-job">
-  <label>Job Highlights</label>
-  <div id="highlightsEditor" style="height: 120px;"></div>
-</div>
-
-<!-- Job Description -->
-<div class="form-group-post-job">
-  <label>Job Description</label>
-  <div id="descriptionEditor" style="height: 200px;"></div>
-</div>
-
-
-
-
-
-
-    <div class="form-group-post-job">
+    <!-- Job Highlights -->
+    <div class="form-group-post-job job-post">
       <label>Job Highlights</label>
-      <textarea id="highlights" placeholder="Enter each highlight on a new line"></textarea>
+      <div id="highlightsEditor" style="height: 120px;"></div>
     </div>
 
-    <div class="form-group-post-job">
+    <!-- Job Description -->
+    <div class="form-group-post-job job-post">
       <label>Job Description</label>
-      <textarea id="description" placeholder="Job Description"></textarea>
+      <div id="descriptionEditor" style="height: 200px;"></div>
     </div>
 
     <button onclick="postJob()">Post Job</button>
@@ -281,15 +263,12 @@
     formData.append("location", document.getElementById("location").value);
     formData.append("salary", document.getElementById("salary").value);
     formData.append("skills", document.getElementById("skills").value);
-    // formData.append("description", document.getElementById("description").value);
-
     formData.append("industry", document.getElementById("industry").value);
     formData.append("department", document.getElementById("department").value);
     formData.append("jobType", document.getElementById("jobType").value);
     formData.append("category", document.getElementById("category").value);
     formData.append("education", document.getElementById("education").value);
-    // formData.append("highlights", document.getElementById("highlights").value);
-
+    
     formData.append("highlights", highlightsQuill.root.innerHTML);
     formData.append("description", descriptionQuill.root.innerHTML);
     
@@ -357,17 +336,38 @@ async function loadEmployerJobs() {
       </div>
 
       <div class="job-info-employer">
-        📍 ${job.location} <br>
-        💰 ${job.salary} <br>
-        🎯 ${job.experience || "Not specified"} yrs experience
+        <p><i class="fa-solid fa-location-dot"></i> ${job.location}</p>
+        <p><i class="fa-solid fa-indian-rupee-sign"></i> ${job.salary}</p>
+        <p><i class="fa-solid fa-briefcase"></i> ${job.experience || "Not specified"} Experience</p>
       </div>
 
       <div class="skills-employer">
+        <b class="skills-label">Skills:</b>
         ${skills.map(skill => `<span class="skill-tag-employer">${skill}</span>`).join("")}
       </div>
 
+      <!-- JOB HIGHLIGHTS -->
+      <div class="job-highlights">
+        <b>Job Highlights:</b>
+        ${job.highlights || "<p>No highlights provided</p>"}
+      </div>
+
+      <!-- JOB DESCRIPTION -->
       <div class="job-desc-employer">
+        <b>Job Description:</b>
         ${job.description || "No job description provided"}
+      </div>
+
+      <div class="role-details">
+        <b>Role Details:</b>
+          <p><b>Industry:</b> ${job.industry || "Not specified"}</p>
+          <p><b>Department:</b> ${job.department || "Not specified"}</p>
+          <p><b>Type:</b> ${job.jobType || "Not specified"}</p>
+          <p><b>Category:</b> ${job.category || "Not specified"}</p>
+      </div>
+
+      <div class="education-job-employer">
+        <b>Education:</b> ${job.education ? job.education : "Not specified"}
       </div>
 
       <button class="delete-btn-employer" onclick="deleteJob(${job.id})">
@@ -398,16 +398,6 @@ window.onload = loadEmployerJobs;
 </script>
 
 
-
-
-
-
-
-
-
-
-
-
 <script>
   // Highlights editor (simple)
   const highlightsQuill = new Quill('#highlightsEditor', {
@@ -415,8 +405,10 @@ window.onload = loadEmployerJobs;
     placeholder: 'Enter job highlights...',
     modules: {
       toolbar: [
-        ['bold', 'italic'],
-        [{ 'list': 'bullet' }, { 'list': 'ordered' }]
+        [{ 'header': [1, 2, false] }],
+        ['bold', 'italic', 'underline'],
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        ['link']
       ]
     }
   });
@@ -435,9 +427,6 @@ window.onload = loadEmployerJobs;
     }
   });
 </script>
-
-
-
 
  </body>
 </html>

@@ -603,8 +603,7 @@ async function loadJobs() {
   div.innerHTML = `
     <div class="job-header-dash">
 
-      <img src="http://localhost:3000${job.logo || '/uploads/default.png'}" 
-          class="company-logo-dash">
+      <img src="http://localhost:3000${job.logo || '/uploads/default.png'}" class="company-logo-dash">
 
         <div class="job-title-section">
           <h3>${job.title}</h3>
@@ -613,7 +612,7 @@ async function loadJobs() {
 
         <!-- ✅ SAVE ICON FIX -->
         <i class="fa-${isSaved(job.id) ? 'solid saved' : 'regular'} fa-bookmark"
-          onclick="toggleSave(${job.id}, this)">
+          onclick="toggleSave(${job.id}, this, event)">
         </i>
         
     </div>
@@ -624,13 +623,12 @@ async function loadJobs() {
       <span><i class="fa fa-indian-rupee-sign"></i> ${job.salary}</span>
     </div>
 
-    <p class="job-desc">${job.description}</p>
+    <div class="job-desc">
+      <b>Job Highlights:</b>
+        ${job.highlights ? job.highlights : "<p>No highlights provided</p>"}
+    </div>
 
-    <p class="job-desc">${job.highlights}</p>
-
-    <p class="job-desc">
-  ${job.highlights ? job.highlights : "No highlights provided"}
-</p>
+    <p><b>Skills:</b> ${job.skills}</p>
 
       <div class="job-footer">
         <span>${timeAgo(job.createdAt)}</span>
@@ -704,7 +702,9 @@ function isSaved(id) {
 }
 
 /*----- Toggle save -----*/
-function toggleSave(id, icon) {
+function toggleSave(id, icon, event) {
+
+  event.stopPropagation(); // 🔥 IMPORTANT
 
   let saved = getSavedJobs();
 

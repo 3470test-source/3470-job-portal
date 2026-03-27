@@ -36,7 +36,13 @@ app.post("/jobs", upload.single("logo"), (req, res) => {
     location: req.body.location,
     salary: req.body.salary,
     skills: req.body.skills,
+    highlights: req.body.highlights,  
     description: req.body.description,
+    education: req.body.education,   
+    category: req.body.category,     
+    industry: req.body.industry,
+    department: req.body.department,
+    jobType: req.body.jobType,
     logo: req.file ? "/uploads/" + req.file.filename : "",
     createdAt: new Date()
   };

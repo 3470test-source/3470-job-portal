@@ -1373,7 +1373,7 @@ hr {
 
 /*--- JOB SECTION ---*/
 .jobs-section-employer-dash {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: auto;
 }
 
@@ -1387,7 +1387,7 @@ hr {
 /*---- GRID (2 COLUMN) ----*/
 .job-employer-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* grid-template-columns: repeat(2, 1fr); */
   gap: 30px;
 }
 
@@ -1432,11 +1432,32 @@ hr {
 .job-info-employer {
   font-size: 14px;
   margin: 8px 0;
-  color: #666;
+  color: #444;
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.job-info-employer p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+.job-info-employer i {
+  color: #007bff; /* blue icon */
+  font-size: 14px;
 }
 
 .skills-employer {
   margin-top: 10px;
+}
+
+.skills-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
 }
 
 .skill-tag-employer {
@@ -1449,15 +1470,42 @@ hr {
   font-size: 14px;
 }
 
+/* HIGHLIGHTS & DESCRIPTION */
+.job-highlights,
 .job-desc-employer {
-  font-size: 14px;
-  margin-top: 10px;
-  color: #444;
+  margin-top: 12px;
+}
+
+.job-highlights ul,
+.job-desc-employer ul {
+  padding-left: 18px;
+}
+
+.job-highlights li,
+.job-desc-employer li {
+  margin-bottom: 10px;
+}
+
+.job-desc-employer {
+  margin-top: -20px;
+}
+
+/*--- ROLE DETAILS GRID ---*/
+.role-details {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+/*--- EDUCATION ---*/
+.education-job-employer {
+  margin-top: 1px;
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
 .delete-btn-employer {
   margin-top: 12px;
-  padding: 8px 12px;
+  padding: 10px 50px;
   border: none;
   background: #ff4d4d;
   color: white;
@@ -1513,6 +1561,11 @@ hr {
   font-size: 16px;
 }
 
+.job-post label {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .form-container-employer input, 
 .form-container-employer textarea,
 .form-container-employer select {
@@ -1552,6 +1605,7 @@ hr {
   cursor: pointer;
   font-size: 16px;
   transition: 0.3s;
+  margin-top: 15px;
 }
 
 .form-container-employer button:hover {
@@ -1617,9 +1671,24 @@ hr {
 }
 
 .job-desc {
-  font-size:14px;
-  color:#555;
-  margin-bottom: 15px;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: -5px;
+  line-height: 1.5;
+}
+
+.job-desc b {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.job-desc ul {
+  padding-left: 18px;
+  margin: 6px 0;
+}
+
+.job-desc li {
+  margin-bottom: 5px;
 }
 
 .job-footer {
@@ -1689,4 +1758,145 @@ hr {
   font-size: 14px;
 }
 
-/* ------------------------------------------------------------------------------------------------------------------------------------ */
+/* --------------------------------------------------------------------------------------------------------------------------------------- */
+
+                                  /* ---------------------------------
+                                              Job Details  
+                                     --------------------------------- */
+
+.jobDetailsContainer {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 10px;
+}
+
+/*--- CARD STYLE ---*/
+.card-job-details-he {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  border: 1px solid #eee;
+}
+
+/*--- HEADER ---*/
+.card-job-details-he:first-child {
+  display: flex;
+  gap: 20px;
+  /* align-items: center; */
+}
+
+.job-details-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+/*--- TITLE ---*/
+.card-job-details-he h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.card-job-details-he h3 {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 20px;
+  border-left: 4px solid #2563eb;
+  padding-left: 8px;
+}
+
+/*--- JOB INFO ICON ROW ---*/
+.card-job-details-he p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #555;
+}
+
+/*--- ICON STYLE ---*/
+.card-job-details-he .icon-header {
+  color: #2563eb;
+  margin-right: 5px;
+  font-size:14px;
+  margin-top: 10px;
+}
+
+/*--- UL styling ---*/
+.card-job-details-he ul {
+  padding-left: 20px;   /* space for bullets */
+  margin-top: 10px;
+}
+
+/*--- LI styling ---*/
+.card-job-details-he li {
+  margin-bottom: 6px;
+}
+
+/*--- ROLE GRID ---*/
+.role-grid-job-details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  gap: 12px;
+  margin-top: 10px;
+}
+
+/*--- EACH ITEM ---*/
+.role-grid-job-details p {
+  display: flex;
+  align-items: center;   /* 🔥 aligns icon + text */
+  gap: 8px;
+  background: #f9fafb;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  margin: 0;
+  font-size: 14px;
+  color: #444;
+}
+
+/*---- ICON STYLE ----*/
+.role-grid-job-details .icon-role {
+  color: #2563eb;
+  font-size: 14px;
+  min-width: 18px;   /* 🔥 keeps alignment same */
+}
+
+/*---- LABEL (Industry, Department...) ----*/
+.role-grid-job-details b {
+  color: #222;
+  margin-right: 4px;
+}
+
+/*--- SKILLS ---*/
+.card-job-details-he .skill {
+  display: inline-block;
+  background: #eef2ff;
+  color: #1102e9;
+  padding: 6px 12px;
+  margin: 5px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/*--- BUTTON ---*/
+.card-job-details-he button {
+  background: #2563eb;
+  color: #fff;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.card-job-details-he button:hover {
+  background: #1e40af;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------------------------------- */

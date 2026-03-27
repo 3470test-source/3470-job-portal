@@ -285,7 +285,10 @@ async function loadSavedJobs() {
         <span><i class="fa fa-indian-rupee-sign"></i> ${job.salary}</span>
       </div>
 
-      <p class="job-desc">${job.description}</p>
+      <div class="job-desc">
+        <b>Job Highlights:</b>
+        ${job.highlights ? job.highlights : "<p>No highlights provided</p>"}
+      </div>
 
       <p><b>Skills:</b> ${job.skills}</p>
 
@@ -298,6 +301,7 @@ async function loadSavedJobs() {
     `;
 
     container.appendChild(div);
+    
   });
 }
 
