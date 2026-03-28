@@ -159,8 +159,8 @@
 
     <!-- SEARCH BAR -->
     <div class="job-login-search-bar">
-        <input type="text" placeholder="Search jobs, companies, or keywords...">
-        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        <input type="text" id="searchInput" placeholder="Search jobs, companies, or keywords...">
+        <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
     </div>
 
     <!-- Notification -->
@@ -580,17 +580,34 @@
 
 
 <script>
+
+  let allJobs = []; // 🌟 store all jobs
+
+/* ================= LOAD JOBS ================= */
 async function loadJobs() {
 
   const res = await fetch("http://localhost:3000/jobs");
   const jobs = await res.json();
 
+  allJobs = jobs.reverse();
+  displayJobs(allJobs);
+}
+
+
+function displayJobs(jobs) {
+
   const container = document.getElementById("jobs");
   container.innerHTML = "";
 
-  jobs.reverse().forEach(job => {
+  if (jobs.length === 0) {
+    container.innerHTML = "<p>No jobs found 😢</p>";
+    return;
+  }
 
-     const div = document.createElement("div"); 
+  jobs.forEach(job => {
+
+    const div = document.createElement("div"); 
+
 
   /*----- ✅ OPEN DETAILS PAGE (same tab better UX) -----*/
   div.onclick = (e) => {
@@ -641,7 +658,31 @@ async function loadJobs() {
   });
 }
 
-/*----- ✅ Time ago -----*/
+/* ================= SEARCH ================= */
+
+function applySearch() {
+
+  const value = document.getElementById("searchInput").value.toLowerCase();
+
+  const filteredJobs = allJobs.filter(job => 
+    job.title.toLowerCase().includes(value) ||
+    job.company.toLowerCase().includes(value) ||
+    job.skills.toLowerCase().includes(value) ||
+    job.location.toLowerCase().includes(value)
+  );
+
+  displayJobs(filteredJobs);
+}
+
+
+document.getElementById("searchInput")
+  .addEventListener("input", applySearch);
+
+document.getElementById("searchBtn")
+  .addEventListener("click", applySearch);
+
+
+/*--------- ✅ Time ago ---------*/
 function timeAgo(date) {
   const sec = Math.floor((new Date() - new Date(date)) / 1000);
 
@@ -738,6 +779,157 @@ function applyJob(id) {
 
   alert("Application submitted successfully 🎉");
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function applyFilters() {
+
+  let filtered = [...allJobs];
+
+  /* -------- Work Mode -------- */
+  const workModes = [...document.querySelectorAll(".filter-Work-Mode input:checked")]
+    .map(cb => cb.parentElement.textContent.trim().toLowerCase());
+
+  if (workModes.length) {
+    filtered = filtered.filter(job =>
+      workModes.some(mode => job.workMode?.toLowerCase().includes(mode))
+    );
+  }
+
+  /* -------- Experience -------- */
+  const exp = document.getElementById("expRange").value;
+
+  filtered = filtered.filter(job => {
+    const jobExp = parseInt(job.experience) || 0;
+    return jobExp >= exp;
+  });
+
+  /* -------- Department -------- */
+  const departments = [...document.querySelectorAll(".filter-Department input:checked")]
+    .map(cb => cb.parentElement.textContent.trim().toLowerCase());
+
+  if (departments.length) {
+    filtered = filtered.filter(job =>
+      departments.some(dep => job.department?.toLowerCase().includes(dep))
+    );
+  }
+
+  /* -------- Salary -------- */
+  const salaries = [...document.querySelectorAll(".filter-Salary input:checked")]
+    .map(cb => cb.parentElement.textContent.trim());
+
+  if (salaries.length) {
+    filtered = filtered.filter(job =>
+      salaries.some(s => job.salary?.includes(s))
+    );
+  }
+
+  /* -------- Company Type -------- */
+  const companyTypes = [...document.querySelectorAll(".filter-Company-Type input:checked")]
+    .map(cb => cb.parentElement.textContent.trim().toLowerCase());
+
+  if (companyTypes.length) {
+    filtered = filtered.filter(job =>
+      companyTypes.some(type => job.companyType?.toLowerCase().includes(type))
+    );
+  }
+
+  /* -------- Posted By -------- */
+  const postedBy = [...document.querySelectorAll(".filter-Posted-By input:checked")]
+    .map(cb => cb.value);
+
+  if (postedBy.length) {
+    filtered = filtered.filter(job =>
+      postedBy.includes(job.postedBy)
+    );
+  }
+
+  /* -------- Role Category -------- */
+  const roles = [...document.querySelectorAll(".filter-Role-Category input:checked")]
+    .map(cb => cb.parentElement.textContent.trim().toLowerCase());
+
+  if (roles.length) {
+    filtered = filtered.filter(job =>
+      roles.some(role => job.roleCategory?.toLowerCase().includes(role))
+    );
+  }
+
+  /* -------- Education -------- */
+  const education = [...document.querySelectorAll(".filter-Education input:checked")]
+    .map(cb => cb.parentElement.textContent.trim().toLowerCase());
+
+  if (education.length) {
+    filtered = filtered.filter(job =>
+      education.some(edu => job.education?.toLowerCase().includes(edu))
+    );
+  }
+
+  /* -------- Location -------- */
+  const locations = [...document.querySelectorAll(".filter-Location input:checked")]
+    .map(cb => cb.parentElement.textContent.trim().toLowerCase());
+
+  if (locations.length) {
+    filtered = filtered.filter(job =>
+      locations.some(loc => job.location?.toLowerCase().includes(loc))
+    );
+  }
+
+  /* -------- ✅ Freshness (IMPORTANT) -------- */
+  const freshness = document.querySelector(".filter-Freshness input:checked");
+
+  if (freshness) {
+    const days = parseInt(freshness.value);
+
+    filtered = filtered.filter(job => {
+      const jobDate = new Date(job.createdAt);
+      const now = new Date();
+
+      const diffDays = (now - jobDate) / (1000 * 60 * 60 * 24);
+
+      return diffDays <= days;
+    });
+  }
+
+  displayJobs(filtered);
+}
+
+
+
+/* Apply filter on change */
+document.querySelectorAll(".sidebar-dash-job input").forEach(input => {
+  input.addEventListener("change", applyFilters);
+});
+
+
+/* Experience slider */
+document.getElementById("expRange").addEventListener("input", function () {
+  document.getElementById("expValue").innerText = this.value;
+  applyFilters();
+});
+
+
+
+
+
+
+
+
+
 
 
 /* ================= LOAD ================= */

@@ -1487,7 +1487,7 @@ hr {
 }
 
 .job-desc-employer {
-  margin-top: -20px;
+  margin-top: 20px;
 }
 
 /*--- ROLE DETAILS GRID ---*/
@@ -1673,7 +1673,7 @@ hr {
 .job-desc {
   font-size: 14px;
   margin-top: 10px;
-  margin-bottom: -5px;
+  margin-bottom: 15px;
   line-height: 1.5;
 }
 
