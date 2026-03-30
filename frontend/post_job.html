@@ -30,6 +30,150 @@
       padding: 20px;
     }
 
+
+
+
+
+
+
+/*--- Container ---*/
+.applicants-container {
+  margin-top: 20px;
+}
+
+/*--- Card ---*/
+.applicant-card {
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.applicant-card:hover {
+  transform: translateY(-3px);
+}
+
+/*--- Header ---*/
+.applicant-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.applicant-header h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.applicant-header p {
+  font-size: 18px;
+}
+
+.applicant-header i,
+.applicant-cal i,
+.applicant-resume i {
+  color:#0672ca;
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.applicant-header h4,
+.applicant-cal,
+.applicant-resume {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* modern spacing */
+}
+
+/*--- Status Badge ---*/
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status-badge.applied {
+  background: orange;
+  color: white;
+}
+
+.status-badge.shortlisted {
+  background: green;
+  color: white;
+}
+
+.status-badge.rejected {
+  background: red;
+  color: white;
+}
+
+/*--- Buttons ---*/
+.filter-buttons button {
+  margin: 5px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #007bff;
+  color: white;
+}
+
+.filter-buttons button:hover {
+  background: #0056b3;
+}
+
+/*--- Resume link ---*/
+.applicant-card a {
+  color: #087a41;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.applicant-card a:hover {
+  text-decoration: underline;
+}
+
+.status-container {
+  margin-top: -10px;
+}
+
+.status-container label {
+  font-weight: 600;
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.status-container select {
+  padding: 8px 16px;
+  border-radius: 6px;
+  background-color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.status-container select:hover {
+  border-color: #007bff;
+}
+
+.status-container select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+}
+
+/*--- Disabled ---*/
+.status-container select:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+
+
   </style>
 
 </head>
@@ -228,6 +372,23 @@
   <div class="jobs-section-employer-dash">
     <h2>Posted Jobs</h2>
     <div id="employerJobs" class="job-employer-grid"></div>
+
+    <h2>Applicants</h2>
+
+    <!-- Filter Buttons -->
+    <div class="filter-buttons">
+      <button onclick="filterApplicants('ALL')">All</button>
+      <button onclick="filterApplicants('APPLIED')">Applied</button>
+      <button onclick="filterApplicants('SHORTLISTED')">Shortlisted</button>
+      <button onclick="filterApplicants('REJECTED')">Rejected</button>
+    </div>
+
+    <!-- Applicant Count -->
+    <p id="applicantCount"></p>
+
+    <!-- Applicant List -->
+    <div id="applicantsList" class="applicants-container"></div>
+
   </div>
 
 
@@ -235,15 +396,29 @@
 
 <script>
 
-  function previewLogo() {
-    const file = document.getElementById("logo").files[0];
-    const preview = document.getElementById("preview");
+const applicantsList = document.getElementById("applicantsList");
 
-    if (file) {
-      preview.src = URL.createObjectURL(file);
-      preview.style.display = "block";
-    }
+const applicantCount = document.getElementById("applicantCount");
+let allApplicants = [];
+
+let currentJobId = null;
+
+
+/* ================= PREVIEW ================= */
+  
+  function previewLogo() {
+  const fileInput = document.getElementById("logo");
+  const preview = document.getElementById("preview");
+
+  const file = fileInput.files[0];
+
+  if (file) {
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = "block";
   }
+}
+
+
 
   async function postJob() {
 
@@ -289,7 +464,10 @@
       alert("✅ " + data.message);
 
       /*----- 🔥 Clear form -----*/
-      document.querySelectorAll("input, textarea, select").forEach(el => el.value = "");
+      // document.querySelectorAll("input, textarea, select").forEach(el => el.value = "");
+      document.querySelectorAll("input, select").forEach(el => el.value = "");
+      highlightsQuill.root.innerHTML = "";
+      descriptionQuill.root.innerHTML = "";
       document.getElementById("preview").style.display = "none";
 
     } catch (err) {
@@ -305,11 +483,21 @@
 
 /*----- 🔥 Load jobs -----*/
 async function loadEmployerJobs() {
-  const res = await fetch("http://localhost:3000/jobs");
+
+  try {
+    const res = await fetch("http://localhost:3000/jobs");
+
+    if (!res.ok) throw new Error("Failed to fetch");
+
   const jobs = await res.json();
 
   const container = document.getElementById("employerJobs");
   container.innerHTML = "";
+
+  if (!jobs.length) {
+      container.innerHTML = "<p>No jobs posted yet</p>";
+      return;
+    }
 
   jobs.forEach(job => {
 
@@ -373,11 +561,21 @@ async function loadEmployerJobs() {
       <button class="delete-btn-employer" onclick="deleteJob(${job.id})">
         Delete Job
       </button>
+
+      <button class="view-btn-employer" onclick="viewApplicants(${job.id})">
+        View Applicants
+      </button>
+
     `;
 
     container.appendChild(div);
 
   });
+
+  } catch (err) {
+    console.error(err);
+    alert("Error loading jobs");
+  }
 }
 
 /*----- 🔥 Delete job -----*/
@@ -392,6 +590,122 @@ async function deleteJob(id) {
 
   loadEmployerJobs();
 }
+
+
+
+/* ================= VIEW APPLICANTS ================= */
+async function viewApplicants(jobId) {
+
+  currentJobId = jobId;
+
+  applicantsList.innerHTML = "⏳ Loading applicants...";
+
+  try {
+    const res = await fetch(`http://localhost:3000/applicants/${jobId}`);
+
+    if (!res.ok) throw new Error();
+
+    const apps = await res.json();
+
+    allApplicants = apps;
+
+    displayApplicants(apps);
+
+  } catch (err) {
+    console.error(err);
+    alert("❌ Failed to load applicants");
+  }
+}
+
+/* ================= DISPLAY ================= */
+function displayApplicants(apps) {
+
+  applicantsList.innerHTML = "";
+
+  applicantCount.innerText = `Total Applicants: ${apps.length}`;
+
+  if (!apps.length) {
+    applicantsList.innerHTML = "<p>No applicants found</p>";
+    return;
+  }
+
+  apps.forEach(app => {
+
+    const div = document.createElement("div");
+    div.className = "applicant-card";
+
+    div.innerHTML = `
+      <div class="applicant-header">
+        <h4><i class="fa-solid fa-user"></i> User ID: ${app.userId}</h4>
+        <span class="status-badge ${app.status.toLowerCase()}">
+          ${app.status}
+        </span>
+      </div>
+
+      <p class="applicant-cal"><i class="fa-solid fa-calendar"></i> Applied On: ${new Date(app.appliedAt).toLocaleDateString()}</p>
+
+      <a class="applicant-resume" href="http://localhost:3000${app.resume}" target="_blank">
+        <i class="fa-solid fa-file"></i> View Resume
+      </a>
+
+      <br><br>
+
+      <div class="status-container">
+        <label>Update Status:</label>
+        <select onchange="updateStatus(${app.id}, this)">
+         <option value="APPLIED" ${app.status==="APPLIED"?"selected":""}>APPLIED</option>
+         <option value="SHORTLISTED" ${app.status==="SHORTLISTED"?"selected":""}>SHORTLISTED</option>
+         <option value="REJECTED" ${app.status==="REJECTED"?"selected":""}>REJECTED</option>
+        </select>
+    </div>
+
+      <hr>
+    `;
+
+    applicantsList.appendChild(div);
+  });
+}
+
+
+/* ================= FILTER ================= */
+function filterApplicants(status) {
+
+  if (status === "ALL") {
+    displayApplicants(allApplicants);
+  } else {
+    const filtered = allApplicants.filter(a => a.status === status);
+    displayApplicants(filtered);
+  }
+}
+
+
+/* ================= UPDATE STATUS ================= */
+async function updateStatus(id, select) {
+
+  const status = select.value.trim();
+  select.disabled = true;
+
+  try {
+    const res = await fetch(`http://localhost:3000/application/status`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, status })
+    });
+
+    if (!res.ok) throw new Error();
+
+    alert("✅ Updated");
+
+  } catch (err) {
+    console.error(err); // 🔥 helpful debug
+    alert("❌ Update failed");
+  }
+
+  select.disabled = false;
+
+  viewApplicants(currentJobId);
+}
+
 
 window.onload = loadEmployerJobs;
 
@@ -427,6 +741,7 @@ window.onload = loadEmployerJobs;
     }
   });
 </script>
+
 
  </body>
 </html>

@@ -1516,6 +1516,22 @@ hr {
 .delete-btn-employer:hover {
   background: #d93636;
 }
+
+.view-btn-employer {
+  margin-top: 12px;
+  padding: 10px 50px;
+  border: none;
+  background: #0a64a0;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.view-btn-employer:hover {
+  background: #033768;
+}
+
  
                                   /*----------------- Employer post a job form -------------------------*/
 

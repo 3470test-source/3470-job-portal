@@ -19,9 +19,23 @@
     <style>
 
         *{
-           margin:0;
-           padding:0;
-           box-sizing:border-box;
+          margin:0;
+          padding:0;
+          box-sizing:border-box;
+        }
+
+        .status-badge {
+          padding: 5px 10px;
+          border-radius: 20px;
+          color: white;
+          font-size: 12px;
+          font-weight: bold;
+        }
+
+        .status-bar {
+          font-size: 16px;
+          margin-bottom: 10px;
+          margin-top: 15px;
         }
 
     </style>
@@ -240,27 +254,50 @@
 
 async function loadApplications() {
 
-  const res = await fetch("http://localhost:3000/jobs");
-  const jobs = await res.json();
-
-  const appliedIds = JSON.parse(localStorage.getItem("appliedJobs")) || [];
-
   const container = document.getElementById("applications");
-  container.innerHTML = "";
 
-  const appliedJobs = jobs.filter(job =>
-    appliedIds.includes(Number(job.id))
-  );
+  // ✅ Loading state
+  container.innerHTML = "<p>Loading applications...</p>";
 
-  if (appliedJobs.length === 0) {
-    container.innerHTML = "<p>No applications yet 😢</p>";
-    return;
-  }
+  try {
 
-  appliedJobs.reverse().forEach(job => {
+    // 🔥 Replace with real login user later
+    const userId = 101;
+
+    const res = await fetch(`http://localhost:3000/applications/${userId}`);
+
+    // ✅ Handle API errors
+    if (!res.ok) {
+      throw new Error("Server error: " + res.status);
+    }
+
+    const data = await res.json();
+
+    container.innerHTML = "";
+
+    // ✅ Empty state
+    if (!data || data.length === 0) {
+      container.innerHTML = "<p>No applications yet 😢</p>";
+      return;
+    }
+
+
+    data.reverse().forEach(app => {
+
+      const job = app.job || {};
 
     const div = document.createElement("div");
     div.className = "job-card-list-dash";
+
+    /* ---------- CLICK → JOB DETAILS ---------- */
+      div.onclick = (e) => {
+        if (e.target.tagName !== "A") {
+          if (job.id) {
+            window.location.href = `/frontend/job_details.html?id=${job.id}`;
+          }
+        }
+      };
+
 
     div.innerHTML = `
       <div class="job-header-dash">
@@ -271,9 +308,28 @@ async function loadApplications() {
         <div class="job-title-section">
           <h3>${job.title}</h3>
           <p>${job.company}</p>
+
+        <p class="status-bar">Status: 
+          <b style="color:${getStatusColor(app.status)}">
+           ${app.status || "UNKNOWN"}
+          </b>
+        </p>
+
+
+          ${
+              app.resume 
+              ? `<a href="http://localhost:3000${app.resume}" target="_blank">
+                   Download Resume
+                 </a>`
+              : `<span>No Resume</span>`
+            }
+
         </div>
 
-        <span style="color:green; font-weight:bold;">Applied ✅</span>
+          <span class="status-badge"
+                style="background:${getStatusColor(app.status)}">
+            ${app.status} ${getStatusIcon(app.status)}
+          </span>
 
       </div>
 
@@ -300,8 +356,39 @@ async function loadApplications() {
 
     container.appendChild(div);
   });
+
+  } catch (err) {
+    console.error("ERROR:", err);
+
+    container.innerHTML = `
+      <p style="color:red;">
+        ❌ Failed to load applications <br/>
+        ${err.message}
+      </p>
+    `;
+  }
 }
 
+
+/* ---------- STATUS COLOR ---------- */
+function getStatusColor(status) {
+  switch (status) {
+    case "APPLIED": return "blue";
+    case "SHORTLISTED": return "green";
+    case "REJECTED": return "red";
+    default: return "orange";
+  }
+}
+
+/* ---------- STATUS ICON ---------- */
+function getStatusIcon(status) {
+  switch (status) {
+    case "APPLIED": return "🟢";
+    case "SHORTLISTED": return "⭐";
+    case "REJECTED": return "❌";
+    default: return "⏳";
+  }
+}
 
 /*----- TIME AGO -----*/
 function timeAgo(date) {

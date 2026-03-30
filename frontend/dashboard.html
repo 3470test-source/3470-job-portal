@@ -594,17 +594,26 @@ async function loadJobs() {
 }
 
 
+/* ================= DISPLAY JOBS ================= */
 function displayJobs(jobs) {
 
   const container = document.getElementById("jobs");
   container.innerHTML = "";
 
-  if (jobs.length === 0) {
-    container.innerHTML = "<p>No jobs found 😢</p>";
-    return;
-  }
+  const appliedJobs = JSON.parse(localStorage.getItem("appliedJobs")) || [];
+
+
+
+  // if (jobs.length === 0) {
+  //   container.innerHTML = "<p>No jobs found 😢</p>";
+  //   return;
+  // }
+
+  
 
   jobs.forEach(job => {
+
+    const isApplied = appliedJobs.includes(job.id);
 
     const div = document.createElement("div"); 
 
@@ -649,13 +658,77 @@ function displayJobs(jobs) {
 
       <div class="job-footer">
         <span>${timeAgo(job.createdAt)}</span>
-        <button class="apply-btn-dash" onclick="applyJob(${job.id})">Apply</button>
+
+       <button class="apply-btn-dash"
+          onclick="applyJob(${job.id}, this)"
+          ${isApplied ? "disabled style='background:gray'" : ""}
+        >
+          ${isApplied ? "Applied" : "Apply"}
+        </button>
+
       </div>
     `;
 
     container.appendChild(div);
 
   });
+}
+
+
+/* ================= APPLY JOB ================= */
+async function applyJob(jobId, button) {
+
+  let applied = JSON.parse(localStorage.getItem("appliedJobs")) || [];
+
+  if (applied.includes(jobId)) {
+    alert("Already applied ✅");
+    return;
+  }
+
+  const userId = 101;
+
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = ".pdf,.doc,.docx";
+
+  input.onchange = async () => {
+
+    const file = input.files[0];
+
+    if (!file) {
+      alert("Please upload resume");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("jobId", jobId);
+    formData.append("userId", userId);
+    formData.append("resume", file);
+
+    try {
+      const res = await fetch("http://localhost:3000/apply", {
+        method: "POST",
+        body: formData
+      });
+
+      if (!res.ok) throw new Error();
+
+      const data = await res.json();
+
+      alert("✅ " + data.message);
+
+      applied.push(jobId);
+      localStorage.setItem("appliedJobs", JSON.stringify(applied));
+
+      button.innerText = "Applied";
+      button.disabled = true;
+
+    } catch {
+      alert("❌ Apply failed");
+    }
+  };
+
+  input.click();
 }
 
 /* ================= SEARCH ================= */
@@ -693,41 +766,10 @@ function timeAgo(date) {
   return Math.floor(sec/86400) + " days ago";
 }
 
-function applyJob(id) {
-  alert("Applied for Job ID: " + id);
-}
+// function applyJob(id) {
+//   alert("Applied for Job ID: " + id);
+// }
 
-/* ================= SAVE JOB ================= */
-
-/*----- Get saved jobs -----*/
-function getSavedJobs() {
-  return JSON.parse(localStorage.getItem("savedJobs")) || [];
-}
-
-/*----- Check saved -----*/
-function isSaved(id) {
-  return getSavedJobs().includes(id);
-}
-
-/*----- Toggle save -----*/
-function toggleSave(id, icon) {
-
-  let saved = getSavedJobs();
-
-  if (saved.includes(id)) {
-    /*--- remove ---*/
-    saved = saved.filter(jobId => jobId !== id);
-    icon.classList.remove("fa-solid", "saved");
-    icon.classList.add("fa-regular");
-  } else {
-    /*--- add ---*/
-    saved.push(id);
-    icon.classList.remove("fa-regular");
-    icon.classList.add("fa-solid", "saved");
-  }
-
-  localStorage.setItem("savedJobs", JSON.stringify(saved));
-}
 
 
 /* ================= SAVE JOB ================= */
@@ -764,21 +806,34 @@ function toggleSave(id, icon, event) {
   localStorage.setItem("savedJobs", JSON.stringify(saved));
 }
 
-function applyJob(id) {
 
-  let applied = JSON.parse(localStorage.getItem("appliedJobs")) || [];
 
-  if (applied.includes(id)) {
-    alert("Already applied ✅");
-    return;
-  }
 
-  applied.push(id);
 
-  localStorage.setItem("appliedJobs", JSON.stringify(applied));
+// function applyJob(id) {
 
-  alert("Application submitted successfully 🎉");
-}
+//   let applied = JSON.parse(localStorage.getItem("appliedJobs")) || [];
+
+//   if (applied.includes(id)) {
+//     alert("Already applied ✅");
+//     return;
+//   }
+
+//   applied.push(id);
+
+//   localStorage.setItem("appliedJobs", JSON.stringify(applied));
+
+//   alert("Application submitted successfully 🎉");
+// }
+
+
+
+
+
+
+
+
+
 
 
 
