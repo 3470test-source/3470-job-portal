@@ -30,149 +30,6 @@
       padding: 20px;
     }
 
-
-
-
-
-
-
-/*--- Container ---*/
-.applicants-container {
-  margin-top: 20px;
-}
-
-/*--- Card ---*/
-.applicant-card {
-  background: #fff;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: 0.3s;
-}
-
-.applicant-card:hover {
-  transform: translateY(-3px);
-}
-
-/*--- Header ---*/
-.applicant-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.applicant-header h4 {
-  font-size: 18px;
-  margin-bottom: 10px;
-}
-
-.applicant-header p {
-  font-size: 18px;
-}
-
-.applicant-header i,
-.applicant-cal i,
-.applicant-resume i {
-  color:#0672ca;
-  font-size: 18px;
-  margin-right: 8px;
-}
-
-.applicant-header h4,
-.applicant-cal,
-.applicant-resume {
-  display: flex;
-  align-items: center;
-  gap: 6px; /* modern spacing */
-}
-
-/*--- Status Badge ---*/
-.status-badge {
-  padding: 5px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.status-badge.applied {
-  background: orange;
-  color: white;
-}
-
-.status-badge.shortlisted {
-  background: green;
-  color: white;
-}
-
-.status-badge.rejected {
-  background: red;
-  color: white;
-}
-
-/*--- Buttons ---*/
-.filter-buttons button {
-  margin: 5px;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  background: #007bff;
-  color: white;
-}
-
-.filter-buttons button:hover {
-  background: #0056b3;
-}
-
-/*--- Resume link ---*/
-.applicant-card a {
-  color: #087a41;
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.applicant-card a:hover {
-  text-decoration: underline;
-}
-
-.status-container {
-  margin-top: -10px;
-}
-
-.status-container label {
-  font-weight: 600;
-  margin-right: 10px;
-  font-size: 18px;
-}
-
-.status-container select {
-  padding: 8px 16px;
-  border-radius: 6px;
-  background-color: #fff;
-  font-size: 14px;
-  cursor: pointer;
-  outline: none;
-  transition: all 0.3s ease;
-}
-
-.status-container select:hover {
-  border-color: #007bff;
-}
-
-.status-container select:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
-}
-
-/*--- Disabled ---*/
-.status-container select:disabled {
-  background-color: #f5f5f5;
-  cursor: not-allowed;
-}
-
-
   </style>
 
 </head>
@@ -375,7 +232,7 @@
     <h2>Applicants</h2>
 
     <!-- Filter Buttons -->
-    <div class="filter-buttons">
+    <div class="employer-dash-filter-buttons">
       <button onclick="filterApplicants('ALL')">All</button>
       <button onclick="filterApplicants('APPLIED')">Applied</button>
       <button onclick="filterApplicants('SHORTLISTED')">Shortlisted</button>
@@ -636,10 +493,19 @@ function displayApplicants(apps) {
     div.innerHTML = `
       <div class="applicant-header">
         <h4><i class="fa-solid fa-user"></i> User ID: ${app.userId}</h4>
-        <span class="status-badge ${app.status.toLowerCase()}">
+        <span class="applicant-status-badge ${app.status.toLowerCase()}">
           ${app.status}
         </span>
       </div>
+
+      <p class="applicant-job-info">
+        <i class="fa-solid fa-briefcase"></i> 
+          <span class="applicant-job-text">
+           <strong>${app.job?.title || "N/A"}</strong> 
+          <span>at</span>
+           <strong>${app.job?.company || "N/A"}</strong>
+          </span>
+      </p>
 
       <p class="applicant-cal"><i class="fa-solid fa-calendar"></i> Applied On: ${new Date(app.appliedAt).toLocaleDateString()}</p>
 
@@ -649,7 +515,7 @@ function displayApplicants(apps) {
 
       <br><br>
 
-      <div class="status-container">
+      <div class="applicant-status-container">
         <label>Update Status:</label>
         <select onchange="updateStatus(${app.id}, this)">
          <option value="APPLIED" ${app.status==="APPLIED"?"selected":""}>APPLIED</option>

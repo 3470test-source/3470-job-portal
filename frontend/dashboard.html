@@ -602,15 +602,6 @@ function displayJobs(jobs) {
 
   const appliedJobs = JSON.parse(localStorage.getItem("appliedJobs")) || [];
 
-
-
-  // if (jobs.length === 0) {
-  //   container.innerHTML = "<p>No jobs found 😢</p>";
-  //   return;
-  // }
-
-  
-
   jobs.forEach(job => {
 
     const isApplied = appliedJobs.includes(job.id);
@@ -766,11 +757,6 @@ function timeAgo(date) {
   return Math.floor(sec/86400) + " days ago";
 }
 
-// function applyJob(id) {
-//   alert("Applied for Job ID: " + id);
-// }
-
-
 
 /* ================= SAVE JOB ================= */
 
@@ -805,52 +791,6 @@ function toggleSave(id, icon, event) {
 
   localStorage.setItem("savedJobs", JSON.stringify(saved));
 }
-
-
-
-
-
-// function applyJob(id) {
-
-//   let applied = JSON.parse(localStorage.getItem("appliedJobs")) || [];
-
-//   if (applied.includes(id)) {
-//     alert("Already applied ✅");
-//     return;
-//   }
-
-//   applied.push(id);
-
-//   localStorage.setItem("appliedJobs", JSON.stringify(applied));
-
-//   alert("Application submitted successfully 🎉");
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function applyFilters() {
 
@@ -964,7 +904,6 @@ function applyFilters() {
 }
 
 
-
 /* Apply filter on change */
 document.querySelectorAll(".sidebar-dash-job input").forEach(input => {
   input.addEventListener("change", applyFilters);
@@ -978,19 +917,53 @@ document.getElementById("expRange").addEventListener("input", function () {
 });
 
 
-
-
-
-
-
-
-
-
-
 /* ================= LOAD ================= */
     window.onload = loadJobs;
     
 </script>
+
+
+
+
+<h2>Welcome, <span id="userName"></span> 👋</h2>
+<p>Email: <span id="userEmail"></span></p>
+
+
+<script>
+async function loadProfile() {
+
+  const token = localStorage.getItem("token");
+
+  // ❌ Not logged in
+  if (!token) {
+    window.location.href = "/frontend/login.html";
+    return;
+  }
+
+  try {
+    const res = await fetch("http://localhost:3000/profile", {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    });
+
+    const data = await res.json();
+
+    // ✅ Show user data
+    document.getElementById("userName").innerText = data.name;
+    document.getElementById("userEmail").innerText = data.email;
+
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// Call function on page load
+loadProfile();
+</script>
+
+
+
 
 
   </body>

@@ -63,22 +63,25 @@
 
                 <div class="jobseeker-input-group">
                     <label>Phone NO</label>
-                    <input type="tel" id="phone"
-                    pattern="[6-9]{1}[0-9]{9}" maxlength="10" required>
+                    <input type="tel" id="phone" pattern="[6-9]{1}[0-9]{9}" maxlength="10" required>
                     <small class="error"></small>
                 </div>
 
                 <div class="jobseeker-input-group">
                     <label>Password</label>
-                    <input type="password" id="password"
-                    minlength="6" required>
+                      <div class="password-wrapper-icon">    
+                        <input type="password" class="password-icon-btn" id="password"minlength="6" required>
+                        <i class="fa-solid fa-eye toggle-password" data-target="password"></i>
+                      </div>    
                     <small class="error"></small>
                 </div>
 
                 <div class="jobseeker-input-group">
                     <label>Confirm Password</label>
-                    <input type="password" id="confirmPassword"
-                    minlength="6" required>
+                      <div class="password-wrapper-icon">
+                        <input type="password" class="password-icon-btn" id="confirmPassword" minlength="6" required>
+                        <i class="fa-solid fa-eye toggle-password" data-target="confirmPassword"></i>
+                      </div>
                     <small class="error"></small>
                 </div>
 
@@ -101,6 +104,66 @@
     </div>
 
 </div>
+
+
+
+
+
+<script>
+document.getElementById("registerForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+
+  // ✅ ADD HERE
+  if (password !== confirmPassword) {
+    alert("Passwords do not match ❌");
+    return;
+  }
+
+  const formData = new FormData();
+
+  formData.append("name", document.getElementById("name").value);
+  formData.append("email", document.getElementById("email").value);
+  formData.append("phone", document.getElementById("phone").value);
+  formData.append("password", document.getElementById("password").value);
+  formData.append("resume", document.getElementById("resume").files[0]);
+
+  const res = await fetch("http://localhost:3000/register", {
+    method: "POST",
+    body: formData
+  });
+
+  const result = await res.json();
+  alert(result.message);
+
+  if (res.ok) {
+    window.location.href = "/frontend/login.html";
+  }
+});
+</script>
+
+
+<!-- Password Icon hide / unhide -->
+<script>
+    document.querySelectorAll(".toggle-password").forEach(icon => {
+    icon.addEventListener("click", () => {
+        const inputId = icon.getAttribute("data-target");
+        const input = document.getElementById(inputId);
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    });
+});
+</script>
 
 </body>
 </html>

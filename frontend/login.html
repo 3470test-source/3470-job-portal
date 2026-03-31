@@ -196,12 +196,12 @@
 
             <div class="job-lg-input-group">
                 <label>Email ID / Username</label>
-                <input type="email" placeholder="Enter Email / Username">
+                <input type="email" id="loginEmail" placeholder="Enter Email / Username">
             </div>
 
             <div class="job-lg-input-group">
                 <label>Password</label>
-                <input type="password" placeholder="Enter Password">
+                <input type="password" id="loginPassword" placeholder="Enter Password">
             </div>
 
             <div class="job-lg-forgot">
@@ -228,6 +228,51 @@
         }
 
     </script>
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+document.querySelector(".job-lg-login-main").addEventListener("click", async () => {
+
+  const email = document.querySelector("loginEmail").value;
+  const password = document.querySelector("loginPassword").value;
+
+  const res = await fetch("http://localhost:3000/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email, password })
+  });
+
+  const data = await res.json();
+
+  if (res.ok) {
+
+    // ✅ Store login data
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("userId", data.user.id);
+    localStorage.setItem("userName", data.user.name);
+
+    // ✅ Redirect
+    window.location.href = "/frontend/dashboard.html";
+
+  } else {
+    alert(data.message);
+  }
+});
+
+</script>
+
 
 </body>
 </html>

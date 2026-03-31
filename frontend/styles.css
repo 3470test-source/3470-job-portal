@@ -461,6 +461,31 @@
 }
 
 
+                                      /*---- password Icon Btn ----*/
+
+.password-wrapper-icon {
+  position: relative;
+}
+
+.password-wrapper-icon .password-icon-btn {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.password-wrapper-icon i {
+  position: absolute;
+  right: 12px; 
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #555;
+  font-size: 14px;
+}
+
+.password-wrapper-icon i:hover {
+  color: rgb(6, 94, 39);
+}                                      
+
 /* ----------------------------------------------------------------------------------------------------------------------------------------------------- */
 
                                /*------------- Create profile page  --------------------*/
@@ -1774,6 +1799,21 @@ hr {
   font-size: 14px;
 }
 
+.my-application-status-badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.my-application-status-bar {
+  font-size: 16px;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+
+
 /* --------------------------------------------------------------------------------------------------------------------------------------- */
 
                                   /* ---------------------------------
@@ -1916,3 +1956,179 @@ hr {
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------------------------- */
+
+                                    /* -------------------------- 
+                                        Employer - Applicants  
+                                       -------------------------- */
+
+/*--- Container ---*/
+.applicants-container {
+  margin-top: 20px;
+}
+
+/*--- Card ---*/
+.applicant-card {
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.applicant-card:hover {
+  transform: translateY(-3px);
+}
+
+/*--- Header ---*/
+.applicant-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.applicant-header h4 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.applicant-header p {
+  font-size: 18px;
+}
+
+.applicant-header i,
+.applicant-cal i,
+.applicant-resume i, 
+.applicant-job-info i {
+  color:#0672ca;
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.applicant-header h4,
+.applicant-cal,
+.applicant-resume,
+.applicant-job-info {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* modern spacing */
+}
+
+/*--- Status Badge ---*/
+.applicant-status-badge {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.applicant-status-badge.applied {
+  background: orange;
+  color: white;
+}
+
+.applicant-status-badge.shortlisted {
+  background: green;
+  color: white;
+}
+
+.applicant-status-badge.rejected {
+  background: red;
+  color: white;
+}
+
+/*--- Buttons ---*/
+.employer-dash-filter-buttons button {
+  margin: 5px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #007bff;
+  color: white;
+}
+
+.employer-dash-filter-buttons button:hover {
+  background: #0056b3;
+}
+
+/*--- Resume link ---*/
+.applicant-card a {
+  color: #087a41;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.applicant-card a:hover {
+  text-decoration: underline;
+}
+
+.applicant-status-container {
+  margin-top: -10px;
+}
+
+.applicant-status-container label {
+  font-weight: 600;
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.applicant-status-container select {
+  padding: 8px 16px;
+  border-radius: 6px;
+  background-color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.applicant-status-container select:hover {
+  border-color: #007bff;
+}
+
+.applicant-status-container select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+}
+
+/*--- Disabled ---*/
+.applicant-status-container select:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.applicant-job-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+  font-size: 15px;
+  
+}
+
+.applicant-job-info strong {
+  color: #141414;
+  font-weight: 600;
+  font-size: 18px;
+  gap: 20px;
+  
+}
+
+.applicant-job-info span {
+  color: #0b61c2;
+  font-size: 18px;
+}
+
+
+.applicant-job-text {
+  display: flex;
+  gap: 12px; /* spacing between all elements */
+  align-items: center;
+  font-weight: bold;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------------------- */
+
+

@@ -24,20 +24,6 @@
           box-sizing:border-box;
         }
 
-        .status-badge {
-          padding: 5px 10px;
-          border-radius: 20px;
-          color: white;
-          font-size: 12px;
-          font-weight: bold;
-        }
-
-        .status-bar {
-          font-size: 16px;
-          margin-bottom: 10px;
-          margin-top: 15px;
-        }
-
     </style>
 
   </head> 
@@ -309,7 +295,7 @@ async function loadApplications() {
           <h3>${job.title}</h3>
           <p>${job.company}</p>
 
-        <p class="status-bar">Status: 
+        <p class="my-application-status-bar">Status: 
           <b style="color:${getStatusColor(app.status)}">
            ${app.status || "UNKNOWN"}
           </b>
@@ -326,7 +312,7 @@ async function loadApplications() {
 
         </div>
 
-          <span class="status-badge"
+          <span class="my-application-status-badge"
                 style="background:${getStatusColor(app.status)}">
             ${app.status} ${getStatusIcon(app.status)}
           </span>
