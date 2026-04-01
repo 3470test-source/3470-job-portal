@@ -343,6 +343,34 @@
 }
 
 
+/*----- Password Icon hide / unhide -----*/
+
+.password-wrapper-login-icon {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper-login-icon .login-icon {
+  width: 100%;
+  padding: 10px;
+  padding-right: 40px; /* space for icon */
+  box-sizing: border-box;
+}
+
+.password-wrapper-login-icon i {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+  font-size: 13px;
+}
+
+.password-wrapper-login-icon i:hover {
+  color: #0b6d94;
+}
+
 /* ------------------------------------------------------------------------------------------------------------------------------------------------ */
 
                                             /*--------------- Register Page Job Seeker ----------------*/
@@ -479,7 +507,7 @@
   transform: translateY(-50%);
   cursor: pointer;
   color: #555;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .password-wrapper-icon i:hover {

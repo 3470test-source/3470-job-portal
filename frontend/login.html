@@ -17,6 +17,7 @@
     />
 
     <style>
+
         *{
           margin:0;
           padding:0;
@@ -26,6 +27,7 @@
         body{
           background:#68c48b;
         }
+
     </style>
     
 </head>
@@ -201,7 +203,10 @@
 
             <div class="job-lg-input-group">
                 <label>Password</label>
-                <input type="password" id="loginPassword" placeholder="Enter Password">
+              <div class="password-wrapper-login-icon">
+                <input type="password" class="login-icon" id="loginPassword" placeholder="Enter Password">
+                <i class="fa-solid fa-eye toggle-password" data-target="loginPassword"></i>
+              </div>
             </div>
 
             <div class="job-lg-forgot">
@@ -243,8 +248,8 @@
 
 document.querySelector(".job-lg-login-main").addEventListener("click", async () => {
 
-  const email = document.querySelector("loginEmail").value;
-  const password = document.querySelector("loginPassword").value;
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
 
   const res = await fetch("http://localhost:3000/login", {
     method: "POST",
@@ -257,15 +262,11 @@ document.querySelector(".job-lg-login-main").addEventListener("click", async () 
   const data = await res.json();
 
   if (res.ok) {
-
-    // ✅ Store login data
     localStorage.setItem("token", data.token);
     localStorage.setItem("userId", data.user.id);
     localStorage.setItem("userName", data.user.name);
 
-    // ✅ Redirect
     window.location.href = "/frontend/dashboard.html";
-
   } else {
     alert(data.message);
   }
@@ -273,6 +274,23 @@ document.querySelector(".job-lg-login-main").addEventListener("click", async () 
 
 </script>
 
+
+<!-- show Password hide / unhide  -->
+<script>
+  document.querySelectorAll(".toggle-password").forEach(icon => {
+    icon.addEventListener("click", () => {
+        const input = document.getElementById(icon.dataset.target);
+
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.replace("fa-eye", "fa-eye-slash");
+        } else {
+            input.type = "password";
+            icon.classList.replace("fa-eye-slash", "fa-eye");
+        }
+    });
+});
+</script>
 
 </body>
 </html>
