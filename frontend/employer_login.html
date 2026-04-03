@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>3470 Healthcare & Training Institutes Job portal - Login job seeker</title>
+    <title>3470 Healthcare & Training Institutes Job portal - Login Employer</title>
 
     <!-- Favicon -->
     <link rel="icon" href="/image/Logo3470-health3-removebg-preview.png" type="image/x-icon">
@@ -16,18 +16,126 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
 
-<style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
+    <style>
+
+        *{
+          margin:0;
+          padding:0;
+          box-sizing:border-box;
+        }
 
 
 
-</style>
 
-</head> 
+
+.employer-login-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+/*--- LEFT SIDE ---*/
+.employer-login-left {
+  flex: 1;
+  background: linear-gradient(135deg, #1b1f3b, #2e3a8c);
+
+ background: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d')
+              no-repeat center center/cover;
+
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.employer-login-overlay {
+  max-width: 400px;
+}
+
+.employer-login-overlay h1 {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.employer-login-overlay p {
+  margin-bottom: 20px;
+  color: #ddd;
+}
+
+.employer-login-overlay ul {
+  list-style: none;
+}
+
+.employer-login-overlay li {
+  margin-bottom: 10px;
+}
+
+/*--- RIGHT SIDE ---*/
+.employer-login-right {
+  flex: 1;
+  background: #f5f7fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.employer-login-box {
+  width: 350px;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.employer-login-box h2 {
+  margin-bottom: 20px;
+}
+
+/*--- INPUT ---*/
+.loginform-employer input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/*--- OPTIONS ---*/
+.employer-options {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+/*--- BUTTON ---*/
+.loginform-employer button {
+  width: 100%;
+  padding: 12px;
+  background: #1b1f3b;
+  color: white;
+  border: none;
+  margin-top: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.loginform-employer button:hover {
+  background: #2e3a8c;
+}
+
+/*--- REGISTER ---*/
+.employer-register {
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center;
+}
+
+
+
+   
+    </style>
+    
+</head>
 <body>
 
     <!-- NAVBAR -->
@@ -189,125 +297,63 @@
 
     </div>
 
-   <!-- Home Hero Section -->
-   <section class="job-board-home-pg">
-
-      <h1>Start Your Career Journey Today</h1>
-      <p>Discover jobs that match your skills and experience.</p>
-
-    <div class="job-board-search-box">
-
-      <div class="input-box">
-       <i class="fa-solid fa-magnifying-glass"></i>
-       <input type="text" placeholder="Job title / Keywords / Company">
-      </div>
-
-      <div class="input-box">
-       <i class="fa-solid fa-location-dot"></i>
-       <input type="text" placeholder="Location">
-      </div>
-
-    <button>Search</button>
-</section>
-
-<!-- Top Banner Section -->
-<section class="home-job-top-banner">
-  <div class="home-job-banner-content">
-    <h1>Your next job starts here</h1>
-    <p>Create an account or sign in to see your personalised job recommendations.</p>
-    <a href="/frontend/jobseeker_register.html" class="home-job-banner-btn">
-      Get Started <i class="fa-solid fa-arrow-right"></i>
-    </a>
-  </div>
-</section>
 
 
-<!-- job featured -->
-<section class="home-job-features">
-  <div class="home-job-features-container">
 
-    <div class="home-job-feature-box">
-      <div class="home-job-feature-icon-wrapper">
-        <!-- SVG 1 -->
-        <svg viewBox="0 0 64 64" class="home-job-icon">
-          <rect x="10" y="8" width="30" height="48" rx="4"/>
-          <circle cx="25" cy="22" r="6"/>
-          <path d="M18 40c2-4 12-4 14 0"/>
-          <circle cx="46" cy="18" r="8" class="home-job-accent"/>
-          <path d="M42 18l3 3 5-6"/>
-        </svg>
-      </div>
-      <h3>Create an Account</h3>
-      <p>Jobseekers can create an account with their basic information.</p>
+
+
+
+
+
+
+
+<div class="employer-login-wrapper">
+
+  <!-- LEFT SIDE -->
+  <div class="employer-login-left">
+    <div class="employer-login-overlay">
+      <h1>Hire the Best Talent</h1>
+      <p>Post jobs, manage candidates, and grow your company faster.</p>
+
+      <ul>
+        <li>✔ Post Unlimited Jobs</li>
+        <li>✔ Access Verified Candidates</li>
+        <li>✔ Easy Dashboard Management</li>
+      </ul>
     </div>
-
-    <div class="home-job-feature-box">
-      <div class="home-job-feature-icon-wrapper">
-        <!-- SVG 2 -->
-        <svg viewBox="0 0 64 64" class="home-job-icon">
-          <circle cx="28" cy="28" r="14"/>
-          <line x1="38" y1="38" x2="52" y2="52"/>
-          <circle cx="28" cy="24" r="5"/>
-          <path d="M22 34c2-3 8-3 10 0"/>
-          <circle cx="18" cy="14" r="6" class="home-job-accent"/>
-        </svg>
-      </div>
-      <h3>Search Desired Job</h3>
-      <p>Jobseekers can search Jobs which will provide them with the relevant result.</p>
-    </div>
-
-    <div class="home-job-feature-box">
-      <div class="home-job-feature-icon-wrapper">
-        <!-- SVG 3 -->
-        <svg viewBox="0 0 64 64" class="home-job-icon">
-          <rect x="14" y="8" width="28" height="48" rx="4"/>
-          <line x1="20" y1="20" x2="36" y2="20"/>
-          <line x1="20" y1="28" x2="36" y2="28"/>
-          <line x1="20" y1="36" x2="30" y2="36"/>
-          <path d="M40 40l10-10 4 4-10 10-6 2z"/>
-          <circle cx="48" cy="34" r="6" class="home-job-accent"/>
-        </svg>
-      </div>
-      <h3>Send Your Resume</h3>
-      <p>Jobseeker can apply for Job, which is a potential match for their profile.</p>
-    </div>
-
   </div>
-</section>
 
-<section class="home-job-categories">
-  <h2>Popular Job Categories</h2>
-  <p class="home-job-category-desc">
-    Job categories help you explore opportunities based on your skills and interests.
-    Browse jobs in different fields like IT, Marketing, Healthcare, and more.
-  </p>
+  <!-- RIGHT SIDE -->
+  <div class="employer-login-right">
+    <div class="employer-login-box">
+      <h2>Employer Login</h2>
 
-  <div class="home-jobportal-category-container">
-    <div class="home-job-category-card"><i class="fas fa-laptop-code"></i> IT & Software Development</div>
-    <div class="home-job-category-card"><i class="fas fa-vial"></i> Testing / QA</div>
-    <div class="home-job-category-card"><i class="fas fa-chart-line"></i> Data Science & Analytics</div>
-    <div class="home-job-category-card"><i class="fas fa-university"></i> Banking & Finance</div>
-    <div class="home-job-category-card"><i class="fas fa-bullhorn"></i> Sales & Marketing</div>
-    <div class="home-job-category-card"><i class="fas fa-users"></i> Human Resources (HR)</div>
-    <div class="home-job-category-card"><i class="fas fa-palette"></i> UI/UX Design</div>
-    <div class="home-job-category-card"><i class="fas fa-industry"></i> Manufacturing & Production</div>
-    <div class="home-job-category-card"><i class="fas fa-truck"></i> Logistics & Supply Chain</div>
-    <div class="home-job-category-card"><i class="fas fa-heartbeat"></i> Healthcare & Medical</div>
-    <div class="home-job-category-card"><i class="fas fa-graduation-cap"></i> Education & Training</div>
-    <div class="home-job-category-card"><i class="fas fa-shopping-cart"></i> E-commerce & Retail</div>
-    <div class="home-job-category-card"><i class="fas fa-robot"></i> AI / Machine Learning</div>
-    <div class="home-job-category-card"><i class="fas fa-cloud"></i> Cloud & DevOps</div>
-    <div class="home-job-category-card"><i class="fas fa-shield-alt"></i> Cyber Security</div>
+      <form id="loginForm" class="loginform-employer">
+        <input type="email" placeholder="Email Address" required>
+        <input type="password" placeholder="Password" required>
+
+        <div class="employer-options">
+          <label><input type="checkbox"> Remember me</label>
+          <a href="#">Forgot Password?</a>
+        </div>
+
+        <button type="submit">Login</button>
+
+        <p class="employer-register">
+          Don’t have an account? <a href="#">Register</a>
+        </p>
+      </form>
+    </div>
   </div>
-</section>
 
-<!-- Footer -->
-<footer class="home-job-footer">
-    <p>© 2026 MyJobPortal. All rights reserved. Connecting talent with the right opportunities.</p>
-</footer>
+</div>
+
+
+
+
 
 <!-- Javascript --> 
-<script src="/frontend/main.js" defer></script>
+<script src="/frontend/main.js" defer></script>     
 
 <!-- Login & register Page  -->
 <script>
@@ -334,7 +380,6 @@
         });
     });
 </script>
-
-
+    
 </body>
 </html>

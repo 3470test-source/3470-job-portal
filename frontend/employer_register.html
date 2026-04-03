@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3470 Healthcare & Training Institutes Job portal - register Employer</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="/image/Logo3470-health3-removebg-preview.png" type="image/x-icon">
+    
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Font Awesome CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <style>
+        /* WRAPPER */
+.employer-register-wrapper {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* LEFT SIDE */
+.employer-register-left {
+  flex: 1;
+  background: url('https://images.unsplash.com/photo-1551836022-d5d88e9218df')
+              no-repeat center/cover;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 50px;
+}
+
+.overlay h1 {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.overlay ul {
+  list-style: none;
+  margin-top: 15px;
+}
+
+/* RIGHT SIDE */
+.employer-register-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f4f6fb;
+  overflow-y: auto;
+}
+
+/* FORM BOX */
+.register-box {
+  background: #fff;
+  padding: 30px;
+  width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.register-box h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.register-box h4 {
+  margin: 15px 0 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* INPUT */
+.register-box input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* BUTTON */
+.register-box button {
+  width: 100%;
+  padding: 12px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.register-box button:hover {
+  background: #0056b3;
+}
+
+/* LOGIN LINK */
+.login-link {
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .employer-register-wrapper {
+    flex-direction: column;
+  }
+
+  .employer-register-left {
+    height: 200px;
+  }
+}
+    </style>
+
+</head>
+<body>
+
+
+
+    <div class="employer-register-wrapper">
+
+  <!-- LEFT SIDE -->
+  <div class="employer-register-left">
+    <div class="overlay">
+      <h1>Join as an Employer</h1>
+      <p>Find the right talent faster and grow your business.</p>
+
+      <ul>
+        <li>✔ Post Jobs Easily</li>
+        <li>✔ Manage Applications</li>
+        <li>✔ Hire Faster</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- RIGHT SIDE -->
+  <div class="employer-register-right">
+    <div class="register-box">
+      <h2>Create Employer Account</h2>
+
+      <form>
+
+        <h4>Company Details</h4>
+        <input type="text" placeholder="Company Name" required>
+        <input type="text" placeholder="Company Website">
+        <input type="text" placeholder="Company Location">
+
+        <h4>Contact Person</h4>
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Email Address" required>
+        <input type="tel" placeholder="Phone Number" required>
+
+        <h4>Account Details</h4>
+        <input type="password" placeholder="Password" required>
+        <input type="password" placeholder="Confirm Password" required>
+
+        <button type="submit">Register</button>
+
+        <p class="login-link">
+          Already have an account? <a href="employer_login.html">Login</a>
+        </p>
+
+      </form>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Javascript --> 
+<script src="/frontend/main.js" defer></script>       
+
+</body>
+</html>    

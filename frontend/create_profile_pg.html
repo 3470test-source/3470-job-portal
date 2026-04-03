@@ -229,12 +229,29 @@
             <button><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
 
-        <!-- BUTTONS -->
+        <!-- BUTTONS login & Register Page -->
         <div class="job-login-nav-buttons">
-            <a href="/frontend/login.html" class="job-lg-login-btn">Login</a>
-            <a href="/frontend/register.html" class="job-lg-register-btn">Register</a>
-        </div>
 
+          <!-- LOGIN DROPDOWN -->
+          <div class="login-dropdown">
+             <a href="#" class="job-lg-login-btn dropdown-toggle">Login ▾</a>
+              <div class="login-dropdown-menu">
+                <a href="/frontend/employer_login.html">Employer Login</a>
+                <a href="/frontend/jobseeker_login.html">Jobseeker Login</a>
+              </div>
+          </div>
+
+          <!-- REGISTER DROPDOWN -->
+          <div class="register-dropdown">
+            <a href="#" class="job-lg-register-btn dropdown-toggle">Register ▾</a>
+              <div class="register-dropdown-menu">
+                <a href="#">Employer Sign Up</a>
+                <a href="/frontend/jobseeker_register.html">Jobseeker Sign Up</a>
+              </div>
+          </div>
+
+        </div>
+        
     </div>
 
 <!------------ Create the profile --------------->
@@ -425,6 +442,8 @@
 
 
 <!------------------ JavaScripts ------------------->
+<!-- Javascript --> 
+<script src="/frontend/main.js" defer></script>
 
 <script>
 
@@ -727,6 +746,33 @@ alert("Profile Saved Successfully!");
 
 }
 
+</script>
+
+
+<!-- Login & register Page  -->
+<script>
+    const toggles = document.querySelectorAll(".dropdown-toggle");
+
+    toggles.forEach(toggle => {
+        toggle.addEventListener("click", function (e) {
+            e.stopPropagation();
+
+            // Close all other dropdowns
+            document.querySelectorAll(".login-dropdown-menu, .register-dropdown-menu").forEach(menu => {
+                menu.classList.remove("show");
+            });
+
+            // Open current dropdown
+            this.nextElementSibling.classList.toggle("show");
+        });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", function () {
+        document.querySelectorAll(".login-dropdown-menu, .register-dropdown-menu").forEach(menu => {
+            menu.classList.remove("show");
+        });
+    });
 </script>
 
 </body>

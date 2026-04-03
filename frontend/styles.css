@@ -154,25 +154,58 @@
 .job-login-nav-buttons {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 
-.job-login-nav-buttons a {
-  padding:8px 28px;
+.login-dropdown,
+.register-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.login-dropdown-menu,
+.register-dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 120%;
+  background: #fff;
+  min-width: 200px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.login-dropdown-menu a,
+.register-dropdown-menu a {
+  display: block;
+  padding: 12px 14px;
+  text-decoration: none;
+  color: #333;
   border-radius:20px;
-  border:none;
-  cursor:pointer;
-  margin-left:10px;
-  font-size:16px;
+}
+
+.login-dropdown-menu a:hover,
+.register-dropdown-menu a:hover {
+  background-color: #f2f2f2;
+}
+
+.login-dropdown-menu.show,
+.register-dropdown-menu.show {
+  display: block;
 }
 
 .job-lg-login-btn {
   background: #e6e6e6;
-  padding: 7px 18px;
-  border-radius: 6px;
+  padding: 7px 20px;
+  border-radius: 50px;
   text-decoration: none;
   color: #0a2fa3;
   font-weight: 500;
+  border:none;
+  font-size: 16px;
+  display: inline-block;
 }
 
 .job-lg-login-btn:hover {
@@ -183,9 +216,12 @@
 .job-lg-register-btn {
   background:#038022;
   color:white;
-  padding: 7px 18px;
-  border-radius: 6px;
+  padding: 7px 20px;
+  border-radius: 50px;
   text-decoration: none;
+  border:none;
+  font-size: 16px;
+  display: inline-block;
 }
 
 .job-lg-register-btn:hover {
@@ -989,6 +1025,86 @@
   white-space: normal;
 }
 
+                        /*--- home job feature ---*/
+
+/*--- Layout ---*/
+.home-job-features-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1300px;
+  margin: auto;
+  padding: 60px 20px;
+  flex-wrap: wrap;
+}
+
+.home-job-feature-box {
+  width: 30%;
+  text-align: center;
+  padding: 30px 20px;
+  border-radius: 16px;
+  background: #fff;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/*--- Hover Card Lift ---*/
+.home-job-feature-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(3, 151, 10, 0.356);
+}
+
+/*--- Icon Wrapper Glow ---*/
+.home-job-feature-icon-wrapper {
+  width: 90px;
+  height: 90px;
+  margin: auto;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ddf8dd;
+  transition: all 0.3s ease;
+}
+
+/*--- SVG Base Style ---*/
+.home-job-icon {
+  width: 60px;
+  height: 60px;
+  stroke: #1b1f3b;
+  stroke-width: 2;
+  fill: none;
+  transition: all 0.4s ease;
+}
+
+/*--- Peach Accent ---*/
+.home-job-accent {
+  fill: #f7c6b8;
+  stroke: none;
+}
+
+/*--- ICON HOVER EFFECT ---*/
+.home-job-feature-box:hover .home-job-icon {
+  transform: scale(1.1) rotate(3deg);
+}
+
+/*--- Glow Background ---*/
+.home-job-feature-box:hover .home-job-feature-icon-wrapper {
+  background: rgba(233, 137, 110, 0.2);
+  box-shadow: 0 10px 25px rgba(247, 198, 184, 0.4);
+}
+
+/*--- Text ---*/
+.home-job-feature-box h3 {
+  margin-top: 20px;
+  font-size: 24px;
+  color: #222;
+}
+
+.home-job-feature-box p {
+  font-size: 16px;
+  color: #777;
+  margin-top: 15px;
+}
 
 /* -------------------------------------------------------------------------------------------------------------------------------------- */
 
