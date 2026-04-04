@@ -17,113 +17,19 @@
     />
 
     <style>
-        /* WRAPPER */
-.employer-register-wrapper {
-  display: flex;
-  min-height: 100vh;
-  font-family: 'Poppins', sans-serif;
-}
 
-/* LEFT SIDE */
-.employer-register-left {
-  flex: 1;
-  background: url('https://images.unsplash.com/photo-1551836022-d5d88e9218df')
-              no-repeat center/cover;
-  position: relative;
-}
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-.overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.6);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 50px;
-}
+      body {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
 
-.overlay h1 {
-  font-size: 36px;
-  margin-bottom: 15px;
-}
-
-.overlay ul {
-  list-style: none;
-  margin-top: 15px;
-}
-
-/* RIGHT SIDE */
-.employer-register-right {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #f4f6fb;
-  overflow-y: auto;
-}
-
-/* FORM BOX */
-.register-box {
-  background: #fff;
-  padding: 30px;
-  width: 400px;
-  border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-}
-
-.register-box h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.register-box h4 {
-  margin: 15px 0 10px;
-  font-size: 14px;
-  color: #555;
-}
-
-/* INPUT */
-.register-box input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 12px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-/* BUTTON */
-.register-box button {
-  width: 100%;
-  padding: 12px;
-  background: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.register-box button:hover {
-  background: #0056b3;
-}
-
-/* LOGIN LINK */
-.login-link {
-  text-align: center;
-  margin-top: 10px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .employer-register-wrapper {
-    flex-direction: column;
-  }
-
-  .employer-register-left {
-    height: 200px;
-  }
-}
     </style>
 
 </head>
@@ -131,47 +37,49 @@
 
 
 
-    <div class="employer-register-wrapper">
+  <div class="employer-register-wrapper">
 
   <!-- LEFT SIDE -->
   <div class="employer-register-left">
-    <div class="overlay">
-      <h1>Join as an Employer</h1>
-      <p>Find the right talent faster and grow your business.</p>
+    <div class="employer-register-overlay">
+      <h1>Start Hiring the Right Talent</h1>
+      <p>Create your employer account and connect with skilled professionals faster.</p>
 
-      <ul>
-        <li>✔ Post Jobs Easily</li>
-        <li>✔ Manage Applications</li>
-        <li>✔ Hire Faster</li>
+      <ul class="feature-list-emp-register">
+        <li><i class="fa-solid fa-circle-check"></i> Create and manage job postings</li>
+        <li><i class="fa-solid fa-circle-check"></i> Access a wide pool of verified candidates</li>
+        <li><i class="fa-solid fa-circle-check"></i> Simplify your recruitment workflow</li>
       </ul>
     </div>
   </div>
 
   <!-- RIGHT SIDE -->
   <div class="employer-register-right">
-    <div class="register-box">
-      <h2>Create Employer Account</h2>
+    <div class="employer-register-box">
+      <h2>Employer Register</h2>
 
-      <form>
+      <form id="registerForm" class="employer-register-form">
 
-        <h4>Company Details</h4>
         <input type="text" placeholder="Company Name" required>
-        <input type="text" placeholder="Company Website">
-        <input type="text" placeholder="Company Location">
-
-        <h4>Contact Person</h4>
         <input type="text" placeholder="Full Name" required>
         <input type="email" placeholder="Email Address" required>
-        <input type="tel" placeholder="Phone Number" required>
 
-        <h4>Account Details</h4>
-        <input type="password" placeholder="Password" required>
-        <input type="password" placeholder="Confirm Password" required>
+        <!-- PASSWORD -->
+        <div class="employer-register-password-field">
+          <input type="password" id="password" placeholder="Create Password" required>
+          <i class="fa-solid fa-eye" id="togglePassword"></i>
+        </div>
+
+        <!-- CONFIRM PASSWORD -->
+        <div class="employer-register-password-field">
+          <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+          <i class="fa-solid fa-eye" id="toggleConfirmPassword"></i>
+        </div>
 
         <button type="submit">Register</button>
 
-        <p class="login-link">
-          Already have an account? <a href="employer_login.html">Login</a>
+        <p class="employer-login-link">
+          Already have an account? <a href="/frontend/employer_login.html">Login</a>
         </p>
 
       </form>
@@ -183,6 +91,27 @@
 
 <!-- Javascript --> 
 <script src="/frontend/main.js" defer></script>       
+
+<script>
+function toggle(id, iconId) {
+  const input = document.getElementById(id);
+  const icon = document.getElementById(iconId);
+
+  if (input.type === "password") {
+    input.type = "text";
+    icon.classList.replace("fa-eye", "fa-eye-slash");
+  } else {
+    input.type = "password";
+    icon.classList.replace("fa-eye-slash", "fa-eye");
+  }
+}
+
+document.getElementById("togglePassword")
+  .addEventListener("click", () => toggle("password", "togglePassword"));
+
+document.getElementById("toggleConfirmPassword")
+  .addEventListener("click", () => toggle("confirmPassword", "toggleConfirmPassword"));
+</script>
 
 </body>
 </html>    

@@ -24,115 +24,12 @@
           box-sizing:border-box;
         }
 
+        body {
+          display: flex;
+          flex-direction: column;
+          height: 100vh;
+        }
 
-
-
-
-.employer-login-wrapper {
-  display: flex;
-  min-height: 100vh;
-}
-
-/*--- LEFT SIDE ---*/
-.employer-login-left {
-  flex: 1;
-  background: linear-gradient(135deg, #1b1f3b, #2e3a8c);
-
- background: url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d')
-              no-repeat center center/cover;
-
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.employer-login-overlay {
-  max-width: 400px;
-}
-
-.employer-login-overlay h1 {
-  font-size: 32px;
-  margin-bottom: 15px;
-}
-
-.employer-login-overlay p {
-  margin-bottom: 20px;
-  color: #ddd;
-}
-
-.employer-login-overlay ul {
-  list-style: none;
-}
-
-.employer-login-overlay li {
-  margin-bottom: 10px;
-}
-
-/*--- RIGHT SIDE ---*/
-.employer-login-right {
-  flex: 1;
-  background: #f5f7fb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.employer-login-box {
-  width: 350px;
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-}
-
-.employer-login-box h2 {
-  margin-bottom: 20px;
-}
-
-/*--- INPUT ---*/
-.loginform-employer input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-/*--- OPTIONS ---*/
-.employer-options {
-  display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-}
-
-/*--- BUTTON ---*/
-.loginform-employer button {
-  width: 100%;
-  padding: 12px;
-  background: #1b1f3b;
-  color: white;
-  border: none;
-  margin-top: 15px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.loginform-employer button:hover {
-  background: #2e3a8c;
-}
-
-/*--- REGISTER ---*/
-.employer-register {
-  margin-top: 15px;
-  font-size: 14px;
-  text-align: center;
-}
-
-
-
-   
     </style>
     
 </head>
@@ -192,7 +89,6 @@
         </div>
     </div>
   </div>
-
 
   <!-- Companies Dropdown -->
   <div class="job-login-dropdown">
@@ -288,7 +184,7 @@
           <div class="register-dropdown">
             <a href="#" class="job-lg-register-btn dropdown-toggle">Register ▾</a>
               <div class="register-dropdown-menu">
-                <a href="#">Employer Sign Up</a>
+                <a href="/frontend/employer_register.html">Employer Sign Up</a>
                 <a href="/frontend/jobseeker_register.html">Jobseeker Sign Up</a>
               </div>
           </div>
@@ -298,27 +194,19 @@
     </div>
 
 
-
-
-
-
-
-
-
-
-
+<!-- Employer login page -->
 <div class="employer-login-wrapper">
 
   <!-- LEFT SIDE -->
   <div class="employer-login-left">
     <div class="employer-login-overlay">
-      <h1>Hire the Best Talent</h1>
-      <p>Post jobs, manage candidates, and grow your company faster.</p>
+      <h1>Hire Smarter, Grow Faster</h1>
+      <p>Empower your hiring strategy with tools that simplify recruitment and deliver better results.</p>
 
-      <ul>
-        <li>✔ Post Unlimited Jobs</li>
-        <li>✔ Access Verified Candidates</li>
-        <li>✔ Easy Dashboard Management</li>
+      <ul class="feature-list"> 
+        <li><i class="fa-solid fa-circle-check"></i>Reach qualified candidates instantly</li>
+        <li><i class="fa-solid fa-circle-check"></i>Simplified hiring workflow</li>
+        <li><i class="fa-solid fa-circle-check"></i>Data-driven hiring decisions</li>
       </ul>
     </div>
   </div>
@@ -329,18 +217,22 @@
       <h2>Employer Login</h2>
 
       <form id="loginForm" class="loginform-employer">
-        <input type="email" placeholder="Email Address" required>
-        <input type="password" placeholder="Password" required>
+        <input type="email" placeholder="Enter Email / Username" required>
+
+        <!-- PASSWORD FIELD -->
+        <div class="employer-password-field">
+          <input type="password" id="password" placeholder="Enter Password" required>
+          <i class="fa-solid fa-eye" id="togglePassword"></i>
+        </div>
 
         <div class="employer-options">
-          <label><input type="checkbox"> Remember me</label>
           <a href="#">Forgot Password?</a>
         </div>
 
         <button type="submit">Login</button>
 
         <p class="employer-register">
-          Don’t have an account? <a href="#">Register</a>
+          Don’t have an account? <a href="/frontend/employer_register.html">Register</a>
         </p>
       </form>
     </div>
@@ -376,6 +268,22 @@
             menu.classList.remove("show");
         });
     });
+</script>
+
+
+<!-- Password hide / unhide -->
+<script>
+  const togglePassword = document.getElementById("togglePassword");
+  const password = document.getElementById("password");
+
+  togglePassword.addEventListener("click", function () {
+    const type = password.getAttribute("type") === "password" ? "text" : "password";
+    password.setAttribute("type", type);
+
+    // Toggle icon
+    this.classList.toggle("fa-eye");
+    this.classList.toggle("fa-eye-slash");
+  });
 </script>
     
 </body>

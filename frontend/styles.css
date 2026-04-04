@@ -2276,3 +2276,343 @@ hr {
 /* ---------------------------------------------------------------------------------------------------------------------------------------- */
 
 
+                          /*--------------------------------
+                                  Employer login page
+                            --------------------------------*/
+
+.employer-login-wrapper {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/*--- LEFT SIDE ---*/
+.employer-login-left {
+  flex: 1;
+  background: linear-gradient(135deg, #1b3b39, #2e8c84);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.employer-login-overlay {
+  max-width: 500px;
+}
+
+.employer-login-overlay h1 {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.employer-login-overlay p {
+  margin-bottom: 20px;
+  color: #ddd;
+  font-size: 16px;
+}
+
+.employer-login-overlay ul {
+  list-style: none;  
+}
+
+.employer-login-overlay li {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+/*--- LIST RESET ---*/
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+/*--- LIST ITEMS ---*/
+.feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/*--- ICON STYLE ---*/
+.feature-list i {
+  color: #28a745;         
+  font-size: 18px;
+  background: #e6f0ff;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+/*--- HOVER EFFECT (optional 🔥) ---*/
+.feature-list li:hover {
+  transform: translateX(5px);
+  transition: 0.3s;
+}
+
+/*--- RIGHT SIDE ---*/
+.employer-login-right {
+  flex: 1;
+  background: #d9dfec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.employer-login-box {
+  width: 400px;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(2, 133, 68, 0.568);
+}
+
+.employer-login-box h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 26px;
+}
+
+/*--- INPUT ---*/
+.loginform-employer input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.loginform-employer input:focus {
+  border: 1px solid #0aa06e;  
+  outline: none;               
+  box-shadow: 0 0 0 3px rgba(10, 160, 110, 0.15);
+}
+
+/*--- OPTIONS ---*/
+.employer-options {
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.employer-options a {
+  text-decoration:none;
+  color:#2a55e5;
+}
+
+/*--- BUTTON ---*/
+.loginform-employer button {
+  width: 100%;
+  padding: 12px;
+  background: #0b6849;
+  color: white;
+  border: none;
+  margin-top: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 16px;
+}
+
+.loginform-employer button:hover {
+  background: #2e3a8c;
+}
+
+/*--- REGISTER ---*/
+.employer-register {
+  margin-top: 15px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.employer-password-field {
+  position: relative;
+  width: 100%;
+}
+
+.employer-password-field input {
+  width: 100%;
+  padding: 10px 40px 10px 10px; /* space for icon */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/*--- ICON ---*/
+.employer-password-field i {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #777;
+  font-size: 12px;
+}
+
+.employer-password-field i:hover {
+  color: #007bff;
+}
+
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------- */
+
+                                                /* -------------------------------
+                                                     Employer Register page  
+                                                   ------------------------------- */
+
+/*--- WRAPPER ---*/
+.employer-register-wrapper {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/*--- LEFT ---*/
+.employer-register-left {
+  flex: 1;
+  background: linear-gradient(135deg, #1b2d3b, #2e5f8c);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+.employer-register-overlay {
+  max-width: 500px;
+}
+
+.employer-register-overlay h1 {
+  font-size: 38px;
+  margin-bottom: 15px;
+}
+
+.employer-register-overlay p {
+  margin-bottom: 20px;
+  color: #ddd;
+  font-size: 16px;
+}
+
+/* FEATURE LIST */
+.feature-list-emp-register {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.feature-list-emp-register li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.feature-list-emp-register i {
+  color: #28a745;         
+  font-size: 18px;
+  background: #e6f0ff;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.feature-list-emp-register li:hover {
+  transform: translateX(5px);
+  transition: 0.3s;
+}        
+
+/*--- RIGHT ---*/
+.employer-register-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8f9fa;
+}
+
+/*--- BOX ---*/
+.employer-register-box {
+  background: #fff;
+  padding: 30px;
+  width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(17, 142, 192, 0.726);
+}
+
+.employer-register-box h2 {
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 26px;
+}
+
+/*--- INPUT ---*/
+.employer-register-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.employer-register-form input:focus {
+  border: 1px solid #0a5ca0;  
+  outline: none;               
+  box-shadow: 0 0 0 3px rgba(10, 130, 160, 0.15);
+}
+
+/*--- PASSWORD FIELD ---*/
+.employer-register-password-field {
+  position: relative;
+  width: 100%;
+}
+
+.employer-register-password-field input {
+  width: 100%;
+  padding: 10px 40px 10px 10px; /* space for icon */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.employer-register-password-field i {
+  position: absolute;
+  right: 12px;
+  top: 40%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #777;
+  font-size: 12px;
+}
+
+.employer-register-password-field i:hover {
+  color: #007bff;
+}
+
+/*--- BUTTON ---*/
+.employer-register-form button {
+  width: 100%;
+  padding: 12px; 
+  background: #007bff;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 6px;
+  transition: 0.3s;
+  font-size: 16px;
+}
+
+.employer-register-form button:hover {
+  background: #2e8c55;
+}
+
+/*--- LOGIN LINK ---*/
+.employer-login-link {
+  text-align: center;
+  margin-top: 15px; 
+  font-size: 16px;  
+}
+
+/* -------------------------------------------------------------------------------------------------------------------------------------- */
