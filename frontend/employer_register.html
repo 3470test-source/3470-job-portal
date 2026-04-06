@@ -27,14 +27,13 @@
       body {
         display: flex;
         flex-direction: column;
-        height: 100vh;
+        min-height: 100vh;
       }
 
     </style>
 
 </head>
 <body>
-
 
 
   <div class="employer-register-wrapper">
@@ -92,6 +91,11 @@
 <!-- Javascript --> 
 <script src="/frontend/main.js" defer></script>       
 
+<!-- Stylish Popup (SweetAlert) -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<!---- Password hide icon / unhide icon ---->
 <script>
 function toggle(id, iconId) {
   const input = document.getElementById(id);
@@ -112,6 +116,76 @@ document.getElementById("togglePassword")
 document.getElementById("toggleConfirmPassword")
   .addEventListener("click", () => toggle("confirmPassword", "toggleConfirmPassword"));
 </script>
+
+
+<!------ Employer register page JS ------>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+document.getElementById("registerForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const company = e.target[0].value;
+  const name = e.target[1].value;
+  const email = e.target[2].value;
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+
+  // ❌ Password mismatch
+  if (password !== confirmPassword) {
+    Swal.fire({
+      title: "Error ❌",
+      text: "Passwords do not match",
+      icon: "error"
+    });
+    return;
+  }
+
+  try {
+    const res = await fetch("http://localhost:3000/employer/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ company, name, email, password })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      // ✅ SUCCESS
+      Swal.fire({
+        title: "Account Created Successfully 🎉",
+        text: data.message,
+        icon: "success",
+        confirmButtonText: "Go to Login",
+        confirmButtonColor: "#28a745"
+      }).then(() => {
+        window.location.href = "/frontend/employer_login.html";
+      });
+
+    } else {
+      // ❌ ERROR
+      Swal.fire({
+        title: "Error ❌",
+        text: data.message,
+        icon: "error"
+      });
+    }
+
+  } catch (err) {
+    console.error(err);
+
+    Swal.fire({
+      title: "Server Error ❌",
+      text: "Something went wrong",
+      icon: "error"
+    });
+  }
+});
+</script>
+
+
 
 </body>
 </html>    

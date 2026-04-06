@@ -27,7 +27,7 @@
         body {
           display: flex;
           flex-direction: column;
-          height: 100vh;
+          min-height: 100vh;
         }
 
     </style>
@@ -242,7 +242,11 @@
 
 
 <!-- Javascript --> 
-<script src="/frontend/main.js" defer></script>     
+<script src="/frontend/main.js" defer></script>   
+
+<!-- Stylish Popup (SweetAlert) -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 <!-- Login & register Page  -->
 <script>
@@ -285,6 +289,64 @@
     this.classList.toggle("fa-eye-slash");
   });
 </script>
-    
+
+
+<!------ Employer Login Page JS  ------>
+<script>
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = e.target[0].value;
+  const password = document.getElementById("password").value;
+
+  try {
+    const res = await fetch("http://localhost:3000/employer/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      // ✅ store token
+      localStorage.setItem("token", data.token);
+
+      // ✅ SweetAlert Success
+      Swal.fire({
+        title: "Login Successfully ✅",
+        text: "Start posting jobs and hire the best candidates!",
+        icon: "success",
+        confirmButtonColor: "#28a745"
+      }).then(() => {
+        // ✅ redirect AFTER clicking OK
+        window.location.href = "/frontend/post_job.html";
+      });
+
+    } else {
+      // ❌ Error message
+      Swal.fire({
+        title: "Login Failed",
+        text: data.message,
+        icon: "error",
+        confirmButtonColor: "#d33"
+      });
+    }
+
+  } catch (err) {
+    console.error(err);
+
+    Swal.fire({
+      title: "Server Error",
+      text: "Something went wrong ❌",
+      icon: "error"
+    });
+  }
+});
+
+</script>
+
 </body>
 </html>

@@ -24,45 +24,6 @@
         box-sizing: border-box;
     }
 
-
-
-    /* 🔥 POPUP */
-.popup-overlay {
-  position: fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background: rgba(0,0,0,0.5);
-  display:none;
-  justify-content:center;
-  align-items:center;
-}
-
-.popup-box {
-  background:#fff;
-  padding:30px;
-  border-radius:10px;
-  text-align:center;
-  width:350px;
-  animation:fadeIn 0.3s ease;
-}
-
-.popup-icon {
-  font-size:40px;
-  color:green;
-}
-
-.popup-box button {
-  margin-top:20px;
-}
-
-@keyframes fadeIn {
-  from { transform:scale(0.7); opacity:0; }
-  to { transform:scale(1); opacity:1; }
-}
-
-
     </style>
 
 </head>
@@ -86,7 +47,7 @@
         <div class="jobseeker-register-card">
             <h2>Jobseeker Account Registration</h2>
 
-            <form id="registerForm" enctype="multipart/form-data">
+            <form id="registerForm" class="jobseeker-register-form">
 
                 <div class="jobseeker-input-group">
                     <label>Full Name</label>
@@ -129,9 +90,7 @@
                     <input type="file" id="resume" accept=".pdf" required>
                 </div>
 
-                <button type="button" class="jobseeker-register-btn">
-                    Register
-                </button>
+                <button type="submit" class="jobseeker-register-btn">Register</button>
 
                 <p class="jobseeker-login-link">
                     Already have an account?
@@ -145,399 +104,11 @@
 </div>
 
 
-<!-- ✅ POPUP -->
-<div id="successPopup" class="popup-overlay">
-  <div class="popup-box">
-    <div class="popup-icon">✔</div>
-    <h2>🎉 Registration Successful!</h2>
-    <p>Your account has been created successfully.<br>Email sent.</p>
-    <button id="goLoginBtn">Go to Login</button>
-  </div>
-</div>
-
-
-
-
-
-<!-- <script>
-document.getElementById("registerForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const password = document.getElementById("password").value;
-  const confirmPassword = document.getElementById("confirmPassword").value;
-
-  // ✅ ADD HERE
-  if (password !== confirmPassword) {
-    alert("Passwords do not match ❌");
-    return;
-  }
-
-  const formData = new FormData();
-
-  formData.append("name", document.getElementById("name").value);
-  formData.append("email", document.getElementById("email").value);
-  formData.append("phone", document.getElementById("phone").value);
-  formData.append("password", document.getElementById("password").value);
-  formData.append("confirmPassword", document.getElementById("confirmPassword").value);
-  formData.append("resume", document.getElementById("resume").files[0]);
-
-  try {
-    const res = await fetch("http://localhost:3000/register", {
-      method: "POST",
-      body: formData
-    });
-
-
-
-    const text = await res.text();
-console.log("RAW RESPONSE:", text);
-
-let result;
-
-try {
-  result = JSON.parse(text);
-} catch (e) {
-  alert("Server not returning proper JSON ❌");
-  return;
-}
-
-alert(result.message);
-
-
-
-    if (res.ok) {
-      setTimeout(() => {
-        window.location.href = "/frontend/login.html";
-      }, 1500);
-    }
-
-  } catch (error) {
-    console.error(error);
-    alert("Something went wrong ❌");
-  }
-});
-
-</script> -->
-
-
-
-
-
-
-
-
-<!-- <script>
-document.addEventListener("DOMContentLoaded", () => {
-
-  console.log("✅ JS Loaded");
-
-  const form = document.getElementById("registerForm");
-  const button = document.querySelector(".jobseeker-register-btn");
-
-  if (!form || !button) {
-    console.error("❌ Form or Button not found");
-    return;
-  }
-
-  // 🔥 Use BUTTON click instead of form submit (most reliable)
-  button.addEventListener("click", async (e) => {
-    e.preventDefault();
-
-    console.log("✅ Button Clicked");
-
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
-    const fileInput = document.getElementById("resume");
-
-    // ✅ Validation
-    if (!name || !email || !phone || !password || !confirmPassword) {
-      alert("Please fill all fields ❌");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      alert("Passwords do not match ❌");
-      return;
-    }
-
-    if (!fileInput.files.length) {
-      alert("Please upload resume ❌");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("password", password);
-    formData.append("confirmPassword", confirmPassword);
-    formData.append("resume", fileInput.files[0]);
-
-    try {
-      console.log("📡 Sending request...");
-
-      const res = await fetch("http://localhost:3000/register", {
-        method: "POST",
-        body: formData
-      });
-
-      const data = await res.json();
-
-      console.log("📥 Response:", data);
-
-      // ✅ SHOW ALERT
-      alert(data.message);
-
-      // ✅ Redirect after success
-      if (res.ok) {
-        window.location.href = "/frontend/login.html";
-      }
-
-    } catch (error) {
-      console.error("❌ Fetch error:", error);
-      alert("Server not reachable ❌");
-    }
-
-  });
-
-});
-</script> -->
-
-
-
-
-
-
-<!-- ✅ SCRIPT -->
-<!-- <script>
-document.addEventListener("DOMContentLoaded", () => {
-
-  const form = document.getElementById("registerForm");
-  const button = document.querySelector(".jobseeker-register-btn");
-
-  button.addEventListener("click", async (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
-    const fileInput = document.getElementById("resume");
-
-    // VALIDATION
-    if (!name || !email || !phone || !password || !confirmPassword) {
-      alert("Fill all fields ❌");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      alert("Passwords do not match ❌");
-      return;
-    }
-
-    if (!fileInput.files.length) {
-      alert("Upload resume ❌");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("password", password);
-    formData.append("confirmPassword", confirmPassword);
-    formData.append("resume", fileInput.files[0]);
-
-    try {
-      const res = await fetch("http://localhost:3000/register", {
-        method: "POST",
-        body: formData
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        // ✅ SHOW POPUP
-        document.getElementById("successPopup").style.display = "flex";
-      } else {
-        alert(data.message);
-      }
-
-    } catch (err) {
-      alert("Server error ❌");
-    }
-
-  });
-
-  // 🔥 REDIRECT BUTTON
-  document.getElementById("goLoginBtn").addEventListener("click", () => {
-    window.location.href = "/frontend/login.html";
-  });
-
-});
-</script> -->
-
-
-
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-
-  const button = document.querySelector(".jobseeker-register-btn");
-
-  button.addEventListener("click", async (e) => {
-    e.preventDefault();
-
-    console.log("🚀 Button Clicked");
-
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
-    const fileInput = document.getElementById("resume");
-
-    // ✅ Validation
-    if (!name || !email || !phone || !password || !confirmPassword) {
-      alert("Fill all fields ❌");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      alert("Passwords do not match ❌");
-      return;
-    }
-
-    if (!fileInput.files.length) {
-      alert("Upload resume ❌");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("password", password);
-    formData.append("confirmPassword", confirmPassword);
-    formData.append("resume", fileInput.files[0]);
-
-    try {
-      console.log("📡 Sending request...");
-
-      const res = await fetch("http://localhost:3000/register", {
-        method: "POST",
-        body: formData
-      });
-
-      // 🔥 IMPORTANT FIX
-      const text = await res.text();
-      console.log("📄 RAW RESPONSE:", text);
-
-      let data;
-      try {
-        data = JSON.parse(text);
-      } catch (err) {
-        console.error("❌ Not JSON:", text);
-        alert("Server error (not JSON) ❌");
-        return;
-      }
-
-      console.log("✅ Parsed Data:", data);
-
-      // ✅ SHOW POPUP
-      if (res.ok) {
-        document.getElementById("successPopup").style.display = "flex";
-      } else {
-        alert(data.message);
-      }
-
-    } catch (err) {
-      console.error("❌ Fetch Error:", err);
-      alert("Server not reachable ❌");
-    }
-
-  });
-
-  // ✅ REDIRECT BUTTON
-  document.getElementById("goLoginBtn").addEventListener("click", () => {
-    window.location.href = "/frontend/login.html";
-  });
-
-});
-</script>
-
-
-
-
-
-
-
-
-<!-- <script>
-document.getElementById("registerForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  console.log("✅ Form submitted"); // STEP 1
-
-  const password = document.getElementById("password").value;
-  const confirmPassword = document.getElementById("confirmPassword").value;
-
-  if (password !== confirmPassword) {
-    alert("Passwords do not match ❌");
-    return;
-  }
-
-  const formData = new FormData();
-  formData.append("name", document.getElementById("name").value);
-  formData.append("email", document.getElementById("email").value);
-  formData.append("phone", document.getElementById("phone").value);
-  formData.append("password", password);
-  formData.append("confirmPassword", confirmPassword);
-  formData.append("resume", document.getElementById("resume").files[0]);
-
-  try {
-    console.log("📡 Sending request..."); // STEP 2
-
-    const res = await fetch("http://localhost:3000/register", {
-      method: "POST",
-      body: formData
-    });
-
-    console.log("📥 Response received:", res); // STEP 3
-
-    const text = await res.text();
-    console.log("📄 Raw response:", text); // STEP 4
-
-    let data;
-    try {
-      data = JSON.parse(text);
-    } catch (err) {
-      alert("❌ Invalid JSON response from server");
-      return;
-    }
-
-    alert(data.message); // ✅ THIS MUST SHOW
-
-    if (res.ok) {
-      setTimeout(() => {
-        window.location.href = "/frontend/login.html";
-      }, 1500);
-    }
-
-  } catch (error) {
-    console.error("❌ Fetch error:", error);
-    alert("Server not reachable ❌");
-  }
-});
-</script> -->
-
-
-
-
+<!-- Javascript --> 
+<script src="/frontend/main.js" defer></script>    
+
+<!-- Stylish Popup (SweetAlert) -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Password Icon hide / unhide -->
 <script>
@@ -558,6 +129,73 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
     });
 });
 </script>
+
+
+
+
+
+<script>
+  document.getElementById("registerForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const phone = document.getElementById("phone").value.trim();
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+  const resume = document.getElementById("resume").files[0];
+
+  // Validation
+  if (!name || !email || !phone || !password || !confirmPassword || !resume) {
+    Swal.fire("Error ❌", "All fields are required", "error");
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    Swal.fire("Error ❌", "Passwords do not match", "error");
+    return;
+  }
+
+  if (resume.type !== "application/pdf") {
+    Swal.fire("Error ❌", "Only PDF resume allowed", "error");
+    return;
+  }
+
+  try {
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("password", password);
+    formData.append("resume", resume);
+
+    const response = await fetch("http://localhost:3000/register", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      Swal.fire({
+        title: "Registration Successful 🎉",
+        text: "Your account has been created!",
+        icon: "success"
+      }).then(() => {
+        window.location.href = "/frontend/jobseeker_login.html";
+      });
+    } else {
+      Swal.fire("Error ❌", data.message || "Registration failed", "error");
+    }
+
+  } catch (error) {
+    console.error(error);
+    Swal.fire("Error ❌", "Server error", "error");
+  }
+});
+</script>
+
+
 
 
 

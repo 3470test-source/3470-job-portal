@@ -245,6 +245,9 @@
 <!-- Javascript --> 
 <script src="/frontend/main.js" defer></script> 
 
+<!-- Stylish Popup (SweetAlert) -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <!-- Go to register page -->
 <script>
 
@@ -298,44 +301,54 @@
 </script>
 
 
-
-
-
-
-
-
-
-
-
+<!----- User Jobseeker login JS ----->
 <script>
-
 document.querySelector(".job-lg-login-main").addEventListener("click", async () => {
 
   const email = document.getElementById("loginEmail").value;
   const password = document.getElementById("loginPassword").value;
 
-  const res = await fetch("http://localhost:3000/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ email, password })
-  });
-
-  const data = await res.json();
-
-  if (res.ok) {
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("userId", data.user.id);
-    localStorage.setItem("userName", data.user.name);
-
-    window.location.href = "/frontend/dashboard.html";
-  } else {
-    alert(data.message);
+  if (!email || !password) {
+    return Swal.fire("Missing Fields ⚠️", "Enter email & password", "warning");
   }
-});
 
+  try {
+    const res = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("userId", data.user.id);
+      localStorage.setItem("userName", data.user.name);
+
+      Swal.fire({
+        title: "Login Successfully ✅",
+        text: "Welcome back! Explore jobs and apply to your dream role.",
+        icon: "success",
+        confirmButtonColor: "#28a745"
+      }).then(() => {
+        // ✅ redirect AFTER clicking OK
+        window.location.href = "/frontend/dashboard.html";
+      });
+
+    } else {
+      Swal.fire("Login Failed ❌", data.message, "error");
+    }
+
+  } catch (err) {
+    Swal.fire("Server Error ❌", "Try again later", "error");
+  }
+
+});
 </script>
 
-
+</body>
+</html>
 
