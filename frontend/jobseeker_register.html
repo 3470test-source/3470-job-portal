@@ -47,7 +47,7 @@
         <div class="jobseeker-register-card">
             <h2>Jobseeker Account Registration</h2>
 
-            <form id="registerForm" class="jobseeker-register-form">
+            <form id="registerForm" class="jobseeker-register-form" enctype="multipart/form-data">
 
                 <div class="jobseeker-input-group">
                     <label>Full Name</label>
@@ -90,7 +90,7 @@
                     <input type="file" id="resume" accept=".pdf" required>
                 </div>
 
-                <button type="submit" class="jobseeker-register-btn">Register</button>
+                <button type="submit" id="submitBtn" class="jobseeker-register-btn">Register</button>
 
                 <p class="jobseeker-login-link">
                     Already have an account?
@@ -105,7 +105,7 @@
 
 
 <!-- Javascript --> 
-<script src="/frontend/main.js" defer></script>    
+<!-- <script src="/frontend/main.js" defer></script>     -->
 
 <!-- Stylish Popup (SweetAlert) -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -132,73 +132,103 @@
 
 
 
-
-
 <script>
-  document.getElementById("registerForm").addEventListener("submit", async (e) => {
+const BASE_URL = "http://localhost:3000";
+
+const form = document.getElementById("registerForm");
+const btn = document.getElementById("submitBtn");
+
+form.addEventListener("submit", async function (e) {
   e.preventDefault();
 
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const phone = document.getElementById("phone").value.trim();
+  console.log("FORM SUBMIT STARTED"); // debug
+
+  // 🔒 prevent double click
+  btn.disabled = true;
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone").value;
   const password = document.getElementById("password").value;
   const confirmPassword = document.getElementById("confirmPassword").value;
-  const resume = document.getElementById("resume").files[0];
+  const resumeFile = document.getElementById("resume").files[0];
 
-  // Validation
-  if (!name || !email || !phone || !password || !confirmPassword || !resume) {
-    Swal.fire("Error ❌", "All fields are required", "error");
-    return;
-  }
-
+  // ❌ Password mismatch
   if (password !== confirmPassword) {
-    Swal.fire("Error ❌", "Passwords do not match", "error");
-    return;
+    btn.disabled = false;
+    return Swal.fire("Error ❌", "Passwords do not match", "error");
   }
 
-  if (resume.type !== "application/pdf") {
-    Swal.fire("Error ❌", "Only PDF resume allowed", "error");
-    return;
+  // ❌ Resume check
+  if (!resumeFile) {
+    btn.disabled = false;
+    return Swal.fire("Error ❌", "Upload resume", "error");
   }
+
+  // FormData
+  const formData = new FormData();
+  formData.append("name", name);
+  formData.append("email", email);
+  formData.append("phone", phone);
+  formData.append("password", password);
+  formData.append("resume", resumeFile);
 
   try {
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("password", password);
-    formData.append("resume", resume);
-
-    const response = await fetch("http://localhost:3000/register", {
+    const res = await fetch(`${BASE_URL}/api/register`, {
       method: "POST",
       body: formData
     });
 
-    const data = await response.json();
 
-    if (response.ok) {
-      Swal.fire({
-        title: "Registration Successful 🎉",
-        text: "Your account has been created!",
-        icon: "success"
-      }).then(() => {
-        window.location.href = "/frontend/jobseeker_login.html";
+    console.log("Status:", res.status);
+
+
+
+    // const data = await res.json();
+
+
+
+   let data = {};
+
+try {
+  data = await res.json();
+} catch (e) {
+  console.error("Invalid JSON:", e);
+  data.message = "Server response error";
+}
+
+  console.log("Response Data:", data);
+
+
+    if (res.ok) {
+      await Swal.fire({
+        title: "Success 🎉",
+        text: data.message,
+        icon: "success",
+        confirmButtonText: "Go to Login"
       });
+
+      window.location.href = "/frontend/jobseeker_login.html";
+
     } else {
-      Swal.fire("Error ❌", data.message || "Registration failed", "error");
+      Swal.fire("Error ❌", data.message, "error");
+      btn.disabled = false;
     }
 
-  } catch (error) {
-    console.error(error);
-    Swal.fire("Error ❌", "Server error", "error");
-  }
+  } catch (err) {
+  console.error("Catch Error:", err);
+
+  Swal.fire({
+    title: "Error ❌",
+    text: err.message || "Something went wrong",
+    icon: "error"
+  });
+
+  btn.disabled = false;
+}
 });
+
 </script>
-
-
-
-
-
 
 
 </body>

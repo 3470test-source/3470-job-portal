@@ -10,6 +10,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
 
+
+
 const app = express();
 
 app.use(cors());
@@ -331,77 +333,74 @@ app.delete("/jobs/:id", (req, res) => {
 
 
 
-app.post("/register", upload.single("resume"), async (req, res) => {
-  const { name, email, phone, password, confirmPassword } = req.body;
 
-  if (!name || !email || !phone || !password) {
-    return res.status(400).json({ message: "All fields required ❌" });
-  }
 
-  if (password !== confirmPassword) {
-    return res.status(400).json({ message: "Passwords do not match ❌" });
-  }
 
-  if (!/^[6-9]\d{9}$/.test(phone)) {
-    return res.status(400).json({ message: "Invalid phone number ❌" });
-  }
 
-  if (!req.file) {
-    return res.status(400).json({ message: "Resume is required ❌" });
-  }
 
-  const resumePath = "/uploads/" + req.file.filename;
+
+
+
+
+
+
+
+// =======================
+// ✅ JOBSEEKER REGISTER
+// =======================
+app.post("/api/register", upload.single("resume"), async (req, res) => {
+  const { name, email, phone, password } = req.body;
 
   try {
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // ✅ Check duplicate email
+    const checkSql = "SELECT * FROM job_seekers WHERE email = ?";
+    db.query(checkSql, [email], async (err, result) => {
 
-    const sql = `
-      INSERT INTO job_seekers (name, email, phone, password, resume)
-      VALUES (?, ?, ?, ?, ?)
-    `;
+      if (err) return res.status(500).json({ message: "DB error ❌" });
 
-    db.query(
-      sql,
-      [name, email, phone, hashedPassword, resumePath],
-      async (err, result) => {
-        if (err) {
-          if (err.code === "ER_DUP_ENTRY") {
-            return res.status(400).json({ message: "Email already exists ❌" });
-          }
-          return res.status(500).json({ message: "Database error ❌" });
-        }
-
-        const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:5501";
-
-        const mailOptions = {
-          from: `"3470 HealthCare" <${process.env.GMAIL_USER}>`,
-          to: email,
-          subject: "Registration successfully 🎉",
-          html: `
-            <h2>Welcome ${name} 👋</h2>
-            <p>Your account has been created successfully 🎉</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p>Your password is securely stored 🔒</p>
-            <a href="${CLIENT_URL}/frontend/login.html">Login Now</a>
-          `
-        };
-
-        try {
-          await transporter.sendMail(mailOptions);
-
-          res.status(200).json({
-            message: "Account created & email sent 🎉"
-          });
-
-        } catch (emailError) {
-          res.status(200).json({
-            message: "Account created successfully 🎉 (Email failed)"
-          });
-        }
+      if (result.length > 0) {
+        return res.status(400).json({ message: "Email already exists ❌" });
       }
-    );
 
-  } catch (err) {
+      // ✅ Hash password
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      // ✅ File path
+      const resumePath = req.file ? "/uploads/" + req.file.filename : null;
+
+      // ✅ Insert user
+      const insertSql = `
+        INSERT INTO job_seekers (name, email, phone, password, resume)
+        VALUES (?, ?, ?, ?, ?)
+      `;
+
+      db.query(insertSql, [name, email, phone, hashedPassword, resumePath], (err) => {
+
+        if (err) {
+          return res.status(500).json({ message: "Insert failed ❌" });
+        }
+
+        // ✅ Send response FIRST
+        res.json({
+          message: "Account created successfully 🎉"
+        });
+
+        // 📧 Send email AFTER response (non-blocking)
+        transporter.sendMail({
+          from: process.env.GMAIL_USER,
+          to: email,
+          subject: "Registration Successful",
+          html: `
+            <h3>Welcome ${name} 🎉</h3>
+            <p>Your account has been created successfully.</p>
+          `
+        });
+
+      });
+
+    });
+
+  } catch (error) {
     res.status(500).json({ message: "Server error ❌" });
   }
 });
