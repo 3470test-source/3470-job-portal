@@ -222,24 +222,31 @@ app.delete("/jobs/:id", (req, res) => {
 
 
 
-// ================= REGISTER =================
+
+
+
+
+
+
+
+
+
+
+
+
+// ==============================
+// ✅ JOBSEEKER REGISTER API
+// ==============================
 // app.post("/register", upload.single("resume"), async (req, res) => {
-//   const { name, email, phone, password, confirmPassword } = req.body;
-
-//   if (!name || !email || !phone || !password) {
-//     return res.status(400).json({ message: "All fields required ❌" });
-//   }
-
-//   // ✅ 1. Password match check
-//   if (password !== confirmPassword) {
-//     return res.status(400).json({ message: "Passwords do not match ❌" });
-//   }
-
-//   // ✅ 2. Resume path
-//   const resumePath = req.file ? "/uploads/" + req.file.filename : "";
+//   const { name, email, phone, password } = req.body;
+//   const resume = req.file;
 
 //   try {
-//     // ✅ 3. Hash password
+//     // ❌ Validation
+//     if (!name || !email || !phone || !password || !resume) {
+//       return res.status(400).json({ message: "All fields are required ❌" });
+//     }
+
 //     const hashedPassword = await bcrypt.hash(password, 10);
 
 //     const sql = `
@@ -247,80 +254,49 @@ app.delete("/jobs/:id", (req, res) => {
 //       VALUES (?, ?, ?, ?, ?)
 //     `;
 
-//     // ✅ 4. Insert into DB
 //     db.query(
 //       sql,
-//       [name, email, phone, hashedPassword, resumePath],
-//       async (err, result) => {
+//       [name, email, phone, hashedPassword, resume.filename],
+//       async (err) => {
 //         if (err) {
-//           console.error(err);
-
 //           if (err.code === "ER_DUP_ENTRY") {
-//             return res
-//               .status(400)
-//               .json({ message: "Email already exists ❌" });
+//             return res.status(400).json({ message: "Email already exists ❌" });
 //           }
-
 //           return res.status(500).json({ message: "Database error ❌" });
 //         }
 
-//         // ✅ 5. Send Email
-//        const mailOptions = {
-//          from: `"3470 HealthCare" <${process.env.GMAIL_USER}>`,
-//          to: email,
-//          subject: "Registration successfully 🎉",
-//          html: `
-//             <div style="font-family: Arial, sans-serif; background-color:#f4f6f8; padding:20px;">
-    
-//               <div style="max-width:600px; margin:auto; background:#ffffff; padding:25px; border-radius:10px; box-shadow:0 4px 10px rgba(0,0,0,0.1);">
-      
-//                 <h2 style="color:#2c3e50; text-align:center;">Welcome ${name} 👋</h2>
-      
-//                 <p style="font-size:16px; color:#555;">
-//                   Your account has been created successfully 🎉
-//                 </p>
+//         // 📧 Send Email
+//         await transporter.sendMail({
+//           from: process.env.GMAIL_USER,
+//           to: email,
+//           subject: "Jobseeker Registration Successful",
+//           html: `
+//           <div style="font-family: Arial; background:#f4f6f8; padding:20px;">
+//             <div style="max-width:500px; margin:auto; background:#fff; padding:25px; border-radius:10px; text-align:center;">
+              
+//               <h2 style="color:#007bff;">Welcome ${name} 🎉</h2>
+              
+//               <p>Your jobseeker account is ready ✅</p>
 
-//               <div style="background:#f1f1f1; padding:15px; border-radius:8px; margin:20px 0;">
-//                   <p style="margin:5px 0;"><strong>Email:</strong> ${email}</p>
-//                   <p style="margin:5px 0;"><strong>Password:</strong> ${password}</p>
+//               <div style="text-align:left; margin-top:20px;">
+//                 <p><b>Email:</b> ${email}</p>
+//                 <p><b>Password:</b> ${password}</p>
 //               </div>
 
-//               <p style="font-size:15px; color:#555;">
-//                   You can now login using your credentials.
-//               </p>
+//               <a href="http://127.0.0.1:5501/frontend/jobseeker_login.html"
+//                  style="display:inline-block; margin-top:20px; padding:12px 20px; background:#007bff; color:#fff; text-decoration:none; border-radius:5px;">
+//                  Login Now
+//               </a>
 
-//               <div style="text-align:center; margin-top:25px;">
-//                   <a href="http://127.0.0.1:5501/frontend/login.html" 
-//                 style="background-color:#007bff; color:#ffffff; padding:12px 25px; text-decoration:none; border-radius:6px; font-size:16px; display:inline-block;">
-//            Login Now
-//         </a>
-//       </div>
+//             </div>
+//           </div>
+//           `
+//         });
 
-//       <p style="margin-top:30px; font-size:13px; color:#888; text-align:center;">
-//         © 3470 HealthCare. All rights reserved.
-//       </p>
-
-//     </div>
-//   </div>
-//   `
-// };
-
-//         try {
-//           await transporter.sendMail(mailOptions);
-
-//           // ✅ 6. Success response
-//           res.status(200).json({
-//             message: "Account created & email sent 🎉"
-//           });
-
-//         } catch (emailError) {
-//           console.error("Email Error:", emailError);
-
-//           // ⚠️ Email failed but account created
-//           res.status(200).json({
-//             message: "Account created but email failed ⚠️"
-//           });
-//         }
+//         // ✅ Response
+//         res.json({
+//           message: "Your jobseeker account has been created. Email sent 📧"
+//         });
 //       }
 //     );
 
@@ -339,71 +315,55 @@ app.delete("/jobs/:id", (req, res) => {
 
 
 
+// ================= REGISTER =================
+app.post("/register", upload.single("resume"), async (req, res) => {
+  const { name, email, phone, password, confirmPassword } = req.body;
 
+  // ✅ Password match check
+  if (password !== confirmPassword) {
+    return res.status(400).json({ message: "Passwords do not match ❌" });
+  }
 
-
-
-
-
-// =======================
-// ✅ JOBSEEKER REGISTER
-// =======================
-app.post("/api/register", upload.single("resume"), async (req, res) => {
-  const { name, email, phone, password } = req.body;
+  const resumePath = req.file ? "/uploads/" + req.file.filename : "";
 
   try {
-    // ✅ Check duplicate email
-    const checkSql = "SELECT * FROM job_seekers WHERE email = ?";
-    db.query(checkSql, [email], async (err, result) => {
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-      if (err) return res.status(500).json({ message: "DB error ❌" });
+    const sql = `
+      INSERT INTO job_seekers (name, email, phone, password, resume)
+      VALUES (?, ?, ?, ?, ?)
+    `;
 
-      if (result.length > 0) {
-        return res.status(400).json({ message: "Email already exists ❌" });
-      }
-
-      // ✅ Hash password
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      // ✅ File path
-      const resumePath = req.file ? "/uploads/" + req.file.filename : null;
-
-      // ✅ Insert user
-      const insertSql = `
-        INSERT INTO job_seekers (name, email, phone, password, resume)
-        VALUES (?, ?, ?, ?, ?)
-      `;
-
-      db.query(insertSql, [name, email, phone, hashedPassword, resumePath], (err) => {
-
+    db.query(
+      sql,
+      [name, email, phone, hashedPassword, resumePath],
+      (err) => {
         if (err) {
-          return res.status(500).json({ message: "Insert failed ❌" });
+          console.error(err);
+
+          if (err.code === "ER_DUP_ENTRY") {
+            return res
+              .status(400)
+              .json({ message: "Email already exists ❌" });
+          }
+
+          return res.status(500).json({ message: "Database error ❌" });
         }
 
-        // ✅ Send response FIRST
-        res.json({
-          message: "Account created successfully 🎉"
-        });
-
-        // 📧 Send email AFTER response (non-blocking)
-        transporter.sendMail({
-          from: process.env.GMAIL_USER,
-          to: email,
-          subject: "Registration Successful",
-          html: `
-            <h3>Welcome ${name} 🎉</h3>
-            <p>Your account has been created successfully.</p>
-          `
-        });
-
-      });
-
-    });
-
-  } catch (error) {
+        res.json({ message: "Account created successfully 🎉" });
+      }
+    );
+  } catch (err) {
     res.status(500).json({ message: "Server error ❌" });
   }
 });
+
+
+
+
+
+
+
 
 
 

@@ -10,6 +10,9 @@
     
     <link rel="stylesheet" href="styles.css" />
 
+    <!-- Stylish Popup (SweetAlert) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Font Awesome CDN -->
     <link
       rel="stylesheet"
@@ -47,7 +50,7 @@
         <div class="jobseeker-register-card">
             <h2>Jobseeker Account Registration</h2>
 
-            <form id="registerForm" class="jobseeker-register-form" enctype="multipart/form-data">
+            <form id="jobseeker-registerForm" class="jobseeker-register-form">
 
                 <div class="jobseeker-input-group">
                     <label>Full Name</label>
@@ -90,7 +93,7 @@
                     <input type="file" id="resume" accept=".pdf" required>
                 </div>
 
-                <button type="submit" id="submitBtn" class="jobseeker-register-btn">Register</button>
+                <button type="submit" class="jobseeker-register-btn">Register</button>
 
                 <p class="jobseeker-login-link">
                     Already have an account?
@@ -105,10 +108,8 @@
 
 
 <!-- Javascript --> 
-<!-- <script src="/frontend/main.js" defer></script>     -->
+<script src="/frontend/main.js" defer></script>    
 
-<!-- Stylish Popup (SweetAlert) -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- Password Icon hide / unhide -->
 <script>
@@ -131,105 +132,136 @@
 </script>
 
 
-
-<script>
-const BASE_URL = "http://localhost:3000";
-
-const form = document.getElementById("registerForm");
-const btn = document.getElementById("submitBtn");
-
-form.addEventListener("submit", async function (e) {
+<!-- <script>
+document.getElementById("jobseeker-registerForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  console.log("FORM SUBMIT STARTED"); // debug
-
-  // 🔒 prevent double click
-  btn.disabled = true;
-
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const phone = document.getElementById("phone").value;
   const password = document.getElementById("password").value;
   const confirmPassword = document.getElementById("confirmPassword").value;
-  const resumeFile = document.getElementById("resume").files[0];
 
-  // ❌ Password mismatch
+  // ✅ ADD HERE
   if (password !== confirmPassword) {
-    btn.disabled = false;
-    return Swal.fire("Error ❌", "Passwords do not match", "error");
+    alert("Passwords do not match ❌");
+    return;
   }
 
-  // ❌ Resume check
-  if (!resumeFile) {
-    btn.disabled = false;
-    return Swal.fire("Error ❌", "Upload resume", "error");
-  }
-
-  // FormData
   const formData = new FormData();
-  formData.append("name", name);
-  formData.append("email", email);
-  formData.append("phone", phone);
-  formData.append("password", password);
-  formData.append("resume", resumeFile);
 
-  try {
-    const res = await fetch(`${BASE_URL}/api/register`, {
-      method: "POST",
-      body: formData
-    });
+  formData.append("name", document.getElementById("name").value);
+  formData.append("email", document.getElementById("email").value);
+  formData.append("phone", document.getElementById("phone").value);
+  formData.append("password", document.getElementById("password").value);
+  formData.append("confirmPassword", document.getElementById("confirmPassword").value);
+  formData.append("resume", document.getElementById("resume").files[0]);
 
-
-    console.log("Status:", res.status);
-
-
-
-    // const data = await res.json();
-
-
-
-   let data = {};
-
-try {
-  data = await res.json();
-} catch (e) {
-  console.error("Invalid JSON:", e);
-  data.message = "Server response error";
-}
-
-  console.log("Response Data:", data);
-
-
-    if (res.ok) {
-      await Swal.fire({
-        title: "Success 🎉",
-        text: data.message,
-        icon: "success",
-        confirmButtonText: "Go to Login"
-      });
-
-      window.location.href = "/frontend/jobseeker_login.html";
-
-    } else {
-      Swal.fire("Error ❌", data.message, "error");
-      btn.disabled = false;
-    }
-
-  } catch (err) {
-  console.error("Catch Error:", err);
-
-  Swal.fire({
-    title: "Error ❌",
-    text: err.message || "Something went wrong",
-    icon: "error"
+  const res = await fetch("http://localhost:3000/register", {
+    method: "POST",
+    body: formData
   });
 
-  btn.disabled = false;
-}
-});
+  const result = await res.json();
+  alert(result.message);
 
+  if (res.ok) {
+    window.location.href = "/frontend/jobseeker_login.html";
+  }
+});
+</script> -->
+
+
+
+
+
+
+
+
+<script>
+document.getElementById("jobseeker-registerForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const submitBtn = document.querySelector('.jobseeker-register-btn');
+    const originalBtnText = submitBtn.textContent;
+
+    // Disable button and show loading state
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Registering...';
+
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    // Password match check
+    if (password !== confirmPassword) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Passwords do not match!',
+            confirmButtonColor: '#d33'
+        });
+        // Re-enable button
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+        return;
+    }
+
+  const formData = new FormData();
+    formData.append("name", document.getElementById("name").value);
+    formData.append("email", document.getElementById("email").value);
+    formData.append("phone", document.getElementById("phone").value);
+    formData.append("password", password);
+    formData.append("confirmPassword", confirmPassword);
+    formData.append("resume", document.getElementById("resume").files[0]);
+
+    try {
+        const res = await fetch("http://localhost:3000/register", {
+            method: "POST",
+            body: formData
+        });
+
+        const result = await res.json();
+
+        if (res.ok) {
+            // Success Popup + Redirect after user clicks OK
+            Swal.fire({
+                icon: 'success',
+                title: 'Registration Successful!',
+                text: result.message || 'You can now login with your credentials.',
+                confirmButtonText: 'Go to Login',
+                confirmButtonColor: '#28a745'
+            }).then((swalResult) => {
+                if (swalResult.isConfirmed) {
+                    window.location.href = "/frontend/jobseeker_login.html";
+                }
+            });
+        } 
+        else {
+            // Error from server
+            Swal.fire({
+                icon: 'error',
+                title: 'Registration Failed',
+                text: result.message || 'Something went wrong. Please try again.',
+                confirmButtonColor: '#d33'
+            });
+        }
+    } 
+    catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Network error or server is not responding. Please check your connection.',
+            confirmButtonColor: '#d33'
+        });
+        console.error("Error:", error);
+    } 
+    finally {
+        // Always re-enable the button (whether success or failure)
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+    }
+});
 </script>
+
 
 
 </body>
 </html>
+
