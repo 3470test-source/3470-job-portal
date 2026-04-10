@@ -54,26 +54,26 @@
 
                 <div class="jobseeker-input-group">
                     <label>Full Name</label>
-                    <input type="text" id="name" required>
+                    <input type="text" id="name" name="name" required>
                     <small class="error"></small>
                 </div>
 
                 <div class="jobseeker-input-group">
                     <label>Email ID</label>
-                    <input type="email" id="email" required>
+                    <input type="email" id="email" name="email" required>
                     <small class="error"></small>
                 </div>
 
                 <div class="jobseeker-input-group">
                     <label>Phone NO</label>
-                    <input type="tel" id="phone" pattern="[6-9]{1}[0-9]{9}" maxlength="10" required>
+                    <input type="tel" id="phone" name="phone" pattern="[6-9]{1}[0-9]{9}" maxlength="10" required>
                     <small class="error"></small>
                 </div>
 
                 <div class="jobseeker-input-group">
                     <label>Password</label>
                       <div class="password-wrapper-icon">    
-                        <input type="password" class="password-icon-btn" id="password"minlength="6" required>
+                        <input type="password" class="password-icon-btn" id="password" name="password" minlength="6" required>
                         <i class="fa-solid fa-eye toggle-password" data-target="password"></i>
                       </div>    
                     <small class="error"></small>
@@ -82,7 +82,7 @@
                 <div class="jobseeker-input-group">
                     <label>Confirm Password</label>
                       <div class="password-wrapper-icon">
-                        <input type="password" class="password-icon-btn" id="confirmPassword" minlength="6" required>
+                        <input type="password" class="password-icon-btn" id="confirmPassword" name="confirmPassword" minlength="6" required>
                         <i class="fa-solid fa-eye toggle-password" data-target="confirmPassword"></i>
                       </div>
                     <small class="error"></small>
@@ -90,7 +90,7 @@
 
                 <div class="jobseeker-input-group">
                     <label>Upload Resume (PDF only)</label>
-                    <input type="file" id="resume" accept=".pdf" required>
+                    <input type="file" id="resume" name="resume" accept=".pdf" required>
                 </div>
 
                 <button type="submit" class="jobseeker-register-btn">Register</button>
@@ -107,8 +107,7 @@
 </div>
 
 
-<!-- Javascript --> 
-<script src="/frontend/main.js" defer></script>    
+  
 
 
 <!-- Password Icon hide / unhide -->
@@ -154,18 +153,44 @@ document.getElementById("jobseeker-registerForm").addEventListener("submit", asy
   formData.append("confirmPassword", document.getElementById("confirmPassword").value);
   formData.append("resume", document.getElementById("resume").files[0]);
 
-  const res = await fetch("http://localhost:3000/register", {
-    method: "POST",
-    body: formData
-  });
+//   const res = await fetch("http://localhost:3000/register", {
+//     method: "POST",
+//     body: formData
+//   });
 
-  const result = await res.json();
-  alert(result.message);
+//   const result = await res.json();
+//   alert(result.message);
 
-  if (res.ok) {
-    window.location.href = "/frontend/jobseeker_login.html";
-  }
+//   if (res.ok) {
+//     window.location.href = "/frontend/jobseeker_login.html";
+//   }
+
+// });
+
+
+const res = await fetch("http://localhost:3000/register", {
+  method: "POST",
+  body: formData
 });
+
+let result;
+try {
+  result = await res.json();
+} catch (err) {
+  alert("Invalid server response ❌");
+  return;
+}
+
+alert(result.message);
+
+// redirect only if success
+if (res.ok) {
+  window.location.href = "/frontend/jobseeker_login.html";
+}
+});
+
+
+
 </script> -->
 
 
@@ -176,90 +201,86 @@ document.getElementById("jobseeker-registerForm").addEventListener("submit", asy
 
 
 <script>
-document.getElementById("jobseeker-registerForm").addEventListener("submit", async (e) => {
+    window.addEventListener("DOMContentLoaded", () => {
+
+  console.log("✅ Register JS Loaded Successfully");
+
+  const form = document.getElementById("jobseeker-registerForm");
+
+  if (!form) {
+    console.log("❌ Form not found!");
+    return;
+  }
+
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const submitBtn = document.querySelector('.jobseeker-register-btn');
-    const originalBtnText = submitBtn.textContent;
-
-    // Disable button and show loading state
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Registering...';
+    console.log("🔥 Form Submitted");
 
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
 
     // Password match check
     if (password !== confirmPassword) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Passwords do not match!',
-            confirmButtonColor: '#d33'
-        });
-        // Re-enable button
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalBtnText;
-        return;
+      Swal.fire({
+        icon: "error",
+        text: "Passwords do not match ❌"
+      });
+      return;
     }
 
-  const formData = new FormData();
-    formData.append("name", document.getElementById("name").value);
-    formData.append("email", document.getElementById("email").value);
-    formData.append("phone", document.getElementById("phone").value);
-    formData.append("password", password);
-    formData.append("confirmPassword", confirmPassword);
-    formData.append("resume", document.getElementById("resume").files[0]);
+    const formData = new FormData(form);
 
     try {
-        const res = await fetch("http://localhost:3000/register", {
-            method: "POST",
-            body: formData
-        });
+      console.log("🚀 Sending request to backend...");
 
-        const result = await res.json();
+      const res = await fetch("http://localhost:3000/register", {
+        method: "POST",
+        body: formData
+      });
+
+      console.log("📡 Response received:", res.status);
+
+      let data = {};
+      try {
+        data = await res.json();
+      } catch (err) {
+        console.log("❌ JSON parse error");
+        Swal.fire({
+          icon: "error",
+          text: "Invalid server response"
+        });
+        return;
+      }
+
+      console.log("📦 Data:", data);
+
+      Swal.fire({
+        icon: res.ok ? "success" : "error",
+        text: data.message
+      }).then(() => {
 
         if (res.ok) {
-            // Success Popup + Redirect after user clicks OK
-            Swal.fire({
-                icon: 'success',
-                title: 'Registration Successful!',
-                text: result.message || 'You can now login with your credentials.',
-                confirmButtonText: 'Go to Login',
-                confirmButtonColor: '#28a745'
-            }).then((swalResult) => {
-                if (swalResult.isConfirmed) {
-                    window.location.href = "/frontend/jobseeker_login.html";
-                }
-            });
-        } 
-        else {
-            // Error from server
-            Swal.fire({
-                icon: 'error',
-                title: 'Registration Failed',
-                text: result.message || 'Something went wrong. Please try again.',
-                confirmButtonColor: '#d33'
-            });
+          console.log("🔁 Redirecting to login page...");
+
+          window.location.href = "/frontend/jobseeker_login.html";
         }
-    } 
-    catch (error) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Network error or server is not responding. Please check your connection.',
-            confirmButtonColor: '#d33'
-        });
-        console.error("Error:", error);
-    } 
-    finally {
-        // Always re-enable the button (whether success or failure)
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalBtnText;
+
+      });
+
+    } catch (error) {
+      console.log("❌ Network error:", error);
+
+      Swal.fire({
+        icon: "error",
+        text: "Server not reachable"
+      });
     }
+
+  });
+
 });
 </script>
-
 
 
 </body>
