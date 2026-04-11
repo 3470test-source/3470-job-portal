@@ -959,6 +959,13 @@
   font-size: 16px;
 }
 
+.employer-job-footer {
+  background:#07533a;
+  color:white;
+  text-align:center;
+  padding:4px;
+  font-size: 16px;
+}
 
 /*---- Popular Job Categories ----*/
 
@@ -1540,6 +1547,151 @@ hr {
 
                     /*------------------- Employer the posted a jobs show card -----------*/
 
+.employer-navbar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 60px;
+  background:white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.job-login-logo-employer {
+  display:flex;
+  align-items:center;
+}
+
+.employer-login-logo-img {
+  height:80px;
+  object-fit:contain;
+}
+
+/* ===== NAV LINKS ===== */
+
+.employer-login-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.employer-login-nav-links a {
+  text-decoration: none;
+  font-size: 20px;
+  color:#0558b8;
+  padding: 6px 10px;
+  transition: 0.3s;
+}
+
+/*--- Hover ---*/
+
+.employer-login-nav-links a:hover {
+  background: #068d53;
+  color: white;
+  border-radius: 9px;
+}
+
+.employer-login-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.employer-login-dropdown a {
+  padding:6px 10px;
+  text-decoration:none;
+  color:#0558b8;
+  font-size:20px;
+}
+
+.employer-login-dropdown-menu {
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  background:#d2ecec;
+  padding:25px;
+  min-width:600px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  border-radius:10px;
+  flex-direction:row;
+  gap:50px;
+  margin-top: 15px;
+}
+
+.employer-login-dropdown:hover .employer-login-dropdown-menu {
+  display:flex;
+}
+
+/* ===== MEGA MENU ===== */
+
+.employer-menu-column {
+  display:flex;
+  flex-direction:column;
+  flex:1;  
+}
+
+.employer-menu-column h4{
+  margin-bottom:10px;
+  margin-top: 1px;
+  color:#0558b8;
+  font-size:16px;
+}
+
+.employer-menu-column a {
+  text-decoration: none;
+  color: #555;
+  font-size: 14px;
+  margin: 4px 0;    
+}
+
+.employer-login-dropdown-menu .employer-menu-column a:hover{
+  background: #068d53;
+  color: white;
+  border-radius: 9px;
+}
+
+.employer-menu-column a:hover{
+  color:#007bff;
+}
+
+/* ===== SEARCH BAR ===== */
+
+.employer-login-search-bar {
+  display:flex;
+  align-items:center;
+  background:#f1f3f8;
+  border-radius:30px;
+  width:320px;
+  padding: 4px 10px;  
+}
+
+.employer-login-search-bar input {
+  border:none;
+  outline:none;
+  background:transparent;
+  padding: 8px;
+  width:100%;
+  font-size:14px;
+}
+
+.employer-login-search-bar button {
+  background:#2a55e5;
+  color:white;
+  border:none;
+  border-radius:50%;
+  width:35px;
+  height:35px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:14px;
+}
+
+
+
 /*--- JOB SECTION ---*/
 .jobs-section-employer-dash {
   max-width: 1200px;
@@ -1551,6 +1703,13 @@ hr {
   margin-bottom: 20px;
   color: #0960b3;
   font-size: 28px;
+}
+
+.employer-applicants h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0960b3;
+  font-size: 58px;
 }
 
 /*---- GRID (2 COLUMN) ----*/
@@ -1709,6 +1868,7 @@ hr {
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
+  margin-top: 40px;
 }
     
 .form-container-employer {
@@ -2108,6 +2268,7 @@ hr {
 /*--- Container ---*/
 .applicants-container {
   margin-top: 20px;
+  margin-bottom: 30px;
 }
 
 /*--- Card ---*/
