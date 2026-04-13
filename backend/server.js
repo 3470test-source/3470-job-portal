@@ -222,148 +222,50 @@ app.delete("/jobs/:id", (req, res) => {
 
 
 // ================= REGISTER =================
-// app.post("/register", upload.single("resume"), async (req, res) => {
-//   const { name, email, phone, password, confirmPassword } = req.body;
-
-//   // ✅ Password match check
-//   if (password !== confirmPassword) {
-//     return res.status(400).json({ message: "Passwords do not match ❌" });
-//   }
-
-//   const resumePath = req.file ? "/uploads/" + req.file.filename : "";
-
-//   try {
-//     const hashedPassword = await bcrypt.hash(password, 10);
-
-//     const sql = `
-//       INSERT INTO job_seekers (name, email, phone, password, resume)
-//       VALUES (?, ?, ?, ?, ?)
-//     `;
-
-//     db.query(
-//       sql,
-//       [name, email, phone, hashedPassword, resumePath],
-//       (err) => {
-//         if (err) {
-//           console.error(err);
-
-//           if (err.code === "ER_DUP_ENTRY") {
-//             return res
-//               .status(400)
-//               .json({ message: "Email already exists ❌" });
-//           }
-
-//           return res.status(500).json({ message: "Database error ❌" });
-//         }
-
-//         res.json({ message: "Account created successfully 🎉" });
-//       }
-//     );
-//   } catch (err) {
-//     res.status(500).json({ message: "Server error ❌" });
-//   }
-// });
-
-
-
-
-
-
-// app.post("/register", upload.single("resume"), async (req, res) => {
-//   console.log("BODY:", req.body);
-//   console.log("FILE:", req.file);
-
-//   try {
-//     const { name, email, phone, password, confirmPassword } = req.body;
-
-//     if (!password || !email) {
-//       return res.status(400).json({ message: "Missing fields" });
-//     }
-
-//     if (password !== confirmPassword) {
-//       return res.status(400).json({ message: "Passwords do not match ❌" });
-//     }
-
-//     const hashedPassword = await bcrypt.hash(password, 10);
-
-//     const resumePath = req.file ? "/uploads/" + req.file.filename : "";
-
-//     const sql = `
-//       INSERT INTO job_seekers (name, email, phone, password, resume)
-//       VALUES (?, ?, ?, ?, ?)
-//     `;
-
-//     db.query(sql,
-//       [name, email, phone, hashedPassword, resumePath],
-//       (err) => {
-
-//         if (err) {
-//           console.log("DB ERROR:", err); // 👈 VERY IMPORTANT
-
-//           if (err.code === "ER_DUP_ENTRY") {
-//             return res.status(400).json({ message: "Email already exists ❌" });
-//           }
-
-//           return res.status(500).json({ message: "Database error ❌" });
-//         }
-
-//         res.json({ message: "Account created successfully 🎉" });
-//       }
-//     );
-
-//   } catch (err) {
-//     console.log("SERVER ERROR:", err); // 👈 THIS TELLS EXACT REASON
-//     res.status(500).json({ message: "Server error ❌" });
-//   }
-// });
-
-
-
 app.post("/register", upload.single("resume"), async (req, res) => {
-
-  console.log("BODY:", req.body);
-  console.log("FILE:", req.file);
-
   const { name, email, phone, password, confirmPassword } = req.body;
 
-  // ✅ IMPORTANT CHECK
-  if (!name || !email || !phone || !password || !confirmPassword) {
-    return res.status(400).json({ message: "Missing fields ❌" });
-  }
-
+  // ✅ Password match check
   if (password !== confirmPassword) {
     return res.status(400).json({ message: "Passwords do not match ❌" });
   }
 
+  const resumePath = req.file ? "/uploads/" + req.file.filename : "";
+
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    const resumePath = req.file ? "/uploads/" + req.file.filename : "";
 
     const sql = `
       INSERT INTO job_seekers (name, email, phone, password, resume)
       VALUES (?, ?, ?, ?, ?)
     `;
 
-    db.query(sql, [name, email, phone, hashedPassword, resumePath], (err) => {
-      if (err) {
-        console.log(err);
+    db.query(
+      sql,
+      [name, email, phone, hashedPassword, resumePath],
+      (err) => {
+        if (err) {
+          console.error(err);
 
-        if (err.code === "ER_DUP_ENTRY") {
-          return res.status(400).json({ message: "Email already exists ❌" });
+          if (err.code === "ER_DUP_ENTRY") {
+            return res
+              .status(400)
+              .json({ message: "Email already exists ❌" });
+          }
+
+          return res.status(500).json({ message: "Database error ❌" });
         }
 
-        return res.status(500).json({ message: "Database error ❌" });
+        res.json({ message: "Account created successfully 🎉" });
       }
-
-      return res.json({ message: "Account created successfully 🎉" });
-    });
-
-  } catch (error) {
-    console.log(error);
+    );
+  } catch (err) {
     res.status(500).json({ message: "Server error ❌" });
   }
 });
+
+
+
 
 
 

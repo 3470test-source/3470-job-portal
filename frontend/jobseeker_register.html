@@ -131,7 +131,7 @@
 </script>
 
 
-<!-- <script>
+<script>
 document.getElementById("jobseeker-registerForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -153,135 +153,21 @@ document.getElementById("jobseeker-registerForm").addEventListener("submit", asy
   formData.append("confirmPassword", document.getElementById("confirmPassword").value);
   formData.append("resume", document.getElementById("resume").files[0]);
 
-//   const res = await fetch("http://localhost:3000/register", {
-//     method: "POST",
-//     body: formData
-//   });
-
-//   const result = await res.json();
-//   alert(result.message);
-
-//   if (res.ok) {
-//     window.location.href = "/frontend/jobseeker_login.html";
-//   }
-
-// });
-
-
-const res = await fetch("http://localhost:3000/register", {
-  method: "POST",
-  body: formData
-});
-
-let result;
-try {
-  result = await res.json();
-} catch (err) {
-  alert("Invalid server response ❌");
-  return;
-}
-
-alert(result.message);
-
-// redirect only if success
-if (res.ok) {
-  window.location.href = "/frontend/jobseeker_login.html";
-}
-});
-
-
-
-</script> -->
-
-
-
-
-
-
-
-
-<script>
-    window.addEventListener("DOMContentLoaded", () => {
-
-  console.log("✅ Register JS Loaded Successfully");
-
-  const form = document.getElementById("jobseeker-registerForm");
-
-  if (!form) {
-    console.log("❌ Form not found!");
-    return;
-  }
-
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    console.log("🔥 Form Submitted");
-
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
-
-    // Password match check
-    if (password !== confirmPassword) {
-      Swal.fire({
-        icon: "error",
-        text: "Passwords do not match ❌"
-      });
-      return;
-    }
-
-    const formData = new FormData(form);
-
-    try {
-      console.log("🚀 Sending request to backend...");
-
-      const res = await fetch("http://localhost:3000/register", {
-        method: "POST",
-        body: formData
-      });
-
-      console.log("📡 Response received:", res.status);
-
-      let data = {};
-      try {
-        data = await res.json();
-      } catch (err) {
-        console.log("❌ JSON parse error");
-        Swal.fire({
-          icon: "error",
-          text: "Invalid server response"
-        });
-        return;
-      }
-
-      console.log("📦 Data:", data);
-
-      Swal.fire({
-        icon: res.ok ? "success" : "error",
-        text: data.message
-      }).then(() => {
-
-        if (res.ok) {
-          console.log("🔁 Redirecting to login page...");
-
-          window.location.href = "/frontend/jobseeker_login.html";
-        }
-
-      });
-
-    } catch (error) {
-      console.log("❌ Network error:", error);
-
-      Swal.fire({
-        icon: "error",
-        text: "Server not reachable"
-      });
-    }
-
+  const res = await fetch("http://localhost:3000/register", {
+    method: "POST",
+    body: formData
   });
 
-});
-</script>
+  const result = await res.json();
+  alert(result.message);
 
+  if (res.ok) {
+    window.location.href = "/jobseeker_login.html";
+  }
+
+});
+
+</script>
 
 </body>
 </html>
