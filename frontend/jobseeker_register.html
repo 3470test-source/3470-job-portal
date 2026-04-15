@@ -107,9 +107,6 @@
 </div>
 
 
-  
-
-
 <!-- Password Icon hide / unhide -->
 <script>
     document.querySelectorAll(".toggle-password").forEach(icon => {
@@ -131,7 +128,7 @@
 </script>
 
 
-<script>
+<!-- <script>
 document.getElementById("jobseeker-registerForm").addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -162,11 +159,71 @@ document.getElementById("jobseeker-registerForm").addEventListener("submit", asy
   alert(result.message);
 
   if (res.ok) {
-    window.location.href = "/jobseeker_login.html";
+    window.location.href = "/frontend/jobseeker_login.html";
   }
 
 });
 
+</script> -->
+
+
+<script>
+document.getElementById("jobseeker-registerForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+
+  if (password !== confirmPassword) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Passwords do not match ❌"
+    });
+    return;
+  }
+
+  const formData = new FormData();
+
+  formData.append("name", document.getElementById("name").value);
+  formData.append("email", document.getElementById("email").value);
+  formData.append("phone", document.getElementById("phone").value);
+  formData.append("password", password);
+  formData.append("confirmPassword", confirmPassword);
+  formData.append("resume", document.getElementById("resume").files[0]);
+
+  try {
+    const res = await fetch("http://localhost:3000/register", {
+      method: "POST",
+      body: formData
+    });
+
+    const result = await res.json();
+
+    if (res.ok) {
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: result.message
+      }).then(() => {
+        window.location.href = "/frontend/jobseeker_login.html";
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: result.message
+      });
+    }
+
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Server Error",
+      text: "Something went wrong ❌"
+    });
+  }
+});
 </script>
 
 </body>
