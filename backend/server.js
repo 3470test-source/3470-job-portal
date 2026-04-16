@@ -270,80 +270,192 @@ app.delete("/jobs/:id", (req, res) => {
 
 
 
+// // Register API
+// app.post("/register", upload.single("resume"), async (req, res) => {
+//   try {
+//     const { name, email, phone, password, confirmPassword } = req.body;
+
+//     if (password !== confirmPassword) {
+//       return res.json({ success: false, message: "Passwords do not match" });
+//     }
+
+//     // Hash password
+//     const hashedPassword = await bcrypt.hash(password, 10);
+
+//     // Save to DB
+//     const sql = "INSERT INTO users (name, email, phone, password, resume) VALUES (?, ?, ?, ?, ?)";
+//     db.query(sql, [name, email, phone, hashedPassword, req.file.filename], async (err, result) => {
+
+//       if (err) {
+//         return res.json({ success: false, message: "Email already exists" });
+//       }
+
+//       // Send email
+//       await transporter.sendMail({
+//         from: process.env.GMAIL_USER,
+//         to: email,
+//         subject: "Registration Successful",
+//         html: `<h2>Welcome ${name}</h2>
+//                <p>Your registration is successful.</p>`
+//       });
+
+//       res.json({ success: true, message: "Registered successfully & email sent!" });
+//     });
+
+//   } catch (error) {
+//     res.json({ success: false, message: "Server error" });
+//   }
+// });
+
+
 
 
 app.post("/register", upload.single("resume"), async (req, res) => {
-  const { name, email, phone, password, confirmPassword } = req.body;
 
-  if (password !== confirmPassword) {
-    return res.status(400).json({
-      success: false,
-      message: "Passwords do not match ❌"
-    });
-  }
+    try {
+        console.log("BODY:", req.body);
+        console.log("FILE:", req.file);
 
-  const resumePath = req.file ? "/uploads/" + req.file.filename : "";
+        const { name, email, phone, password } = req.body;
 
-  try {
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const sql = `
-      INSERT INTO job_seekers (name, email, phone, password, resume)
-      VALUES (?, ?, ?, ?, ?)
-    `;
-
-    db.query(
-      sql,
-      [name, email, phone, hashedPassword, resumePath],
-      async (err) => {
-        if (err) {
-          if (err.code === "ER_DUP_ENTRY") {
+        if (!name || !email || !phone || !password) {
             return res.status(400).json({
-              success: false,
-              message: "Email already exists ❌"
+                message: "Missing required fields ❌"
             });
-          }
-
-          return res.status(500).json({
-            success: false,
-            message: "Database error ❌"
-          });
         }
 
-        // ✅ Use transporter from top
-        try {
-          await transporter.sendMail({
-            from: "your_email@gmail.com",
-            to: email,
-            subject: "Registration Successful 🎉",
-            html: `
-              <h2>Welcome, ${name} 👋</h2>
-              <p>Your account has been created successfully.</p>
-              <p>You can now login.</p>
-            `
-          });
-
-          return res.status(201).json({
-            success: true,
-            message:
-              "Welcome! Your account has been created 🎉. A confirmation email has been sent. Please login."
-          });
-
-        } catch (emailError) {
-          return res.status(201).json({
-            success: true,
-            message: "Account created successfully 🎉. Please login."
-          });
+        if (!req.file) {
+            return res.status(400).json({
+                message: "Resume file is required ❌"
+            });
         }
-      }
-    );
-  } catch (err) {
-    res.status(500).json({
-      success: false,
-      message: "Server error ❌"
-    });
-  }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const sql = `
+            INSERT INTO jobseekers (name, email, phone, password, resume)
+            VALUES (?, ?, ?, ?, ?)
+        `;
+
+        db.query(sql,
+            [name, email, phone, hashedPassword, req.file.filename],
+            (err) => {
+
+                if (err) {
+                    console.log("MYSQL ERROR:", err);
+
+                    if (err.code === "ER_DUP_ENTRY") {
+                        return res.status(400).json({
+                            message: "Email already exists ❌"
+                        });
+                    }
+
+                    return res.status(500).json({
+                        message: "Database error ❌"
+                    });
+                }
+
+                return res.json({
+                    message: "Jobseeker registered successfully 🎉"
+                });
+            }
+        );
+
+    } catch (err) {
+        console.log("SERVER ERROR:", err);
+        return res.status(500).json({
+            message: err.message
+        });
+    }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// app.post("/register", upload.single("resume"), async (req, res) => {
+//   const { name, email, phone, password, confirmPassword } = req.body;
+
+//   if (password !== confirmPassword) {
+//     return res.status(400).json({
+//       success: false,
+//       message: "Passwords do not match ❌"
+//     });
+//   }
+
+//   const resumePath = req.file ? "/uploads/" + req.file.filename : "";
+
+//   try {
+//     const hashedPassword = await bcrypt.hash(password, 10);
+
+//     const sql = `
+//       INSERT INTO job_seekers (name, email, phone, password, resume)
+//       VALUES (?, ?, ?, ?, ?)
+//     `;
+
+//     db.query(
+//       sql,
+//       [name, email, phone, hashedPassword, resumePath],
+//       async (err) => {
+//         if (err) {
+//           if (err.code === "ER_DUP_ENTRY") {
+//             return res.status(400).json({
+//               success: false,
+//               message: "Email already exists ❌"
+//             });
+//           }
+
+//           return res.status(500).json({
+//             success: false,
+//             message: "Database error ❌"
+//           });
+//         }
+
+//         // ✅ Use transporter from top
+//         try {
+//           await transporter.sendMail({
+//             from: "your_email@gmail.com",
+//             to: email,
+//             subject: "Registration Successful 🎉",
+//             html: `
+//               <h2>Welcome, ${name} 👋</h2>
+//               <p>Your account has been created successfully.</p>
+//               <p>You can now login.</p>
+//             `
+//           });
+
+//           return res.status(201).json({
+//             success: true,
+//             message:
+//               "Welcome! Your account has been created 🎉. A confirmation email has been sent. Please login."
+//           });
+
+//         } catch (emailError) {
+//           return res.status(201).json({
+//             success: true,
+//             message: "Account created successfully 🎉. Please login."
+//           });
+//         }
+//       }
+//     );
+//   } catch (err) {
+//     res.status(500).json({
+//       success: false,
+//       message: "Server error ❌"
+//     });
+//   }
+// });
 
 
 
@@ -515,4 +627,16 @@ app.post("/employer/login", (req, res) => {
 app.listen(3000, () => {
   console.log("Server running on http://localhost:3000");
 });
+
+
+
+
+
+
+
+
+
+
+
+
 

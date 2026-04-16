@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jobseeker Register</title>
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="/image/Logo3470-health3-removebg-preview.png">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="jobseeker-register-container">
+
+    <!-- LEFT -->
+    <div class="jobseeker-register-left">
+        <img src="/image/Logo3470-health3-removebg-preview.png" class="jobseeker-register-logo">
+        <h3>On registering, you can</h3>
+        <ul>
+            <li><i class="fa-solid fa-circle-check"></i> Build profile</li>
+            <li><i class="fa-solid fa-circle-check"></i> Get job alerts</li>
+            <li><i class="fa-solid fa-circle-check"></i> Apply jobs easily</li>
+        </ul>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="jobseeker-register-right">
+        <div class="jobseeker-register-card">
+
+            <h2>Jobseeker Registration</h2>
+
+            <form id="jobseeker-registerForm">
+
+                <input type="text" id="name" placeholder="Full Name" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="tel" id="phone" placeholder="Phone" required>
+
+                <!-- PASSWORD -->
+                <div class="password-box">
+                    <input type="password" id="password" placeholder="Password" required>
+                    <i class="fa-solid fa-eye" id="togglePassword"></i>
+                </div>
+
+                <!-- CONFIRM -->
+                <div class="password-box">
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                    <i class="fa-solid fa-eye" id="toggleConfirmPassword"></i>
+                </div>
+
+                <!-- RESUME -->
+                <input type="file" id="resume" accept=".pdf" required>
+
+                <button type="submit">Register</button>
+
+                <p>
+                    Already have account?
+                    <a href="/frontend/jobseeker_login.html">Login</a>
+                </p>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- PASSWORD TOGGLE -->
+<script>
+function toggle(id, iconId) {
+    const input = document.getElementById(id);
+    const icon = document.getElementById(iconId);
+
+    if (input.type === "password") {
+        input.type = "text";
+        icon.classList.replace("fa-eye", "fa-eye-slash");
+    } else {
+        input.type = "password";
+        icon.classList.replace("fa-eye-slash", "fa-eye");
+    }
+}
+
+document.getElementById("togglePassword")
+.addEventListener("click", () => toggle("password", "togglePassword"));
+
+document.getElementById("toggleConfirmPassword")
+.addEventListener("click", () => toggle("confirmPassword", "toggleConfirmPassword"));
+</script>
+
+<!-- FORM SUBMIT -->
+<script>
+document.getElementById("jobseeker-registerForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+    const resume = document.getElementById("resume").files[0];
+
+    // PASSWORD CHECK
+    if (password !== confirmPassword) {
+        Swal.fire({
+            title: "Error ❌",
+            text: "Passwords do not match",
+            icon: "error"
+        });
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("password", password);
+    formData.append("resume", resume);
+
+    try {
+        const res = await fetch("http://localhost:3000/register", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            Swal.fire({
+                title: "Success 🎉",
+                text: data.message,
+                icon: "success",
+                confirmButtonText: "Login"
+            }).then(() => {
+                window.location.href = "/frontend/jobseeker_login.html";
+            });
+
+        } else {
+            Swal.fire({
+                title: "Error ❌",
+                text: data.message,
+                icon: "error"
+            });
+        }
+
+    } catch (err) {
+        Swal.fire({
+            title: "Server Error ❌",
+            text: "Something went wrong",
+            icon: "error"
+        });
+    }
+});
+</script>
+
+</body>
+</html>

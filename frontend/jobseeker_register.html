@@ -128,45 +128,6 @@
 </script>
 
 
-<!-- <script>
-document.getElementById("jobseeker-registerForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const password = document.getElementById("password").value;
-  const confirmPassword = document.getElementById("confirmPassword").value;
-
-  // ✅ ADD HERE
-  if (password !== confirmPassword) {
-    alert("Passwords do not match ❌");
-    return;
-  }
-
-  const formData = new FormData();
-
-  formData.append("name", document.getElementById("name").value);
-  formData.append("email", document.getElementById("email").value);
-  formData.append("phone", document.getElementById("phone").value);
-  formData.append("password", document.getElementById("password").value);
-  formData.append("confirmPassword", document.getElementById("confirmPassword").value);
-  formData.append("resume", document.getElementById("resume").files[0]);
-
-  const res = await fetch("http://localhost:3000/register", {
-    method: "POST",
-    body: formData
-  });
-
-  const result = await res.json();
-  alert(result.message);
-
-  if (res.ok) {
-    window.location.href = "/frontend/jobseeker_login.html";
-  }
-
-});
-
-</script> -->
-
-
 <script>
 document.getElementById("jobseeker-registerForm").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -176,20 +137,18 @@ document.getElementById("jobseeker-registerForm").addEventListener("submit", asy
 
   if (password !== confirmPassword) {
     Swal.fire({
-      icon: "error",
-      title: "Error",
-      text: "Passwords do not match ❌"
+      title: "Error ❌",
+      text: "Passwords do not match",
+      icon: "error"
     });
     return;
   }
 
   const formData = new FormData();
-
   formData.append("name", document.getElementById("name").value);
   formData.append("email", document.getElementById("email").value);
   formData.append("phone", document.getElementById("phone").value);
   formData.append("password", password);
-  formData.append("confirmPassword", confirmPassword);
   formData.append("resume", document.getElementById("resume").files[0]);
 
   try {
@@ -198,33 +157,34 @@ document.getElementById("jobseeker-registerForm").addEventListener("submit", asy
       body: formData
     });
 
-    const result = await res.json();
+    const data = await res.json();
 
     if (res.ok) {
       Swal.fire({
-        icon: "success",
-        title: "Success",
-        text: result.message
+        title: "Success 🎉",
+        text: data.message,
+        icon: "success"
       }).then(() => {
         window.location.href = "/frontend/jobseeker_login.html";
       });
     } else {
       Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: result.message
+        title: "Error ❌",
+        text: data.message,
+        icon: "error"
       });
     }
 
-  } catch (error) {
+  } catch (err) {
     Swal.fire({
-      icon: "error",
-      title: "Server Error",
-      text: "Something went wrong ❌"
+      title: "Server Error ❌",
+      text: "Backend not reachable",
+      icon: "error"
     });
   }
 });
 </script>
+
 
 </body>
 </html>
