@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Employee Application Form</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f4f6f9;
+    margin: 0;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+    padding: 20px;
+}
+
+h2 {
+    background: #2c3e50;
+    color: white;
+    padding: 10px;
+}
+
+.section {
+    background: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 10px;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.row div {
+    flex: 1;
+}
+
+button {
+    background: #27ae60;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<form id="form">
+
+<!-- ================= STAGE 1 ================= -->
+
+<h2>Stage 1: Job Application</h2>
+
+<div class="section">
+<h3>Personal Details</h3>
+
+<input placeholder="Full Name" required>
+<input type="date" required>
+
+<select required>
+<option>Gender</option>
+<option>Male</option>
+<option>Female</option>
+</select>
+
+<input type="email" placeholder="Email" required>
+<input placeholder="Mobile Number" required>
+<input placeholder="Alternate Phone">
+
+<textarea placeholder="Current Address"></textarea>
+<textarea placeholder="Permanent Address"></textarea>
+
+<input placeholder="City">
+<input placeholder="State">
+<input placeholder="Pincode">
+
+<input placeholder="Nationality">
+<input placeholder="Aadhaar (Optional)">
+<input placeholder="PAN Number">
+
+</div>
+
+<div class="section">
+<h3>Position Details</h3>
+
+<input placeholder="Applying For">
+<input placeholder="Preferred Location">
+<input placeholder="Expected Salary">
+<input placeholder="Notice Period">
+
+<select>
+<option>Relocate?</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+
+</div>
+
+<div class="section">
+<h3>Education</h3>
+
+<h4>10th</h4>
+<input placeholder="School Name">
+<input placeholder="Board">
+<input placeholder="Year">
+<input placeholder="Percentage">
+
+<h4>12th</h4>
+<input placeholder="School Name">
+<input placeholder="Stream">
+<input placeholder="Year">
+<input placeholder="Percentage">
+
+<h4>Graduation</h4>
+<input placeholder="Degree">
+<input placeholder="College">
+<input placeholder="University">
+<input placeholder="Year">
+<input placeholder="CGPA">
+
+<h4>Post Graduation</h4>
+<input placeholder="Degree">
+<input placeholder="College">
+<input placeholder="Year">
+<input placeholder="Percentage">
+
+</div>
+
+<div class="section">
+<h3>Work Experience</h3>
+
+<input placeholder="Total Experience">
+<input placeholder="Current Company">
+<input placeholder="Previous Company">
+<input placeholder="Role">
+<input placeholder="Skills">
+<input placeholder="Last Salary">
+<input placeholder="Reason for Leaving">
+
+</div>
+
+<div class="section">
+<h3>Skills</h3>
+
+<input placeholder="Technical Skills">
+<input placeholder="Tools">
+<input placeholder="Certifications">
+<input placeholder="Languages">
+
+</div>
+
+<div class="section">
+<h3>Documents</h3>
+
+<input type="file" required>
+<input type="file">
+<input type="file">
+<input type="file">
+<input type="file">
+<input type="file">
+<input type="file">
+
+</div>
+
+<div class="section">
+<h3>Additional Info</h3>
+
+<textarea placeholder="Why this job?"></textarea>
+<input type="date">
+<input placeholder="Reference">
+
+</div>
+
+<div class="section">
+<h3>Declaration</h3>
+
+<input type="checkbox" required> I Agree
+</div>
+
+<!-- ================= STAGE 2 ================= -->
+
+<h2>Stage 2: Employee Details</h2>
+
+<div class="section">
+<h3>Basic Info</h3>
+
+<input placeholder="Employee ID">
+<input type="date">
+<input placeholder="Department">
+<input placeholder="Manager">
+<input placeholder="Location">
+
+<select>
+<option>Employment Type</option>
+<option>Full-time</option>
+<option>Contract</option>
+</select>
+
+</div>
+
+<div class="section">
+<h3>KYC & Bank</h3>
+
+<input placeholder="PAN">
+<input placeholder="Aadhaar">
+<input placeholder="Bank Name">
+<input placeholder="Account Number">
+<input placeholder="IFSC">
+<input placeholder="UAN">
+
+</div>
+
+<div class="section">
+<h3>Salary</h3>
+
+<input placeholder="CTC">
+<input placeholder="Basic">
+<input placeholder="HRA">
+<input placeholder="Allowances">
+<input placeholder="Bonus">
+
+</div>
+
+<div class="section">
+<h3>Performance</h3>
+
+<select>
+<option>Probation</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+
+<input type="date">
+<input type="number" min="1" max="5" placeholder="Rating">
+<textarea placeholder="Feedback"></textarea>
+<input placeholder="KPI">
+
+</div>
+
+<div class="section">
+<h3>Increment</h3>
+
+<input type="date">
+<input placeholder="Increment %">
+<input placeholder="New Salary">
+
+<select>
+<option>Promotion</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+
+<input placeholder="New Role">
+
+</div>
+
+<div class="section">
+<h3>Attendance</h3>
+
+<input placeholder="Leave Balance">
+<input placeholder="Sick Leave">
+<input placeholder="Casual Leave">
+<input placeholder="Attendance %">
+
+</div>
+
+<div class="section">
+<h3>Employee Documents</h3>
+
+<input type="file">
+<input type="file">
+<input type="file">
+<input type="file">
+
+</div>
+
+<div class="section">
+<h3>Exit</h3>
+
+<input type="date">
+<input type="date">
+<textarea placeholder="Exit Reason"></textarea>
+<textarea placeholder="Feedback"></textarea>
+
+</div>
+
+<button type="submit">Submit</button>
+
+</form>
+
+</div>
+
+<script>
+document.getElementById("form").addEventListener("submit", function(e){
+    e.preventDefault();
+    alert("Form Submitted Successfully!");
+});
+</script>
+
+</body>
+</html>
